@@ -25,12 +25,13 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.btnHome = new System.Windows.Forms.Button();
+            this.gbxItemDisplay = new System.Windows.Forms.GroupBox();
             this.bstblEPOSItemsTableAdapter = new System.Windows.Forms.BindingSource(this.components);
             this.ePOSDBDataSet = new CS3._0Project.EPOSDBDataSet();
             this.tblEPOSItemsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter();
-            this.gbxItemDisplay = new System.Windows.Forms.GroupBox();
             this.bstblEPOSItemFolders = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSItemFoldersTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemFoldersTableAdapter();
+            this.btnFolderBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemsTableAdapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemFolders)).BeginInit();
@@ -46,6 +47,14 @@
             this.btnHome.UseVisualStyleBackColor = true;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
+            // gbxItemDisplay
+            // 
+            this.gbxItemDisplay.Location = new System.Drawing.Point(12, 93);
+            this.gbxItemDisplay.Name = "gbxItemDisplay";
+            this.gbxItemDisplay.Size = new System.Drawing.Size(737, 675);
+            this.gbxItemDisplay.TabIndex = 1;
+            this.gbxItemDisplay.TabStop = false;
+            // 
             // bstblEPOSItemsTableAdapter
             // 
             this.bstblEPOSItemsTableAdapter.DataMember = "tblEPOSItems";
@@ -60,15 +69,6 @@
             // 
             this.tblEPOSItemsTableAdapter.ClearBeforeFill = true;
             // 
-            // gbxItemDisplay
-            // 
-            this.gbxItemDisplay.Location = new System.Drawing.Point(12, 93);
-            this.gbxItemDisplay.Name = "gbxItemDisplay";
-            this.gbxItemDisplay.Size = new System.Drawing.Size(816, 675);
-            this.gbxItemDisplay.TabIndex = 1;
-            this.gbxItemDisplay.TabStop = false;
-            this.gbxItemDisplay.Text = "groupBox1";
-            // 
             // bstblEPOSItemFolders
             // 
             this.bstblEPOSItemFolders.DataMember = "tblEPOSItemFolders";
@@ -78,12 +78,23 @@
             // 
             this.tblEPOSItemFoldersTableAdapter.ClearBeforeFill = true;
             // 
+            // btnFolderBack
+            // 
+            this.btnFolderBack.Location = new System.Drawing.Point(93, 12);
+            this.btnFolderBack.Name = "btnFolderBack";
+            this.btnFolderBack.Size = new System.Drawing.Size(75, 75);
+            this.btnFolderBack.TabIndex = 2;
+            this.btnFolderBack.Text = "Back";
+            this.btnFolderBack.UseVisualStyleBackColor = true;
+            this.btnFolderBack.Click += new System.EventHandler(this.btnFolderBack_Click);
+            // 
             // frmSalesMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1914, 1074);
             this.ControlBox = false;
+            this.Controls.Add(this.btnFolderBack);
             this.Controls.Add(this.gbxItemDisplay);
             this.Controls.Add(this.btnHome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -111,5 +122,6 @@
         private System.Windows.Forms.GroupBox gbxItemDisplay;
         private System.Windows.Forms.BindingSource bstblEPOSItemFolders;
         private EPOSDBDataSetTableAdapters.tblEPOSItemFoldersTableAdapter tblEPOSItemFoldersTableAdapter;
+        private System.Windows.Forms.Button btnFolderBack;
     }
 }

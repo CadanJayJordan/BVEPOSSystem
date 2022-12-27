@@ -33,24 +33,23 @@
             this.btnClock = new System.Windows.Forms.Button();
             this.btnMessage = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tblEPOSItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ePOSDBDataSet = new CS3._0Project.EPOSDBDataSet();
+            this.tblEPOSItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tblEPOSItemsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter();
             this.eposItemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eposItemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eposItemDepartmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemFolderIDsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eposItemXDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eposItemYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eposItemLocationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eposAllowZeroPriceDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.eposItemPrintersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eposPrintRedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.eposItemAlt1AmountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eposItemAlt2AmountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eposItemAlt3AmountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tblEPOSItemsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tblEPOSItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblEPOSItemsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
@@ -142,8 +141,7 @@
             this.eposItemNameDataGridViewTextBoxColumn,
             this.eposItemDepartmentIDDataGridViewTextBoxColumn,
             this.itemFolderIDsDataGridViewTextBoxColumn,
-            this.eposItemXDataGridViewTextBoxColumn,
-            this.eposItemYDataGridViewTextBoxColumn,
+            this.eposItemLocationDataGridViewTextBoxColumn,
             this.eposAllowZeroPriceDataGridViewCheckBoxColumn,
             this.eposItemPrintersDataGridViewTextBoxColumn,
             this.eposPrintRedDataGridViewCheckBoxColumn,
@@ -156,15 +154,19 @@
             this.dataGridView1.Size = new System.Drawing.Size(1344, 150);
             this.dataGridView1.TabIndex = 8;
             // 
+            // ePOSDBDataSet
+            // 
+            this.ePOSDBDataSet.DataSetName = "EPOSDBDataSet";
+            this.ePOSDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // tblEPOSItemsBindingSource
             // 
             this.tblEPOSItemsBindingSource.DataMember = "tblEPOSItems";
             this.tblEPOSItemsBindingSource.DataSource = this.ePOSDBDataSet;
             // 
-            // ePOSDBDataSet
+            // tblEPOSItemsTableAdapter
             // 
-            this.ePOSDBDataSet.DataSetName = "EPOSDBDataSet";
-            this.ePOSDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tblEPOSItemsTableAdapter.ClearBeforeFill = true;
             // 
             // eposItemIDDataGridViewTextBoxColumn
             // 
@@ -190,17 +192,11 @@
             this.itemFolderIDsDataGridViewTextBoxColumn.HeaderText = "itemFolderIDs";
             this.itemFolderIDsDataGridViewTextBoxColumn.Name = "itemFolderIDsDataGridViewTextBoxColumn";
             // 
-            // eposItemXDataGridViewTextBoxColumn
+            // eposItemLocationDataGridViewTextBoxColumn
             // 
-            this.eposItemXDataGridViewTextBoxColumn.DataPropertyName = "eposItemX";
-            this.eposItemXDataGridViewTextBoxColumn.HeaderText = "eposItemX";
-            this.eposItemXDataGridViewTextBoxColumn.Name = "eposItemXDataGridViewTextBoxColumn";
-            // 
-            // eposItemYDataGridViewTextBoxColumn
-            // 
-            this.eposItemYDataGridViewTextBoxColumn.DataPropertyName = "eposItemY";
-            this.eposItemYDataGridViewTextBoxColumn.HeaderText = "eposItemY";
-            this.eposItemYDataGridViewTextBoxColumn.Name = "eposItemYDataGridViewTextBoxColumn";
+            this.eposItemLocationDataGridViewTextBoxColumn.DataPropertyName = "eposItemLocation";
+            this.eposItemLocationDataGridViewTextBoxColumn.HeaderText = "eposItemLocation";
+            this.eposItemLocationDataGridViewTextBoxColumn.Name = "eposItemLocationDataGridViewTextBoxColumn";
             // 
             // eposAllowZeroPriceDataGridViewCheckBoxColumn
             // 
@@ -238,10 +234,6 @@
             this.eposItemAlt3AmountDataGridViewTextBoxColumn.HeaderText = "eposItemAlt3Amount";
             this.eposItemAlt3AmountDataGridViewTextBoxColumn.Name = "eposItemAlt3AmountDataGridViewTextBoxColumn";
             // 
-            // tblEPOSItemsTableAdapter
-            // 
-            this.tblEPOSItemsTableAdapter.ClearBeforeFill = true;
-            // 
             // frmEPOSMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,8 +259,8 @@
             this.Text = "EPOSMenu";
             this.Load += new System.EventHandler(this.frmEPOSMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tblEPOSItemsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblEPOSItemsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -284,20 +276,21 @@
         private System.Windows.Forms.Button btnClock;
         private System.Windows.Forms.Button btnMessage;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eposItemXDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eposItemYDataGridViewTextBoxColumn;
         private EPOSDBDataSet ePOSDBDataSet;
         private System.Windows.Forms.BindingSource tblEPOSItemsBindingSource;
+        private EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter tblEPOSItemsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemDepartmentIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemFolderIDsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn eposItemXDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn eposItemYDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eposItemLocationDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn eposAllowZeroPriceDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemPrintersDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn eposPrintRedDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemAlt1AmountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemAlt2AmountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemAlt3AmountDataGridViewTextBoxColumn;
-        private EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter tblEPOSItemsTableAdapter;
     }
 }
