@@ -22,8 +22,10 @@ namespace CS3._0Project.Code.Sales {
         private int folderY; // Folder y so we can put the items under the folders
         private int parentFolder = 0; // Default Parent
 
+        // FOR ITEM DISPLAYING AND SORTING
         private List<List<int>> itemLocationList;
         private List<List<int>> sortList;
+        private bool isItems;
 
         private frmMessageBox cMessageBox = new frmMessageBox(); // Custom message box
 
@@ -48,18 +50,22 @@ namespace CS3._0Project.Code.Sales {
             // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSItems' table. You can move, or remove it, as needed.
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
 
-            currentFolderPath.Add(0);
+            currentFolderPath.Add(0); // Ensure the base directory is always set
             createButtons();
         }
 
         private void createButtons() {
-            getItemFolders();
-            sortFolderIDs();
+            tblEPOSItemsTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItems.*" +
+                "\nFROM tblEPOSItems;"; // Reset the table adaptor to ensure no querys are taking place
+            this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
 
+            getItemFolders(); // Seperates the CSV fields in the db into lists
+            sortFolderIDs(); // Sort the items based on their location setting
 
             createFolderButtons(); // Create folders buttons on load
 
             createItemButtons(); // Create buttons on form load
+
         }
 
         private void createItemButtons() { // Create a button in the group box for all items in the db table
@@ -67,14 +73,14 @@ namespace CS3._0Project.Code.Sales {
             int itemY = folderY + 100;
 
 
-            for (int i = 0; i < sortList.Count; i++) {
+            for (int i = 0; i < sortList.Count; i++) { // For every sorted item
                 string itemId = sortList[i][0].ToString();
                 tblEPOSItemsTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItems.*\n" +
                     "FROM tblEPOSItems\n" +
-                    "WHERE (((tblEPOSItems.eposItemID)= " + itemId + "));";
+                    "WHERE (((tblEPOSItems.eposItemID)= " + itemId + "));"; // Query the DB for that item ID
                     this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
 
-                DataRow itemDataRow = ePOSDBDataSet.tblEPOSItems.Rows[0];
+                DataRow itemDataRow = ePOSDBDataSet.tblEPOSItems.Rows[0]; // Get the 1 (hopefully) data row returned from the DB query
 
                 Button dynamicItemButton = new Button(); // Create a button
                 dynamicItemButton.Hide();
@@ -88,9 +94,9 @@ namespace CS3._0Project.Code.Sales {
                     itemY += 100; // Move item down
                     itemX = 10; // reset the x coordinate
                 }
-                dynamicItemButton.Location = new Point(itemX, itemY);
+                dynamicItemButton.Location = new Point(itemX, itemY); // Set location
                 dynamicItemButton.Show();
-                itemX += 110;
+                itemX += 110; // To actully stop items overflowing
             }
 
         }
@@ -98,13 +104,13 @@ namespace CS3._0Project.Code.Sales {
         private void getItemFolders() { // Gets the item folders and locations and puts them in a list where it follows the schema
                                         // [eposItemID, itemFolderID(1), itemLocaton (1), itemFolderID(2), itemLocation(2), ....] for a list of items
                                         // (Each individual item has all the properties in the square brackets), and will be stored in the itemLocationList List.
-
+            isItems = false; // Flag to see if there are actully items in the folder
             itemLocationList = new List<List<int>>(); // Create new list when ran
-            foreach(DataRow itemDataRow in this.ePOSDBDataSet.tblEPOSItems) {
-                string[] itemFolderArray = itemDataRow[3].ToString().Split(',');
-                string[] itemLocationArray = itemDataRow[4].ToString().Split(',');
+            foreach(DataRow itemDataRow in this.ePOSDBDataSet.tblEPOSItems) { // For each item in the database 
+                string[] itemFolderArray = itemDataRow[3].ToString().Split(','); // Get the folders that contain this item in a list
+                string[] itemLocationArray = itemDataRow[4].ToString().Split(','); // Get the location in the folders for this item in a list
 
-                if (itemFolderArray.Length != itemLocationArray.Length) { // if there are not equal items
+                if (itemFolderArray.Length != itemLocationArray.Length) { // if there are not equal items, something has gone horribly wrong
                     // TODO: Report Error
 
                 } else { // The lists are equal and we can now add it to the location list
@@ -126,6 +132,7 @@ namespace CS3._0Project.Code.Sales {
                 while(i < itemLocationRow.Count) { // Repeat until every other item in the list has been iterated through
                     if (itemLocationRow[i] == currentFolderID) { // If the current folder ID is equal to the iterated item
                         currentFolderIDs.Add(itemLocationRow[0]); // Add this folder to the list to display
+                        isItems = true;
                     }
                     i += 2; // Incremement to go through every other item
                 }
@@ -134,29 +141,30 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void sortFolderIDs() { // Sorts the list 
+            sortList = new List<List<int>>();
             int currentFolderID = currentFolderPath[currentFolderPath.Count - 1]; // Get the ID of the current folder
             List<int> currentFolderIDs = getCurrentFolderItemIDs(currentFolderID); // Get all the current IDs for this folder
-            List<List<int>> itemFolderLocations = new List<List<int>>();
-            List<int> sortedFolderIDs = new List<int>();
-            foreach(List<int> itemLocationRow in itemLocationList) {
-                for (int i = 0; i < currentFolderIDs.Count; i++) {
-                    if (itemLocationRow[0] == currentFolderIDs[i]){
-                        int x = 1; // Set int to 1 to get the first FOLDER ID
-                        while (x < itemLocationRow.Count) { // Repeat until every other item in the list has been iterated through
-                            if (itemLocationRow[x] == currentFolderID) { // If the current folder ID is equal to the iterated item
-                                List<int> itemFolderLocationSubList = new List<int>();
-                                itemFolderLocationSubList.Add(itemLocationRow[0]);
-                                itemFolderLocationSubList.Add(itemLocationRow[x + 1]);
-                                itemFolderLocations.Add(itemFolderLocationSubList);
+            if (isItems) { // If there are items in the list
+                List<List<int>> itemFolderLocations = new List<List<int>>(); // Create new list of int lists for the locations to sort
+                foreach (List<int> itemLocationRow in itemLocationList) { // For all item locations
+                    for (int i = 0; i < currentFolderIDs.Count; i++) { // For every ID of an item in the current folder
+                        if (itemLocationRow[0] == currentFolderIDs[i]) { // If there are ID matches
+                            int x = 1; // Set int to 1 to get the first FOLDER ID
+                            while (x < itemLocationRow.Count) { // Repeat until every other item in the list has been iterated through
+                                if (itemLocationRow[x] == currentFolderID) { // If the current folder ID is equal to the iterated item
+                                    List<int> itemFolderLocationSubList = new List<int>(); // Create a new list to add to the current list
+                                    itemFolderLocationSubList.Add(itemLocationRow[0]); // Add ID
+                                    itemFolderLocationSubList.Add(itemLocationRow[x + 1]); // Add location
+                                    itemFolderLocations.Add(itemFolderLocationSubList); // Add to the locations to sort
+                                }
+                                x += 2; // Incremement to go through every other item (Refer to getItemFolders() to see why)
                             }
-                            x += 2; // Incremement to go through every other item
                         }
                     }
                 }
+                sortList = itemFolderLocations;  // Create a copy of this list to sort
+                qSort(0, sortList.Count - 1); // Perform the sort on the sort list (Quicksort)
             }
-            sortList = itemFolderLocations;
-            qSort(0, sortList.Count - 1);
-                       
         }
 
         //QUICK SORT
@@ -238,7 +246,7 @@ namespace CS3._0Project.Code.Sales {
             gbxItemDisplay.Controls.Clear(); // Clear exitsting folders
             Button button = (Button)sender; // Assign type button to sender
             currentFolderPath.Add(Convert.ToInt32(button.Name.Substring(3, button.Name.Length - 3))); // Add the number on the name of the button, which is the folder ID and thereby the parent ID
-            createButtons();
+            createButtons(); // Recreate new buttons
         }
 
         private void DynamicItemButton_Click(object sender, EventArgs e) { // TODO: Custom click event
@@ -249,7 +257,7 @@ namespace CS3._0Project.Code.Sales {
             if (currentFolderPath.Count > 1) { // If it is not the base directory
                 gbxItemDisplay.Controls.Clear(); // Clear existing folders
                 currentFolderPath.RemoveAt(currentFolderPath.Count - 1); // Remove last folder path (like a back button)
-                createFolderButtons(); // Recreate the new folder buttons
+                createButtons(); // Recreate the new buttons
             } // else do nothing 
         }
     }
