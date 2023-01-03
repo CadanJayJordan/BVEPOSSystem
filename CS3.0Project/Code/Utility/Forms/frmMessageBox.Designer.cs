@@ -29,19 +29,22 @@
             // 
             // btnOk
             // 
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnOk.ForeColor = System.Drawing.Color.White;
             this.btnOk.Location = new System.Drawing.Point(114, 75);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(55, 31);
             this.btnOk.TabIndex = 1;
             this.btnOk.Text = "Ok";
-            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // rtbTextOutput
             // 
             this.rtbTextOutput.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.rtbTextOutput.BackColor = System.Drawing.SystemColors.Control;
+            this.rtbTextOutput.BackColor = System.Drawing.Color.Gray;
             this.rtbTextOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbTextOutput.ForeColor = System.Drawing.Color.White;
             this.rtbTextOutput.HideSelection = false;
             this.rtbTextOutput.Location = new System.Drawing.Point(12, 12);
             this.rtbTextOutput.Name = "rtbTextOutput";
@@ -55,6 +58,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(284, 118);
             this.ControlBox = false;
             this.Controls.Add(this.rtbTextOutput);

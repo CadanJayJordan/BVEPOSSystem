@@ -1,12 +1,15 @@
 ﻿using CS3._0Project.Code.Utility.Forms;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using static CS3._0Project.EPOSDBDataSet;
 
@@ -17,8 +20,8 @@ namespace CS3._0Project.Code.Sales {
         private int loginCode;
 
         private bool isRefundMode;
-        private List<int> currentFolderPath = new List<int>(); // Current Folder Path as Comma Seperated List
-
+        private List<int> currentFolderPath = new List<int>(); // Current Folder Path
+                              
         private int folderY; // Folder y so we can put the items under the folders
         private int parentFolder = 0; // Default Parent
 
@@ -26,6 +29,14 @@ namespace CS3._0Project.Code.Sales {
         private List<List<int>> itemLocationList;
         private List<List<int>> sortList;
         private bool isItems;
+
+        // FOR ITEM DISPLAY AND CALC
+        private List<int> tillSelectedItems = new List<int>();
+        decimal tillTotal = 0.0m;
+        decimal chequeDeductions = 0.0m;
+        decimal cashAmount = 0.0m;
+        private bool isListBoxLocked = false;
+        private bool usingCustomAmount = false;
 
         private frmMessageBox cMessageBox = new frmMessageBox(); // Custom message box
 
@@ -45,13 +56,28 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void frmSalesMode_Load(object sender, EventArgs e) {
+            // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSCashCheques' table. You can move, or remove it, as needed.
+            this.tblEPOSCashChequesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSCashCheques);
+            // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSCashCheques' table. You can move, or remove it, as needed.
+            this.tblEPOSCashChequesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSCashCheques);
+            // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSItemPrice' table. You can move, or remove it, as needed.
+            this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice);
+            // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSItems' table. You can move, or remove it, as needed.
+            this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
             // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSItemFolders' table. You can move, or remove it, as needed.
             this.tblEPOSItemFoldersTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemFolders);
             // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSItems' table. You can move, or remove it, as needed.
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
+            // TODO: This line of code loads data into the 'ePOSDBDataSet.tblEPOSCashCheques' table. You can move, or remove it, as needed.
+            this.tblEPOSCashChequesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSCashCheques);
 
             currentFolderPath.Add(0); // Ensure the base directory is always set
             createButtons();
+
+            //TODO: FUNCTION
+            tbxTillDisplay.Clear();
+            lbxTillDisplay.Items.Clear();
+            tbxTillTotal.Clear();
         }
 
         private void createButtons() {
@@ -65,6 +91,8 @@ namespace CS3._0Project.Code.Sales {
             createFolderButtons(); // Create folders buttons on load
 
             createItemButtons(); // Create buttons on form load
+
+            AllowButtonClick(pnlTillDisplay); // Allow all buttons in the till display to be clicked
 
         }
 
@@ -88,9 +116,10 @@ namespace CS3._0Project.Code.Sales {
                 dynamicItemButton.Height = 80;
                 dynamicItemButton.Name = "dib" + itemDataRow[0].ToString().Trim(); // Get the ID For later use (name = dib[ID])
                 dynamicItemButton.Text = itemDataRow[1].ToString().Trim(); // Name of item
-                dynamicItemButton.Parent = gbxItemDisplay; // Put it inside the gbx
+                dynamicItemButton.Parent = pnlItemDisplay; // Put it inside the gbx
                 dynamicItemButton.Click += DynamicItemButton_Click; // Custom click event
-                if ((itemX + dynamicItemButton.Width + 10) > gbxItemDisplay.Width) { // If the items go off the right hand side of the gbx
+                dynamicItemButton.ForeColor = Color.White; // Change text colour
+                if ((itemX + dynamicItemButton.Width + 10) > pnlItemDisplay.Width) { // If the items go off the right hand side of the gbx
                     itemY += 100; // Move item down
                     itemX = 10; // reset the x coordinate
                 }
@@ -210,7 +239,7 @@ namespace CS3._0Project.Code.Sales {
             folderY = 20;
             int folderWidth = 100;
             int folderHeight = 80;
-            if (folderWidth + 20 > gbxItemDisplay.Width) { // If the gbx is too small (to contain the width of one button + padding)
+            if (folderWidth + 20 > pnlItemDisplay.Width) { // If the gbx is too small (to contain the width of one button + padding)
                 cMessageBox.ShowMessage("Screen Resolution Error"); // Error Message
                 // TODO: Some form of backout sequence
             } else {
@@ -229,9 +258,10 @@ namespace CS3._0Project.Code.Sales {
                     dynamicFolderButton.Height = folderHeight;
                     dynamicFolderButton.Name = "dfb" + folderDataRow[0].ToString().Trim(); // Set name based on its DB ID for later use
                     dynamicFolderButton.Text = folderDataRow[1].ToString().Trim(); // Get the display text to be the DB Name
-                    dynamicFolderButton.Parent = gbxItemDisplay; // Assign parent
+                    dynamicFolderButton.Parent = pnlItemDisplay; // Assign parent
                     dynamicFolderButton.Click += DynamicFolderButton_Click; // Assign the custom click event
-                    if ((folderX + dynamicFolderButton.Width + 10) > gbxItemDisplay.Width) { // If the folders go off the right hand side of the gbx
+                    dynamicFolderButton.ForeColor = Color.White; // Change text colour
+                    if ((folderX + dynamicFolderButton.Width + 10) > pnlItemDisplay.Width) { // If the folders go off the right hand side of the gbx
                         folderY += 100; // Move folder down
                         folderX = 10; // reset the x coordinate
                     }
@@ -243,22 +273,238 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void DynamicFolderButton_Click(object sender, EventArgs e) { // If a folder is clicked
-            gbxItemDisplay.Controls.Clear(); // Clear exitsting folders
+            pnlItemDisplay.Controls.Clear(); // Clear exitsting folders
             Button button = (Button)sender; // Assign type button to sender
             currentFolderPath.Add(Convert.ToInt32(button.Name.Substring(3, button.Name.Length - 3))); // Add the number on the name of the button, which is the folder ID and thereby the parent ID
             createButtons(); // Recreate new buttons
         }
-
-        private void DynamicItemButton_Click(object sender, EventArgs e) { // TODO: Custom click event
-            throw new NotImplementedException();
-        }
-
         private void btnFolderBack_Click(object sender, EventArgs e) {
             if (currentFolderPath.Count > 1) { // If it is not the base directory
-                gbxItemDisplay.Controls.Clear(); // Clear existing folders
+                pnlItemDisplay.Controls.Clear(); // Clear existing folders
                 currentFolderPath.RemoveAt(currentFolderPath.Count - 1); // Remove last folder path (like a back button)
                 createButtons(); // Recreate the new buttons
             } // else do nothing 
+        }
+
+        private void DynamicItemButton_Click(object sender, EventArgs e) { // TODO: Custom click event
+            Button button = (Button)sender; // Cast the sender to a button
+            int itemID = Convert.ToInt32(button.Name.Substring(3, button.Name.Length - 3)); // Get the itemID which is stored as part of the button name
+            
+            tillSelectedItems.Add(itemID); // Add the itemID to the list
+
+            if (isListBoxLocked) {
+                changeListLock();
+            }
+
+            updateTotal();
+            updateTillList();
+        }
+
+        private void updateTotal() {
+            
+            tillTotal = 0;
+            foreach (int itemID in tillSelectedItems) { // for every item ID
+                tblEPOSItemPriceTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItemPrice.*\n" +
+                    "FROM tblEPOSItemPrice" +
+                    "\nWHERE (((tblEPOSItemPrice.eposItemID)=" + itemID + "));"; // Query the DB for that item ID to get associated prices
+                this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice); // Fill datatable
+                tillTotal += Convert.ToDecimal(this.ePOSDBDataSet.tblEPOSItemPrice.Rows[0][2]); // Get the total an add it to the total
+            }
+            updateTotalDisplay(tillTotal);
+        }
+
+        private void updateTotalDisplay(decimal total) {
+            tbxTillTotal.Text = "Total: £" + total.ToString("0.00");
+        }
+
+        private void updateTillList() {
+            lbxTillDisplay.Items.Clear();
+            foreach (int itemID in tillSelectedItems) { // for every item ID
+                // TODO: Find quicker way to do the acquring of price and name
+                tblEPOSItemPriceTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItemPrice.*\n" +
+                    "FROM tblEPOSItemPrice" +
+                    "\nWHERE (((tblEPOSItemPrice.eposItemID)=" + itemID + "));"; // Query the DB for that item ID to get associated prices
+                this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice); // Fill datatable
+
+                tblEPOSItemsTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItems.*\n" +
+                   "FROM tblEPOSItems\n" +
+                   "WHERE (((tblEPOSItems.eposItemID)= " + itemID + "));"; // Query the DB for that item ID
+                this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems); // Fill datatable
+
+                string itemName = ePOSDBDataSet.tblEPOSItems.Rows[0][1].ToString(); // Get the item name
+                string itemPrice = String.Format("£{0}", Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[0][2]).ToString("0.00")); // Get the item price and format it to be (£x.xx)
+
+                String displayString = String.Format("{0, -4}{1}{2," + (36 - itemName.Length - 4) +"}", "1", itemName, itemPrice); // Format the display string to be <qty><name><price> with adequete spacing
+
+                lbxTillDisplay.Items.Add(displayString); // Add each item to the db 
+            }
+        }
+        private void AllowButtonClick(Control ctrl) { // Findng buttons to read text of on click
+            foreach (Control subctrl in ctrl.Controls) { // Get each control in the form
+                if (subctrl.GetType() == typeof(GroupBox) || subctrl.GetType() == typeof(Panel)) { // if the control is a group box or panel, enter the method again
+                    AllowButtonClick(subctrl); // Recursion
+                } else if (subctrl.GetType() == typeof(Button)) { // If a button is found, allow the event to be used.
+                    subctrl.Click += OnTillButtonClick;
+                }
+            }
+        }
+        private void OnTillButtonClick(object sender, EventArgs e) {
+            Button btn = (Button)sender; // Cast sender to a button object
+            string btnText = btn.Text;
+            switch (btnText) { // Switch on the button text
+                case ("Card"): // If card button is clicked
+                    tillFinish(true);
+                    break;
+                case ("Cash"): // If cash button is clicked
+                    tillFinish(false);
+                    // OPEN CHASH DRAWER
+                    break;
+                case ("Error Correct"): // If error correct button is clicked
+                    tillErrorCorrect();
+                    break;
+                case ("Cancel"): // If cancel button is clicked
+                    tillCancel();
+                    break;
+                default: // If any of the other buttons are clicked that are not above (numbers)
+                    if (tbxTillDisplay.Text.Length > 0) {
+                        if (Char.IsLetter(Convert.ToChar(tbxTillDisplay.Text[0]))) {
+                            tbxTillDisplay.Text = "";
+                        }
+                    }
+                        tbxTillDisplay.Text += btnText;
+                        usingCustomAmount = true;
+                    
+                    break;
+            }
+        }
+
+        private void tillFinish(bool isByCard) { // Till finialisation 
+            if (!isListBoxLocked) { // If the list box is unlocked
+                if (lbxTillDisplay.Items.Count > 0) { // And has items in it
+                    // Declare all items to be put into datatable 
+                    int userID = 999; // TODO: User from table
+                    DateTime cashedTime = DateTime.Now; // The date/time when cashed is the same as now 
+                    string itemsOnCheque = ""; // String of a list of items and quantity
+
+                    
+
+                    decimal tenderedAmount;
+                    if (usingCustomAmount) { // If a number is typed in
+                        tenderedAmount = Convert.ToDecimal(tbxTillDisplay.Text); // Get tendered amount
+                        usingCustomAmount = false; // Make it so it is only using a custom amount if there is actully a custom amount
+                    } else { // If no number is typed it can be assumed we are tendered preciecily the correct amount
+                        tenderedAmount = tillTotal;
+                    }
+                    chequeDeductions += tenderedAmount; // Keep count of how much the cheque is
+
+
+                    lbxTillDisplay.Items.Add(new String('-', 36)); // seperate display
+                    lbxTillDisplay.Items.Add(String.Format("Subtotal{0," + (36 - "Subtotal".Length) + "}", "£" + tillTotal.ToString("0.00"))); // Add the subtotal line
+                    if (isByCard) { // If is a card payment
+                        lbxTillDisplay.Items.Add(String.Format("Card{0," + (36 - "Card".Length) + "}", "-£" + tenderedAmount.ToString("0.00"))); // Add the card line
+                        tillTotal -= tenderedAmount; // Subtract the tenderd amount off the total bull
+                        tbxTillDisplay.Text = "Card: £" + tenderedAmount.ToString("0.00"); // Print registering the card payment
+                        lbxTillDisplay.Items.Add(String.Format("Remaining Balance{0," + (36 - "Remaining Balance".Length) + "}", "£" + tillTotal.ToString("0.00"))); // Add the Remain balance line
+                    } else {
+                        lbxTillDisplay.Items.Add(String.Format("Cash{0," + (36 - "Cash".Length) + "}", "-£" + tenderedAmount.ToString("0.00"))); // Add the Cash line
+                        tbxTillDisplay.Text = "Cash: £" + tenderedAmount.ToString("0.00"); // Then print hopw much we are payed in cash
+                        cashAmount += tenderedAmount; // track cash in till
+                        decimal change = 0;
+                        if ((tillTotal - tenderedAmount) < 0) { // If we have change to handle
+                            change = -(tillTotal - tenderedAmount); // change is equal to whatever the levtover is 
+                            tillTotal = 0; // Total is no longer important
+                            tenderedAmount = 0; // Tendered amount is no longer important
+                            chequeDeductions -= change; // remove any over values from the deduction
+                            cashAmount -= change; // Track cash in till
+                            lbxTillDisplay.Items.Add(String.Format("Change{0," + (36 - "Change".Length) + "}", "£" + change.ToString("0.00"))); // Add the change line                        
+                        }
+                        tillTotal -= tenderedAmount; // remove the tendered amount from the total if there is no change or not enough to cover the whole bill
+                    }
+
+                    updateTotalDisplay(tillTotal); // Update the total amount
+
+
+
+
+                    if (tillTotal == 0) {// If the whole bill is payed
+
+                        changeListLock(); // Lock the list
+
+                        // Create the Items on cheque string
+                        for (int i = 0; i < tillSelectedItems.Count; i++) { // For all selected items
+                            int itemID = tillSelectedItems[i]; // get their ID 
+                            int quantity = 1; // Get their quantity TODO: Allow adjustable quantity
+                            itemsOnCheque += String.Format("{0},{1};", itemID.ToString(), quantity.ToString()); // Add them to the cheque string
+                        }
+
+                        tblEPOSCashChequesTableAdapter.Fill(ePOSDBDataSet.tblEPOSCashCheques); // Pull information to keep DB sync
+                        DataTable cashedCheques = ePOSDBDataSet.tblEPOSCashCheques; // Gets the dataTable
+                        cashedCheques.Rows.Add(); // Adds a new row
+                        int lastRowIndex = cashedCheques.Rows.Count - 1; // Finds the index of the last (new) row
+
+                        // Input all data into the new row
+                        cashedCheques.Rows[lastRowIndex][1] = userID;
+                        cashedCheques.Rows[lastRowIndex][2] = cashedTime;
+                        cashedCheques.Rows[lastRowIndex][3] = itemsOnCheque;
+                        cashedCheques.Rows[lastRowIndex][4] = chequeDeductions;
+                        cashedCheques.Rows[lastRowIndex][5] = cashAmount;
+
+                        tblEPOSCashChequesTableAdapter.Update(ePOSDBDataSet.tblEPOSCashCheques); // Push updates to DB
+                        
+                        tillSelectedItems.Clear(); // Clear the list of selected items
+
+                        MessageBox.Show(userID + "\n" + cashedTime + "\n" + itemsOnCheque + "\n" + chequeDeductions + "\n" + cashAmount);
+
+                        chequeDeductions = 0; // reset for next sale
+                        cashAmount = 0;
+                    } // else do nothing
+                }
+            }
+        }
+
+        private void tillErrorCorrect() { // Till error correction
+            if (!isListBoxLocked) { // Only do so if list box is unlocked
+                if (lbxTillDisplay.SelectedItem != null) { // Assuming an item is selected 
+                    int selectedItemIndex = lbxTillDisplay.SelectedIndex; // Get the selected index 
+                    int itemID = tillSelectedItems[selectedItemIndex]; // get the slected item ID
+
+                    tblEPOSItemPriceTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItemPrice.*\n" +
+                            "FROM tblEPOSItemPrice" +
+                            "\nWHERE (((tblEPOSItemPrice.eposItemID)=" + itemID + "));"; // Query the DB for that item ID to get associated prices
+                    this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice); // Fill datatable
+
+                    decimal itemPrice = Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[0][2]); // Get the item price
+
+                    lbxTillDisplay.Items.RemoveAt(selectedItemIndex); // Remove item from list box
+                    tillSelectedItems.RemoveAt(selectedItemIndex); // remove item from list
+
+                    updateTotal(); // Update the till total
+
+                    tbxTillDisplay.Text = "Error Correct: £" + itemPrice.ToString("0.00"); // Display errorr correct message
+                }
+            }
+        }
+
+        private void tillCancel() {
+            if (!isListBoxLocked) { // Only cancel if lsit box is unlocked 
+                tbxTillDisplay.Text = "Cancel £" + tillTotal.ToString("0.00"); // Display cancel value
+                lbxTillDisplay.Items.Add(new String('-', 36)); // seperate display
+                lbxTillDisplay.Items.Add(String.Format("Cancel{0," + (36 - "Cancel".Length) + "}", "-£" + tillTotal.ToString("0.00"))); // Add the cance; ;ime 
+                tillSelectedItems.Clear(); // Clear all items from the list
+                lbxTillDisplay.ClearSelected(); // Clear any selected index to ensure nothing can be editied
+                changeListLock(); // Lock list
+                updateTotal(); // Update the total value
+            }
+        }
+
+        private void changeListLock() { // Invert the list lock and disable selection
+            if (isListBoxLocked) { // if it is locked 
+                lbxTillDisplay.SelectionMode = SelectionMode.One; // allow selection
+                isListBoxLocked = false; // not locked
+            } else { // if it is not locked
+                lbxTillDisplay.SelectionMode = SelectionMode.None; // disallow selection
+                isListBoxLocked = true; // lock list
+            }
         }
     }
 }
