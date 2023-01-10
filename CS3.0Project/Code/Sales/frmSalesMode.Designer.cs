@@ -30,7 +30,7 @@
             this.pnlItemDisplay = new System.Windows.Forms.Panel();
             this.pnlTillDisplay = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnTableStore = new System.Windows.Forms.Button();
             this.btnTill00 = new System.Windows.Forms.Button();
             this.btnTill0 = new System.Windows.Forms.Button();
             this.btnTillDecimal = new System.Windows.Forms.Button();
@@ -58,6 +58,7 @@
             this.bstblEPOSCashCheques = new System.Windows.Forms.BindingSource(this.components);
             this.bstblEPOSItemsTableAdapter = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSCashChequesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSCashChequesTableAdapter();
+            this.btnTablePlan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             this.pnlTillDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemFolders)).BeginInit();
@@ -105,7 +106,7 @@
             // pnlTillDisplay
             // 
             this.pnlTillDisplay.Controls.Add(this.button2);
-            this.pnlTillDisplay.Controls.Add(this.button1);
+            this.pnlTillDisplay.Controls.Add(this.btnTableStore);
             this.pnlTillDisplay.Controls.Add(this.btnTill00);
             this.pnlTillDisplay.Controls.Add(this.btnTill0);
             this.pnlTillDisplay.Controls.Add(this.btnTillDecimal);
@@ -140,15 +141,16 @@
             this.button2.TabIndex = 21;
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btnTableStore
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(226, 593);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 51);
-            this.button1.TabIndex = 20;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnTableStore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnTableStore.ForeColor = System.Drawing.Color.White;
+            this.btnTableStore.Location = new System.Drawing.Point(226, 593);
+            this.btnTableStore.Name = "btnTableStore";
+            this.btnTableStore.Size = new System.Drawing.Size(75, 51);
+            this.btnTableStore.TabIndex = 20;
+            this.btnTableStore.Text = "Table Store";
+            this.btnTableStore.UseVisualStyleBackColor = false;
             // 
             // btnTill00
             // 
@@ -406,6 +408,18 @@
             // 
             this.tblEPOSCashChequesTableAdapter.ClearBeforeFill = true;
             // 
+            // btnTablePlan
+            // 
+            this.btnTablePlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnTablePlan.ForeColor = System.Drawing.Color.White;
+            this.btnTablePlan.Location = new System.Drawing.Point(1039, 11);
+            this.btnTablePlan.Name = "btnTablePlan";
+            this.btnTablePlan.Size = new System.Drawing.Size(75, 75);
+            this.btnTablePlan.TabIndex = 4;
+            this.btnTablePlan.Text = "Table Plan";
+            this.btnTablePlan.UseVisualStyleBackColor = false;
+            this.btnTablePlan.Click += new System.EventHandler(this.btnTablePlan_Click);
+            // 
             // frmSalesMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,6 +427,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1914, 1074);
             this.ControlBox = false;
+            this.Controls.Add(this.btnTablePlan);
             this.Controls.Add(this.pnlTillDisplay);
             this.Controls.Add(this.pnlItemDisplay);
             this.Controls.Add(this.btnFolderBack);
@@ -469,9 +484,10 @@
         private System.Windows.Forms.Button btnTillErrorCorrect;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnTableStore;
         private System.Windows.Forms.BindingSource bstblEPOSCashCheques;
         private System.Windows.Forms.BindingSource bstblEPOSItemsTableAdapter;
         private EPOSDBDataSetTableAdapters.tblEPOSCashChequesTableAdapter tblEPOSCashChequesTableAdapter;
+        private System.Windows.Forms.Button btnTablePlan;
     }
 }

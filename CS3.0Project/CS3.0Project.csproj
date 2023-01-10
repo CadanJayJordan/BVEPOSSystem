@@ -51,6 +51,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,6 +94,18 @@
     </Compile>
     <Compile Include="Code\Sales\frmSalesMode.Designer.cs">
       <DependentUpon>frmSalesMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Table\frmTableOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Table\frmTableOptions.Designer.cs">
+      <DependentUpon>frmTableOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Table\frmTablePlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Table\frmTablePlan.Designer.cs">
+      <DependentUpon>frmTablePlan.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Utility\Classes\FormDragger.cs" />
     <Compile Include="Code\Utility\Forms\frmKeyboard.cs">
@@ -137,6 +150,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Sales\frmSalesMode.resx">
       <DependentUpon>frmSalesMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Table\frmTableOptions.resx">
+      <DependentUpon>frmTableOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Table\frmTablePlan.resx">
+      <DependentUpon>frmTablePlan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Utility\Forms\frmKeyboard.resx">
       <DependentUpon>frmKeyboard.cs</DependentUpon>
