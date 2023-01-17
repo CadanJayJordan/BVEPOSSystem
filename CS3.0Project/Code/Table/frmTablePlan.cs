@@ -187,14 +187,14 @@ namespace CS3._0Project.Code.Table {
             } 
         }
 
-        private void updateTables() {
+        public void updateTables() {
             tblEPOSTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSTables.*\r\nFROM tblEPOSTables;";
             tblEPOSTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSTables); // Ensure DB Is updated
             foreach (Control table in pnlFloorPanel.Controls) { // For each table in the plan (on the current floor)
                 foreach (DataRow dbTables in ePOSDBDataSet.tblEPOSTables) { // Go through each table in the DB
                     if (Convert.ToInt32(table.Name.Substring(3, table.Name.Length - 3)) == Convert.ToInt32(dbTables[0])) { // Until a match is found.
                         // Insert data into DB
-                        dbTables[1] = table.Name; // Table Number (Not id)
+                        dbTables[1] = table.Text.Split('\n')[0]; // Table Number (Not id)
                         dbTables[3] = table.Location.X; // Table X location
                         dbTables[4] = table.Location.Y; // Table Y Location
                         dbTables[5] = table.Width; // Table Width

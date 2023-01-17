@@ -145,11 +145,12 @@ namespace CS3._0Project.Code.Table {
         }
 
         private void btnNumber_Click(object sender, EventArgs e) { // Change table number (not ID)
+            frmTablePlan.updateTables(); // Update tables to ensure nothing is moved when editing numbers
+
             tblEPOSTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSTables.*\r\nFROM tblEPOSTables;";
             tblEPOSTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSTables); // Get DB Table
 
             // TODO: Start with existing number in the num pad
-            // TODO: Make sure tables dont duplicate on re numbering
             frmNumPad numPad = new frmNumPad();
             numPad.ShowDialog();
             string input = numPad.getInput();
@@ -169,11 +170,25 @@ namespace CS3._0Project.Code.Table {
             frmTablePlan.drawTables(); // Redraw tables
         }
 
-        private void btnRemove_Click(object sender, EventArgs e) {
-            // TODO: remove table if it is not open
+        private void btnRemove_Click(object sender, EventArgs e) { // TODO: error if open
+            if (!isTableOpen(tableID)) { // If the table is not open
+                frmTablePlan.updateTables(); // Update tables to ensure nothing is wrong when removed
+                tblEPOSTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSTables.*\r\nFROM tblEPOSTables;";
+                tblEPOSTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSTables); // Get DB Table
+                foreach (DataRow table in ePOSDBDataSet.tblEPOSTables) { // For every table
+                    if (Convert.ToInt32(table[0]) == tableID) { // If a table ID match is found
+                        table.Delete();
+                    }
+                }
+                tblEPOSTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSTables);
+                ePOSDBDataSet.tblEPOSTables.AcceptChanges();
+                frmTablePlan.drawTables(); // Draw tables again to remove table
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e) { // Add new table
+            frmTablePlan.updateTables(); // Update tables to ensure concurrency
+
             tblEPOSTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSTables.*\r\nFROM tblEPOSTables;";
             tblEPOSTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSTables); // Get DB Table
 

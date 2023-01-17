@@ -9,7 +9,6 @@ namespace CS3._0Project.Forms.Utility.Classes {
         private readonly Control ctrl; // Form to drag
         private Point mouseDown; // Mouse location
         private bool hasBoundingParent;
-        public bool isDraggging = false;
 
         public ControlDragger(Control ctrl, bool dragSubControls, bool hasBoundingParent) {
             this.ctrl = ctrl; // Get input ctrl
@@ -17,7 +16,6 @@ namespace CS3._0Project.Forms.Utility.Classes {
         }
 
         protected void OnMouseDown(object sender, MouseEventArgs e) { // Where has mouse been pressed too
-            isDraggging = true;
             mouseDown = e.Location;
         }
 
@@ -48,10 +46,6 @@ namespace CS3._0Project.Forms.Utility.Classes {
             }
         }
 
-        protected void OnMouseUp(object sender, MouseEventArgs e) {
-            isDraggging = false;
-        }
-
         private void AllowDrag(Control ctrl, bool dragSubControls, bool hasBoundingParent) { // Allow for ctrls to be dragged
             this.hasBoundingParent = hasBoundingParent;
             if (ctrl.GetType() == typeof(Button)) { // If the control is a button dont drag
@@ -60,7 +54,6 @@ namespace CS3._0Project.Forms.Utility.Classes {
             // Envoke events
             ctrl.MouseDown += OnMouseDown;
             ctrl.MouseMove += OnMouseMove;
-            ctrl.MouseUp += OnMouseUp;
 
             // Make all child controls also draggable, if drga sub controls is true
             if (dragSubControls) {

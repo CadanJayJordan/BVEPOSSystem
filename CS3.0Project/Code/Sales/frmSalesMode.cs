@@ -616,7 +616,7 @@ namespace CS3._0Project.Code.Sales {
             if (openTableIndex >= 0) {
                 ePOSDBDataSet.tblEPOSOpenTables.Rows[openTableIndex].Delete(); // Remove index
                 tblEPOSOpenTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSOpenTables); // Update db
-                ePOSDBDataSet.AcceptChanges(); // Acept row deletion
+                ePOSDBDataSet.tblEPOSOpenTables.AcceptChanges(); // Acept row deletion
             }
         }        
     }
