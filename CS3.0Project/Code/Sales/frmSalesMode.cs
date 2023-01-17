@@ -17,7 +17,7 @@ namespace CS3._0Project.Code.Sales {
     public partial class frmSalesMode : Form {
 
         private Size screenSize;
-        private int loginCode;
+        private int userID;
 
         private bool isRefundMode; // TODO: Make refun mode work
         private List<int> currentFolderPath = new List<int>(); // Current Folder Path
@@ -40,14 +40,14 @@ namespace CS3._0Project.Code.Sales {
         private bool usingCustomAmount = false;
 
         // FOR TABLE OPENING
-
+        private int openTableID = -1;
 
         private frmMessageBox cMessageBox = new frmMessageBox(); // Custom message box
 
-        public frmSalesMode(Size size, int loginCode, bool isRefundMode) {
+        public frmSalesMode(Size size, int userID, bool isRefundMode) {
             InitializeComponent();
             this.screenSize = size;
-            this.loginCode = loginCode;
+            this.userID = userID;
             this.isRefundMode = isRefundMode;
         }
 
@@ -61,6 +61,7 @@ namespace CS3._0Project.Code.Sales {
 
         private void frmSalesMode_Load(object sender, EventArgs e) {
             // Fill DB Tables On Load
+            this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables);
             this.tblEPOSCashChequesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSCashCheques);
             this.tblEPOSCashChequesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSCashCheques);
             this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice);
@@ -371,6 +372,9 @@ namespace CS3._0Project.Code.Sales {
                 case ("Table Store"): // If table store button is clicked
                     tillTableStore();
                     break;
+                case ("Quantity"):
+                    tillChangeQuantity();
+                    break;
                 default: // If any of the other buttons are clicked that are not above (numbers)
                     if (tbxTillDisplay.Text.Length > 0) {
                         if (Char.IsLetter(Convert.ToChar(tbxTillDisplay.Text[0]))) {
@@ -384,10 +388,11 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void tillFinish(bool isByCard) { // Till finialisation 
+            // TODO: Make so if finish occurs with a table selected it will clear the table and delete the open table record
             if (!isListBoxLocked) { // If the list box is unlocked
                 if (lbxTillDisplay.Items.Count > 0) { // And has items in it
                     // Declare all items to be put into datatable 
-                    int userID = 999; // TODO: User from table
+                    //int userID = 999; // TODO: User from table
                     DateTime cashedTime = DateTime.Now; // The date/time when cashed is the same as now 
                     string itemsOnCheque = ""; // String of a list of items and quantity
                     decimal tenderedAmount;
@@ -435,28 +440,50 @@ namespace CS3._0Project.Code.Sales {
                             int quantity = tillSelectedQuantity[i];
                             itemsOnCheque += String.Format("{0},{1};", itemID.ToString(), quantity.ToString()); // Add them to the cheque string
                         }
+                        tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables;\r\n";
+                        tblEPOSOpenTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSOpenTables); // Pull info from DB
 
-                        tblEPOSCashChequesTableAdapter.Fill(ePOSDBDataSet.tblEPOSCashCheques); // Pull information to keep DB sync
+                        int openTableIndex = 0; // Index of open table row in db
+
+                        for (int i = 0; i < ePOSDBDataSet.tblEPOSOpenTables.Rows.Count; i++) {
+                            if (Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[i][0]) == this.openTableID) { // If the table ID is equal
+                                openTableIndex = i; // Update the open table index
+                                break; // Break to avoid slowness
+                            }
+                        }
+
+                        tblEPOSCashChequesTableAdapter.Fill(ePOSDBDataSet.tblEPOSCashCheques); // Pull info from DB
                         DataTable cashedCheques = ePOSDBDataSet.tblEPOSCashCheques; // Gets the dataTable
                         cashedCheques.Rows.Add(); // Adds a new row
                         int lastRowIndex = cashedCheques.Rows.Count - 1; // Finds the index of the last (new) row
+                        int openTable = 0;
+                        if (openTableID >= 0) {
+                            openTable = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[openTableIndex][1]);
+                        } else {
+                            openTable = -1;
+                        }
 
                         // Input all data into the new row
                         cashedCheques.Rows[lastRowIndex][1] = userID;
-                        cashedCheques.Rows[lastRowIndex][2] = cashedTime;
-                        cashedCheques.Rows[lastRowIndex][3] = itemsOnCheque;
-                        cashedCheques.Rows[lastRowIndex][4] = chequeDeductions;
-                        cashedCheques.Rows[lastRowIndex][5] = cashAmount;
+                        cashedCheques.Rows[lastRowIndex][2] = openTable;
+                        cashedCheques.Rows[lastRowIndex][3] = cashedTime;
+                        cashedCheques.Rows[lastRowIndex][4] = itemsOnCheque;
+                        cashedCheques.Rows[lastRowIndex][5] = chequeDeductions;
+                        cashedCheques.Rows[lastRowIndex][6] = cashAmount;
 
                         tblEPOSCashChequesTableAdapter.Update(ePOSDBDataSet.tblEPOSCashCheques); // Push updates to DB
                         
                         tillSelectedItems.Clear(); // Clear the list of selected items
                         tillSelectedQuantity.Clear();
 
-                        MessageBox.Show(userID + "\n" + cashedTime + "\n" + itemsOnCheque + "\n" + chequeDeductions + "\n" + cashAmount);
+                        MessageBox.Show(userID + "\n" + cashedTime + "\n" + openTable + "\n" + itemsOnCheque + "\n" + chequeDeductions + "\n" + cashAmount);
 
                         chequeDeductions = 0; // reset for next sale
                         cashAmount = 0;
+                        if (openTableID >= 0) { // Reset table when till is finished
+                            closeTable(openTableID); // Close the table if it is open (which we can assume if openTableID is not -1)
+                            openTableID = -1;
+                        }
                     } // else do nothing
                 }
             }
@@ -494,8 +521,48 @@ namespace CS3._0Project.Code.Sales {
                 tillSelectedItems.Clear(); // Clear all items from the list
                 tillSelectedQuantity.Clear(); // Clear all quantitys from the list
                 lbxTillDisplay.ClearSelected(); // Clear any selected index to ensure nothing can be editied
+                if (openTableID >= 0) { // If the table ID has been used
+                    openTableID = -1; // Reset it
+                }
                 changeListLock(); // Lock list
                 updateTotal(); // Update the total value
+            }
+        }
+
+        private void tillTableStore() { // Store the items in the list to an open table, TODO: allow storing of already cashed off parts of the ticket
+            if (isListBoxLocked) { // If the table is not locked, lock it
+                changeListLock();
+            }
+
+            if (openTableID != -1) { // If the a table is open
+                tblEPOSOpenTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSOpenTables); // Fill DB
+                for (int i = 0; i < ePOSDBDataSet.tblEPOSOpenTables.Rows.Count; i++) { // For every open table
+                    if (Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[i][0]) == openTableID) { // Find open table
+                        string newTableItemString = ""; // Create new string
+                        for (int x = 0; x < lbxTillDisplay.Items.Count; x++) { // For every item in the list box
+                            newTableItemString += String.Format("{0},{1};", tillSelectedItems[x], tillSelectedQuantity[x]); // Add its quantity and itemid to the string
+                        }
+                        ePOSDBDataSet.tblEPOSOpenTables.Rows[i][2] = newTableItemString; // add string in DB
+                        tblEPOSOpenTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSOpenTables.Rows[i]); // Update string
+                        break; // break loop to avoid unnessasary searching
+                    }
+                }
+                // Display
+                lbxTillDisplay.Items.Add(new String('-', 36)); // seperate display
+                lbxTillDisplay.Items.Add(String.Format("Table Store{0," + (36 - "Table Store".Length) + "}", "£" + tillTotal.ToString("0.00"))); // Add the table store line
+                tbxTillDisplay.Text = "Table Store: £" + tillTotal.ToString("0.00"); // Print registering the table store
+                openTableID = -1; // Reset table ID to base value
+
+            } // else do nothing
+        }
+
+        private void tillChangeQuantity() { // Function to multiply quantity
+            if (lbxTillDisplay.SelectedIndex != -1 && tbxTillDisplay.Text != "") { // If an index is selected and text is in the box
+                // TODO: Fix error if quantity is not int
+                tillSelectedQuantity[lbxTillDisplay.SelectedIndex] *= Convert.ToInt32(tbxTillDisplay.Text);
+                updateTotal();
+                updateTillList();
+                tbxTillDisplay.Text = "";
             }
         }
 
@@ -509,25 +576,48 @@ namespace CS3._0Project.Code.Sales {
             }
         }
 
-        private void btnTablePlan_Click(object sender, EventArgs e) {
-            frmTablePlan frmTablePlan = new frmTablePlan(screenSize, this);
-            frmTablePlan.ShowDialog();
+        private void btnTablePlan_Click(object sender, EventArgs e) { // Open table plan Form
+            frmTablePlan frmTablePlan = new frmTablePlan(screenSize, userID, this); // new form instance, passing through any sub forms
+            frmTablePlan.ShowDialog();// Open table plan
         } 
 
-        public void openTable(List<int> tableSelectedTillItems, List<int> tableSelectedTillQuantity) { // New code to open a table externally using an int list of the selected item IDs
-            this.tillSelectedItems = tableSelectedTillItems;
+        public void openTable(List<int> tableSelectedTillItems, List<int> tableSelectedTillQuantity, int openTableID) { // public to open a table externally using an int list of the selected item IDs
+            this.tillSelectedItems = tableSelectedTillItems; // get the arrays from the other form
             this.tillSelectedQuantity = tableSelectedTillQuantity;
+            this.openTableID = openTableID; // Pull table ID to open
+
+            // TODO: Put notes on a table once opened
+            // TODO: Allow moving tabs between tables
+            // TODO: Split bill feature
+            // TODO: Reciept Layout/print
+
+            tbxTillDisplay.Text = ""; // Clear display if any text
 
             if (isListBoxLocked) { // If the table is locked 
                 changeListLock();
             }
-
+            // Update the till display
             updateTotal();
             updateTillList();
         }
 
-        private void tillTableStore() {
+        private void closeTable(int openTableID) { // "Close" a table by removeing it from the open tables DB table
+            tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables;\r\n";
+            tblEPOSOpenTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSOpenTables); // Pull info from DB
+            DataTable openTables = ePOSDBDataSet.tblEPOSOpenTables; // Table
 
-        }
+            int openTableIndex = -1; // Index in DB of the open table
+            for (int i = 0; i < openTables.Rows.Count; i++) { // Iterate until a DB match is found
+                if (openTableID == Convert.ToInt32(openTables.Rows[i][0])) {
+                    openTableIndex = i; // Store index
+                }
+            }
+
+            if (openTableIndex >= 0) {
+                ePOSDBDataSet.tblEPOSOpenTables.Rows[openTableIndex].Delete(); // Remove index
+                tblEPOSOpenTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSOpenTables); // Update db
+                ePOSDBDataSet.AcceptChanges(); // Acept row deletion
+            }
+        }        
     }
 }

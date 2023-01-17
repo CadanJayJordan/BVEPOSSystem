@@ -33,6 +33,9 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.bstblEPOSOpenTables = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSOpenTablesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnNumber = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSTables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSOpenTables)).BeginInit();
@@ -70,6 +73,7 @@
             this.btnBill.TabIndex = 2;
             this.btnBill.Text = "Bill";
             this.btnBill.UseVisualStyleBackColor = true;
+            this.btnBill.Click += new System.EventHandler(this.btnBill_Click);
             // 
             // bstblEPOSTables
             // 
@@ -104,12 +108,45 @@
             // 
             this.tblEPOSOpenTablesTableAdapter.ClearBeforeFill = true;
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(13, 93);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 39);
+            this.btnAdd.TabIndex = 4;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(93, 93);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 39);
+            this.btnRemove.TabIndex = 5;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnNumber
+            // 
+            this.btnNumber.Location = new System.Drawing.Point(174, 93);
+            this.btnNumber.Name = "btnNumber";
+            this.btnNumber.Size = new System.Drawing.Size(75, 39);
+            this.btnNumber.TabIndex = 6;
+            this.btnNumber.Text = "Number";
+            this.btnNumber.UseVisualStyleBackColor = true;
+            this.btnNumber.Click += new System.EventHandler(this.btnNumber_Click);
+            // 
             // frmTableOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 144);
             this.ControlBox = false;
+            this.Controls.Add(this.btnNumber);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnBill);
             this.Controls.Add(this.btnOpen);
@@ -142,5 +179,8 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.BindingSource bstblEPOSOpenTables;
         private EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter tblEPOSOpenTablesTableAdapter;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnNumber;
     }
 }

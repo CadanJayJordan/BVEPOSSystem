@@ -29,7 +29,7 @@
             this.btnFolderBack = new System.Windows.Forms.Button();
             this.pnlItemDisplay = new System.Windows.Forms.Panel();
             this.pnlTillDisplay = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnMultiply = new System.Windows.Forms.Button();
             this.btnTableStore = new System.Windows.Forms.Button();
             this.btnTill00 = new System.Windows.Forms.Button();
             this.btnTill0 = new System.Windows.Forms.Button();
@@ -59,12 +59,15 @@
             this.bstblEPOSItemsTableAdapter = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSCashChequesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSCashChequesTableAdapter();
             this.btnTablePlan = new System.Windows.Forms.Button();
+            this.bstblEPOSOpenTables = new System.Windows.Forms.BindingSource(this.components);
+            this.tblEPOSOpenTablesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             this.pnlTillDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemFolders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSCashCheques)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemsTableAdapter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSOpenTables)).BeginInit();
             this.SuspendLayout();
             // 
             // btnHome
@@ -105,7 +108,7 @@
             // 
             // pnlTillDisplay
             // 
-            this.pnlTillDisplay.Controls.Add(this.button2);
+            this.pnlTillDisplay.Controls.Add(this.btnMultiply);
             this.pnlTillDisplay.Controls.Add(this.btnTableStore);
             this.pnlTillDisplay.Controls.Add(this.btnTill00);
             this.pnlTillDisplay.Controls.Add(this.btnTill0);
@@ -131,15 +134,16 @@
             this.pnlTillDisplay.Size = new System.Drawing.Size(400, 750);
             this.pnlTillDisplay.TabIndex = 3;
             // 
-            // button2
+            // btnMultiply
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(226, 650);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 51);
-            this.button2.TabIndex = 21;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnMultiply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnMultiply.ForeColor = System.Drawing.Color.White;
+            this.btnMultiply.Location = new System.Drawing.Point(226, 650);
+            this.btnMultiply.Name = "btnMultiply";
+            this.btnMultiply.Size = new System.Drawing.Size(75, 51);
+            this.btnMultiply.TabIndex = 21;
+            this.btnMultiply.Text = "Quantity";
+            this.btnMultiply.UseVisualStyleBackColor = false;
             // 
             // btnTableStore
             // 
@@ -420,6 +424,15 @@
             this.btnTablePlan.UseVisualStyleBackColor = false;
             this.btnTablePlan.Click += new System.EventHandler(this.btnTablePlan_Click);
             // 
+            // bstblEPOSOpenTables
+            // 
+            this.bstblEPOSOpenTables.DataMember = "tblEPOSOpenTables";
+            this.bstblEPOSOpenTables.DataSource = this.ePOSDBDataSet;
+            // 
+            // tblEPOSOpenTablesTableAdapter
+            // 
+            this.tblEPOSOpenTablesTableAdapter.ClearBeforeFill = true;
+            // 
             // frmSalesMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -448,6 +461,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSCashCheques)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemsTableAdapter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSOpenTables)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -483,11 +497,13 @@
         private System.Windows.Forms.Button btnTill1;
         private System.Windows.Forms.Button btnTillErrorCorrect;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnMultiply;
         private System.Windows.Forms.Button btnTableStore;
         private System.Windows.Forms.BindingSource bstblEPOSCashCheques;
         private System.Windows.Forms.BindingSource bstblEPOSItemsTableAdapter;
         private EPOSDBDataSetTableAdapters.tblEPOSCashChequesTableAdapter tblEPOSCashChequesTableAdapter;
         private System.Windows.Forms.Button btnTablePlan;
+        private System.Windows.Forms.BindingSource bstblEPOSOpenTables;
+        private EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter tblEPOSOpenTablesTableAdapter;
     }
 }

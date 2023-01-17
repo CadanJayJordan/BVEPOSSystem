@@ -35,6 +35,7 @@
             this.tblEPOSItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ePOSDBDataSet = new CS3._0Project.EPOSDBDataSet();
             this.tblEPOSItemsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter();
+            this.btnManagerFunctions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tblEPOSItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             this.SuspendLayout();
@@ -149,6 +150,18 @@
             // 
             this.tblEPOSItemsTableAdapter.ClearBeforeFill = true;
             // 
+            // btnManagerFunctions
+            // 
+            this.btnManagerFunctions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnManagerFunctions.ForeColor = System.Drawing.Color.White;
+            this.btnManagerFunctions.Location = new System.Drawing.Point(422, 80);
+            this.btnManagerFunctions.Name = "btnManagerFunctions";
+            this.btnManagerFunctions.Size = new System.Drawing.Size(133, 320);
+            this.btnManagerFunctions.TabIndex = 8;
+            this.btnManagerFunctions.Text = "Manager Functions";
+            this.btnManagerFunctions.UseVisualStyleBackColor = false;
+            this.btnManagerFunctions.Click += new System.EventHandler(this.btnManagerFunctions_Click);
+            // 
             // frmEPOSMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +169,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.btnManagerFunctions);
             this.Controls.Add(this.btnMessage);
             this.Controls.Add(this.btnClock);
             this.Controls.Add(this.btnKeyboard);
@@ -193,5 +207,6 @@
         private EPOSDBDataSet ePOSDBDataSet;
         private System.Windows.Forms.BindingSource tblEPOSItemsBindingSource;
         private EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter tblEPOSItemsTableAdapter;
+        private System.Windows.Forms.Button btnManagerFunctions;
     }
 }

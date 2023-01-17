@@ -9,7 +9,7 @@ namespace CS3._0Project.Code.Utility.Forms {
 
         public frmKeyboard() {
             InitializeComponent();
-            new FormDragger(this); // Enable form dragging
+            new ControlDragger(this, true, false); // Enable form dragging
         }
 
         private void frmKeyboard_Load(object sender, EventArgs e) {

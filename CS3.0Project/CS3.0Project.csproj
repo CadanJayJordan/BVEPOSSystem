@@ -83,6 +83,12 @@
       <DependentUpon>frmEPOSMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Login\LoginClass.cs" />
+    <Compile Include="Code\Management\frmManagementFunctions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmManagementFunctions.Designer.cs">
+      <DependentUpon>frmManagementFunctions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Code\Sales\frmRefundMode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,7 +113,10 @@
     <Compile Include="Code\Table\frmTablePlan.Designer.cs">
       <DependentUpon>frmTablePlan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\Utility\Classes\FormDragger.cs" />
+    <Compile Include="Code\Utility\Classes\SizeableButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Code\Utility\Classes\ControlDragger.cs" />
     <Compile Include="Code\Utility\Forms\frmKeyboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Code\frmStartup.resx">
       <DependentUpon>frmStartup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmManagementFunctions.resx">
+      <DependentUpon>frmManagementFunctions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Sales\frmRefundMode.resx">
       <DependentUpon>frmRefundMode.cs</DependentUpon>

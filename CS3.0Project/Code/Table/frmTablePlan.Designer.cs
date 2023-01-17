@@ -145,8 +145,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlFloorPanel;
         private System.Windows.Forms.Button btnPlanClose;
         private System.Windows.Forms.Button btnPlanUp;
         private System.Windows.Forms.Button btnPlanDown;
@@ -156,5 +154,6 @@
         private System.Windows.Forms.Label lblFloor;
         private System.Windows.Forms.BindingSource bstblEPOSTables;
         private EPOSDBDataSetTableAdapters.tblEPOSTablesTableAdapter tblEPOSTablesTableAdapter;
+        public System.Windows.Forms.Panel pnlFloorPanel;
     }
 }

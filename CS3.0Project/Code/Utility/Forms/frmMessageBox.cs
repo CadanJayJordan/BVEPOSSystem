@@ -17,7 +17,7 @@ namespace CS3._0Project.Code.Utility.Forms {
 
         public frmMessageBox() {
             InitializeComponent();
-            new FormDragger(this);
+            new ControlDragger(this, true, false);
         }
 
         public void ShowMessage(string message) {

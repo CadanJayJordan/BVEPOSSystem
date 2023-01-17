@@ -5,14 +5,19 @@ using CS3._0Project.Forms.Utility.Classes;
 namespace CS3._0Project.Forms.Utility {
     public partial class frmNumPad : Form {
 
-        private bool isLoginCode;
+        private bool isLoginCode = false;
 
-        public frmNumPad(bool isLoginCode) {
+        public frmNumPad() {
+            InitializeComponent();
+            new ControlDragger(this, true, false); // Allow Moving form via dragging
+        }
+
+        public frmNumPad(bool isLoginCode) { // Overload for if login code
             InitializeComponent();
             this.isLoginCode = isLoginCode; // Get input, if it is login, numbers cannot exceed 3 chars
-            new FormDragger(this); // Allow Moving form via dragging
-            
+            new ControlDragger(this, true, false); // Allow Moving form via dragging
         }
+
         public string getInput() { // Get text from textbox
             return txtInput.Text;
         }
