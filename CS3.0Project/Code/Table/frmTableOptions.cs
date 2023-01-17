@@ -22,6 +22,8 @@ namespace CS3._0Project.Code.Table {
         private frmSalesMode frmSalesMode;
         private frmTablePlan frmTablePlan;
 
+        // TODO: Cost on open tables?
+
         public frmTableOptions(int userID, frmSalesMode frmSalesMode, frmTablePlan frmTablePlan, bool editMode) {
             InitializeComponent();
             new ControlDragger(this, true, false); // Enable dragging

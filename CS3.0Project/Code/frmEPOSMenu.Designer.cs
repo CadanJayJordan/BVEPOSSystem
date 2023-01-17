@@ -123,6 +123,7 @@
             this.btnClock.TabIndex = 6;
             this.btnClock.Text = "Clock In/Out";
             this.btnClock.UseVisualStyleBackColor = false;
+            this.btnClock.Click += new System.EventHandler(this.btnClock_Click);
             // 
             // btnMessage
             // 

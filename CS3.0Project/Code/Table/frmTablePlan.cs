@@ -27,6 +27,8 @@ namespace CS3._0Project.Code.Table {
         private frmTableOptions frmTableOptions;
         private frmSalesMode frmSalesMode;
 
+        // TODO: Allow creatation and ordering of new floors
+
         public frmTablePlan(Size screenSize, int userID, frmSalesMode frmSalesMode) { // Initial constructor for sales and table item loading
             InitializeComponent();
             this.screenSize = screenSize;
@@ -194,7 +196,6 @@ namespace CS3._0Project.Code.Table {
                 foreach (DataRow dbTables in ePOSDBDataSet.tblEPOSTables) { // Go through each table in the DB
                     if (Convert.ToInt32(table.Name.Substring(3, table.Name.Length - 3)) == Convert.ToInt32(dbTables[0])) { // Until a match is found.
                         // Insert data into DB
-                        dbTables[1] = table.Text.Split('\n')[0]; // Table Number (Not id)
                         dbTables[3] = table.Location.X; // Table X location
                         dbTables[4] = table.Location.Y; // Table Y Location
                         dbTables[5] = table.Width; // Table Width

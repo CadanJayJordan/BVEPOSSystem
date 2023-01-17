@@ -24,6 +24,7 @@ namespace CS3._0Project.Forms {
         }
 
         private void frmEPOSMenu_Load(object sender, EventArgs e) {
+            // Fill DB
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
@@ -42,6 +43,7 @@ namespace CS3._0Project.Forms {
         }
 
         private void btnLogin_Click(object sender, EventArgs e) {
+            // Open login form and bring values out
             LoginClass loginClass = new LoginClass();
             loginCode = loginClass.loginCode;
             isManager = loginClass.isManager;
@@ -49,7 +51,7 @@ namespace CS3._0Project.Forms {
         }
 
         private void btnSalesMode_Click(object sender, EventArgs e) {
-            if (isLoggedIn()) {
+            if (isLoggedIn()) { // if we are logged in, open the sales mode
                 frmSalesMode frmSalesMode = new frmSalesMode(screenSize, userID, false);
                 frmSalesMode.ShowDialog();
             }
@@ -63,6 +65,7 @@ namespace CS3._0Project.Forms {
         }
 
         private void btnConfiguration_Click(object sender, EventArgs e) {
+            // If logged in and is a manager, open config screen
             if (isLoggedIn()) {
                 if (!isManager) {
                     cMessageBox.ShowMessage("You don't have permission to do that");
@@ -86,7 +89,7 @@ namespace CS3._0Project.Forms {
             frmMessageBox.ShowMessage("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
         }
 
-        private bool isLoggedIn() {
+        private bool isLoggedIn() { // Bool to check for login
             if (loginCode < 0) {
                 cMessageBox.ShowMessage("Please login before trying that");
                 return false;
@@ -99,6 +102,10 @@ namespace CS3._0Project.Forms {
         private void btnManagerFunctions_Click(object sender, EventArgs e) {
             frmManagementFunctions frmManagementFunctions = new frmManagementFunctions(screenSize, userID);
             frmManagementFunctions.ShowDialog();
+        }
+
+        private void btnClock_Click(object sender, EventArgs e) {
+            // TODO: Clock in/out functionallity
         }
     }
 }

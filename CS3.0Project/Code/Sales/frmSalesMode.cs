@@ -44,6 +44,8 @@ namespace CS3._0Project.Code.Sales {
 
         private frmMessageBox cMessageBox = new frmMessageBox(); // Custom message box
 
+        // TODO: Reservation System and storage
+
         public frmSalesMode(Size size, int userID, bool isRefundMode) {
             InitializeComponent();
             this.screenSize = size;

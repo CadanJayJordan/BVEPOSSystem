@@ -14,6 +14,8 @@ namespace CS3._0Project.Code.Configuration {
         private Size screenSize;
         private int loginCode;
 
+        // TODO: Allow item editing
+        // TODO: Settings and colour editing
         public frmConfiguration(Size screenSize, int loginCode) {
             InitializeComponent();
             this.screenSize = screenSize;

@@ -91,7 +91,7 @@
             // 
             this.btnFolderBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnFolderBack.ForeColor = System.Drawing.Color.White;
-            this.btnFolderBack.Location = new System.Drawing.Point(543, 12);
+            this.btnFolderBack.Location = new System.Drawing.Point(529, 11);
             this.btnFolderBack.Name = "btnFolderBack";
             this.btnFolderBack.Size = new System.Drawing.Size(75, 75);
             this.btnFolderBack.TabIndex = 2;
