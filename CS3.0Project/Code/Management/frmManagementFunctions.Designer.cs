@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             this.btnClose = new System.Windows.Forms.Button();
             this.btnEditTablePlan = new System.Windows.Forms.Button();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnClose
@@ -40,13 +41,26 @@
             // 
             // btnEditTablePlan
             // 
-            this.btnEditTablePlan.Location = new System.Drawing.Point(68, 118);
+            this.btnEditTablePlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnEditTablePlan.ForeColor = System.Drawing.Color.White;
+            this.btnEditTablePlan.Location = new System.Drawing.Point(12, 110);
             this.btnEditTablePlan.Name = "btnEditTablePlan";
-            this.btnEditTablePlan.Size = new System.Drawing.Size(75, 57);
+            this.btnEditTablePlan.Size = new System.Drawing.Size(133, 129);
             this.btnEditTablePlan.TabIndex = 1;
             this.btnEditTablePlan.Text = "Edit Table Plan";
-            this.btnEditTablePlan.UseVisualStyleBackColor = true;
+            this.btnEditTablePlan.UseVisualStyleBackColor = false;
             this.btnEditTablePlan.Click += new System.EventHandler(this.btnEditTablePlan_Click);
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Consolas", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.ForeColor = System.Drawing.Color.White;
+            this.lblWelcome.Location = new System.Drawing.Point(5, 6);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(246, 41);
+            this.lblWelcome.TabIndex = 2;
+            this.lblWelcome.Text = "Welcome: {0}";
             // 
             // frmManagementFunctions
             // 
@@ -55,6 +69,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1252, 667);
             this.ControlBox = false;
+            this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.btnEditTablePlan);
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -64,6 +79,7 @@
             this.Text = "Management Functions";
             this.Load += new System.EventHandler(this.frmManagementFunctions_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -71,5 +87,6 @@
 
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnEditTablePlan;
+        private System.Windows.Forms.Label lblWelcome;
     }
 }

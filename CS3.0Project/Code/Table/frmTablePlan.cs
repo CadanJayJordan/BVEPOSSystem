@@ -15,17 +15,20 @@ using CS3._0Project.Forms.Utility.Classes;
 namespace CS3._0Project.Code.Table {
     public partial class frmTablePlan : Form {
 
+        // Constructor Objects
         private Size screenSize;
         private int userID;
         private bool editMode = false;
+        private frmSalesMode frmSalesMode;
 
+        // Floor tracking
         private int currentFloorIndex;
         public int currentFloorID;
 
         private List<List<int>> floors = new List<List<int>>(); // Create list of floors to sort on
 
-        private frmTableOptions frmTableOptions;
-        private frmSalesMode frmSalesMode;
+        private frmTableOptions frmTableOptions; // Table Options
+        
 
         // TODO: Allow creatation and ordering of new floors
 
@@ -50,7 +53,7 @@ namespace CS3._0Project.Code.Table {
 
             if (editMode) { // If we are editing the table plan
                 frmTableOptions = new frmTableOptions(userID, this, true); // Create a new instance of the options form on load
-            } else {
+            } else { // If we are using the sales mode of the atable plan
                 frmTableOptions = new frmTableOptions(userID, frmSalesMode, this, false); // Create a new instance of the options form on load
             }
             currentFloorIndex = 0; // Ensure floors are reset
@@ -138,8 +141,9 @@ namespace CS3._0Project.Code.Table {
             }
         }
 
-        private void redrawPlan() {
+        private void redrawPlan() { // Redraws an entire floor on floor change
             currentFloorID = floors[currentFloorIndex][0]; // Ensure the floor ID is updated
+            // TODO: Remove query, use a for loop and store the table floor index straight away if there is a match
             tblEPOSTableFloorsTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSTableFloors.*\n" +
                 "FROM tblEPOSTableFloors\n" +
                 "WHERE(((tblEPOSTableFloors.tableFloorID) = " + currentFloorID + " ));"; // Query for floor ID
@@ -189,7 +193,7 @@ namespace CS3._0Project.Code.Table {
             } 
         }
 
-        public void updateTables() {
+        public void updateTables() { // Updates Pos + Size of tables in the DB to match the display
             tblEPOSTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSTables.*\r\nFROM tblEPOSTables;";
             tblEPOSTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSTables); // Ensure DB Is updated
             foreach (Control table in pnlFloorPanel.Controls) { // For each table in the plan (on the current floor)

@@ -16,7 +16,7 @@ namespace CS3._0Project.Forms.Utility.Classes {
         }
 
         protected void OnMouseDown(object sender, MouseEventArgs e) { // Where has mouse been pressed too
-            mouseDown = e.Location;
+            mouseDown = e.Location; // Getting the mouse location on initial mouse down
         }
 
         protected void OnMouseMove(object sender, MouseEventArgs e) { // If mouse is being held down and moveds
@@ -29,6 +29,7 @@ namespace CS3._0Project.Forms.Utility.Classes {
 
                 if (hasBoundingParent) { // However if the parent is bounding keep the control within the parent, do not let it leave
                     Control parentCtrl = ctrl.Parent;
+                    // Revert movement in these directions if the pointer is outside the box
                     if (parentCtrl.Size.Width < newPoint.X + ctrl.Width) { // Right
                         newPoint.X -= dx;
                     }

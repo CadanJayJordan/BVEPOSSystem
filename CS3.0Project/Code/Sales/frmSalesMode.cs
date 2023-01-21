@@ -44,8 +44,11 @@ namespace CS3._0Project.Code.Sales {
 
         private frmMessageBox cMessageBox = new frmMessageBox(); // Custom message box
 
-        // TODO: Reservation System and storage
+        // TODO: Modernise all form design
 
+        // BIG TODO: Reservation System and storage
+        // BIG TODO: alt amounts on items
+        // BIG TODO: Lists and item selection from a list
         public frmSalesMode(Size size, int userID, bool isRefundMode) {
             InitializeComponent();
             this.screenSize = size;
@@ -105,6 +108,7 @@ namespace CS3._0Project.Code.Sales {
 
 
             for (int i = 0; i < sortList.Count; i++) { // For every sorted item
+                // TODO: Make this only call the DB Once and then sort through the table looking for each item, when found create buttons directly
                 string itemId = sortList[i][0].ToString();
                 tblEPOSItemsTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItems.*\n" +
                     "FROM tblEPOSItems\n" +
@@ -246,7 +250,7 @@ namespace CS3._0Project.Code.Sales {
                 // TODO: Some form of backout sequence
             } else {
                 parentFolder = currentFolderPath[currentFolderPath.Count - 1]; // Get the parent folder
-
+                // TODO: Rework to avoid query, do a for loop, the add the buttons directly after folder comparison
                 tblEPOSItemFoldersTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSItemFolders.itemFolderID, tblEPOSItemFolders.itemFolderName, tblEPOSItemFolders.parentFolderID, tblEPOSItemFolders.itemFolderLocation\n" +
                         "FROM tblEPOSItemFolders\n" +
                         "WHERE(((tblEPOSItemFolders.parentFolderID) = " + parentFolder + "))\n" +
@@ -531,7 +535,11 @@ namespace CS3._0Project.Code.Sales {
             }
         }
 
-        private void tillTableStore() { // Store the items in the list to an open table, TODO: allow storing of already cashed off parts of the ticket
+        private void tillTableStore() { // Store the items in the list to an open table,
+                                        /* TODO: allow storing of already cashed off parts of the ticket
+                                        In The Store a rouge value in the item string with a value to indicate cash or card then an amount? Like: -1,100 for 100 on card
+                                        Then find a way to display this in the till display (Edit open table function probs)
+                                        */
             if (isListBoxLocked) { // If the table is not locked, lock it
                 changeListLock();
             }
@@ -591,7 +599,7 @@ namespace CS3._0Project.Code.Sales {
             // TODO: Put notes on a table once opened
             // TODO: Allow moving tabs between tables
             // TODO: Split bill feature
-            // TODO: Reciept Layout/print
+            // URGENT TODO: Reciept Layout/print
 
             tbxTillDisplay.Text = ""; // Clear display if any text
 
