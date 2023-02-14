@@ -37,5 +37,10 @@ namespace CS3._0Project.Code.Management {
             frmTablePlan frmTablePlan = new frmTablePlan(screenSize, userID, true);
             frmTablePlan.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+            frmItemEditing frmItemEditing = new frmItemEditing(screenSize, userID);
+            frmItemEditing.ShowDialog();
+        }
     }
 }

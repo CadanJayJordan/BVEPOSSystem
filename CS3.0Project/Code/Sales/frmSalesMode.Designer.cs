@@ -29,6 +29,8 @@
             this.btnFolderBack = new System.Windows.Forms.Button();
             this.pnlItemDisplay = new System.Windows.Forms.Panel();
             this.pnlTillDisplay = new System.Windows.Forms.Panel();
+            this.btnTablePlan = new System.Windows.Forms.Button();
+            this.btnToggleAlts = new System.Windows.Forms.Button();
             this.btnMultiply = new System.Windows.Forms.Button();
             this.btnTableStore = new System.Windows.Forms.Button();
             this.btnTill00 = new System.Windows.Forms.Button();
@@ -58,7 +60,6 @@
             this.bstblEPOSCashCheques = new System.Windows.Forms.BindingSource(this.components);
             this.bstblEPOSItemsTableAdapter = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSCashChequesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSCashChequesTableAdapter();
-            this.btnTablePlan = new System.Windows.Forms.Button();
             this.bstblEPOSOpenTables = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSOpenTablesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
@@ -108,6 +109,8 @@
             // 
             // pnlTillDisplay
             // 
+            this.pnlTillDisplay.Controls.Add(this.btnTablePlan);
+            this.pnlTillDisplay.Controls.Add(this.btnToggleAlts);
             this.pnlTillDisplay.Controls.Add(this.btnMultiply);
             this.pnlTillDisplay.Controls.Add(this.btnTableStore);
             this.pnlTillDisplay.Controls.Add(this.btnTill00);
@@ -131,14 +134,36 @@
             this.pnlTillDisplay.Controls.Add(this.lbxTillDisplay);
             this.pnlTillDisplay.Location = new System.Drawing.Point(624, 12);
             this.pnlTillDisplay.Name = "pnlTillDisplay";
-            this.pnlTillDisplay.Size = new System.Drawing.Size(400, 750);
+            this.pnlTillDisplay.Size = new System.Drawing.Size(469, 750);
             this.pnlTillDisplay.TabIndex = 3;
+            // 
+            // btnTablePlan
+            // 
+            this.btnTablePlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnTablePlan.ForeColor = System.Drawing.Color.White;
+            this.btnTablePlan.Location = new System.Drawing.Point(388, 11);
+            this.btnTablePlan.Name = "btnTablePlan";
+            this.btnTablePlan.Size = new System.Drawing.Size(75, 51);
+            this.btnTablePlan.TabIndex = 4;
+            this.btnTablePlan.Text = "Table Plan";
+            this.btnTablePlan.UseVisualStyleBackColor = false;
+            // 
+            // btnToggleAlts
+            // 
+            this.btnToggleAlts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnToggleAlts.ForeColor = System.Drawing.Color.White;
+            this.btnToggleAlts.Location = new System.Drawing.Point(388, 184);
+            this.btnToggleAlts.Name = "btnToggleAlts";
+            this.btnToggleAlts.Size = new System.Drawing.Size(75, 51);
+            this.btnToggleAlts.TabIndex = 22;
+            this.btnToggleAlts.Text = "Toggle";
+            this.btnToggleAlts.UseVisualStyleBackColor = false;
             // 
             // btnMultiply
             // 
             this.btnMultiply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnMultiply.ForeColor = System.Drawing.Color.White;
-            this.btnMultiply.Location = new System.Drawing.Point(226, 650);
+            this.btnMultiply.Location = new System.Drawing.Point(226, 593);
             this.btnMultiply.Name = "btnMultiply";
             this.btnMultiply.Size = new System.Drawing.Size(75, 51);
             this.btnMultiply.TabIndex = 21;
@@ -149,7 +174,7 @@
             // 
             this.btnTableStore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnTableStore.ForeColor = System.Drawing.Color.White;
-            this.btnTableStore.Location = new System.Drawing.Point(226, 593);
+            this.btnTableStore.Location = new System.Drawing.Point(388, 70);
             this.btnTableStore.Name = "btnTableStore";
             this.btnTableStore.Size = new System.Drawing.Size(75, 51);
             this.btnTableStore.TabIndex = 20;
@@ -294,7 +319,7 @@
             // 
             this.btnTillErrorCorrect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnTillErrorCorrect.ForeColor = System.Drawing.Color.White;
-            this.btnTillErrorCorrect.Location = new System.Drawing.Point(307, 650);
+            this.btnTillErrorCorrect.Location = new System.Drawing.Point(388, 241);
             this.btnTillErrorCorrect.Name = "btnTillErrorCorrect";
             this.btnTillErrorCorrect.Size = new System.Drawing.Size(75, 51);
             this.btnTillErrorCorrect.TabIndex = 6;
@@ -412,18 +437,6 @@
             // 
             this.tblEPOSCashChequesTableAdapter.ClearBeforeFill = true;
             // 
-            // btnTablePlan
-            // 
-            this.btnTablePlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnTablePlan.ForeColor = System.Drawing.Color.White;
-            this.btnTablePlan.Location = new System.Drawing.Point(1039, 11);
-            this.btnTablePlan.Name = "btnTablePlan";
-            this.btnTablePlan.Size = new System.Drawing.Size(75, 75);
-            this.btnTablePlan.TabIndex = 4;
-            this.btnTablePlan.Text = "Table Plan";
-            this.btnTablePlan.UseVisualStyleBackColor = false;
-            this.btnTablePlan.Click += new System.EventHandler(this.btnTablePlan_Click);
-            // 
             // bstblEPOSOpenTables
             // 
             this.bstblEPOSOpenTables.DataMember = "tblEPOSOpenTables";
@@ -440,7 +453,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1914, 1074);
             this.ControlBox = false;
-            this.Controls.Add(this.btnTablePlan);
             this.Controls.Add(this.pnlTillDisplay);
             this.Controls.Add(this.pnlItemDisplay);
             this.Controls.Add(this.btnFolderBack);
@@ -505,5 +517,6 @@
         private System.Windows.Forms.Button btnTablePlan;
         private System.Windows.Forms.BindingSource bstblEPOSOpenTables;
         private EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter tblEPOSOpenTablesTableAdapter;
+        private System.Windows.Forms.Button btnToggleAlts;
     }
 }

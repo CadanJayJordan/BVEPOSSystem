@@ -83,6 +83,12 @@
       <DependentUpon>frmEPOSMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Login\LoginClass.cs" />
+    <Compile Include="Code\Management\frmItemEditing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmItemEditing.Designer.cs">
+      <DependentUpon>frmItemEditing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Code\Management\frmManagementFunctions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,7 @@
     <Compile Include="Code\Table\frmTablePlan.Designer.cs">
       <DependentUpon>frmTablePlan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Code\Utility\Classes\ItemDisplayGenerator.cs" />
     <Compile Include="Code\Utility\Classes\SizeableButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -122,6 +129,12 @@
     </Compile>
     <Compile Include="Code\Utility\Forms\frmKeyboard.Designer.cs">
       <DependentUpon>frmKeyboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Utility\Forms\frmListBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Utility\Forms\frmListBox.Designer.cs">
+      <DependentUpon>frmListBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Utility\Forms\frmMessageBox.cs">
       <SubType>Form</SubType>
@@ -154,6 +167,9 @@
     <EmbeddedResource Include="Code\frmStartup.resx">
       <DependentUpon>frmStartup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmItemEditing.resx">
+      <DependentUpon>frmItemEditing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Code\Management\frmManagementFunctions.resx">
       <DependentUpon>frmManagementFunctions.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Utility\Forms\frmKeyboard.resx">
       <DependentUpon>frmKeyboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Utility\Forms\frmListBox.resx">
+      <DependentUpon>frmListBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Utility\Forms\frmMessageBox.resx">
       <DependentUpon>frmMessageBox.cs</DependentUpon>

@@ -87,6 +87,7 @@ namespace CS3._0Project.Code.Table {
             if (!editMode) {
                 List<int> selectedTillItems = new List<int>(); // Create item and quantity lists
                 List<int> selectedTillQuantity = new List<int>();
+                List<int> selectedtillAlts = new List<int>();
                 int openTableID = 0;
                 if (isTableOpen(tableID)) { // If table is already open, load the table into the array
                     tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables\r\nWHERE (((tblEPOSOpenTables.openTableNumber)=" + tableID.ToString() + "));\r\n";
@@ -101,6 +102,7 @@ namespace CS3._0Project.Code.Table {
                             string[] tableArray = tableItem.Split(','); // Split the quantity and items
                             selectedTillItems.Add(Convert.ToInt32(tableArray[0])); // Add items to item array
                             selectedTillQuantity.Add(Convert.ToInt32(tableArray[1])); // Add quantity to qauntity array
+                            selectedtillAlts.Add(Convert.ToInt32(tableArray[2])); // Add quantity to qauntity array
                         }
                     }
                 } else { // If table is not already open, open it with fresh arrays
@@ -122,7 +124,7 @@ namespace CS3._0Project.Code.Table {
                     openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[lastRowIndex][0]); // Get new table ID
                 }
 
-                frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, openTableID); // Open a table in the till view
+                frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, selectedtillAlts, openTableID); // Open a table in the till view
                 this.Hide(); // Hide this form
                 frmTablePlan.Hide(); // Hide the table plan
             }

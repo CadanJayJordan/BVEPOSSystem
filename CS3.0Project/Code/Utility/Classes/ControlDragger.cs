@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Linq.Expressions;
 
 namespace CS3._0Project.Forms.Utility.Classes {
-    // Allows ctrls to be dragged from any point EXCEPT buttons
-    // Envoke by creating a new instance of this class in the constructor of the dragable class
+    // Allows ctrls to be dragged from any point
+    // Envoke by creating a new instance of this class in the constructor of the draggable class passing through the control to drag
     class ControlDragger { 
         private readonly Control ctrl; // Form to drag
         private Point mouseDown; // Mouse location
