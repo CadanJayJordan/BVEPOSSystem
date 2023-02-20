@@ -151,10 +151,15 @@ namespace CS3._0Project.Code.Utility.Classes {
                         dynamicItemButton.Hide();
                         dynamicItemButton.Width = 100; // Assign width + height
                         dynamicItemButton.Height = 80;
-                        dynamicItemButton.Name = "dib" + itemDataRow[0].ToString().Trim(); // Get the ID For later use (name = dib[ID])
+                        if (Convert.ToBoolean(itemDataRow[15])) { // check to see if it is a list box button
+                            dynamicItemButton.Name = "ldib" + itemDataRow[0].ToString().Trim(); // Get the ID For later use (name = ldib[ID]), for all items that are list items 
+                            dynamicItemButton.Click += frmSalesMode.ListDynamicItemButton_Click;
+                        } else {
+                            dynamicItemButton.Name = "dib" + itemDataRow[0].ToString().Trim(); // Get the ID For later use (name = dib[ID]), for all items that are independent items and not a list
+                            dynamicItemButton.Click += frmSalesMode.DynamicItemButton_Click; // Custom click event, for buttons
+                        }
                         dynamicItemButton.Text = itemDataRow[1].ToString().Trim(); // Name of item
                         dynamicItemButton.Parent = pnlItemDisplay; // Put it inside the gbx
-                        dynamicItemButton.Click += frmSalesMode.DynamicItemButton_Click; // Custom click event
                         dynamicItemButton.ForeColor = Color.White; // Change text colour
                         if ((itemX + dynamicItemButton.Width + 10) > pnlItemDisplay.Width) { // If the items go off the right hand side of the gbx
                             itemY += 100; // Move item down
@@ -221,15 +226,24 @@ namespace CS3._0Project.Code.Utility.Classes {
                 if (itemFolderArray.Length != itemLocationArray.Length) { // if there are not equal items, something has gone horribly wrong
                     // TODO: Report Error
                     break;
-                } else { // The lists are equal and we can now add it to the location list
-                    List<int> itemLocationSubList = new List<int>(); // new sub list (for each individual items)
-                    itemLocationSubList.Add(Convert.ToInt32(itemDataRow[0])); // Add the item ID
-                    for (int i = 0; i < itemFolderArray.Length; i++) { // for each individual folder location
-                        itemLocationSubList.Add(Convert.ToInt32(itemFolderArray[i])); // add folder ID
-                        itemLocationSubList.Add(Convert.ToInt32(itemLocationArray[i])); // add location to that folder
-                    }
-                    itemLocationList.Add(itemLocationSubList); // add to the main list
                 }
+                
+                // The lists are equal and we can now add it to the location list
+                List<int> itemLocationSubList = new List<int>(); // new sub list (for each individual items)
+                itemLocationSubList.Add(Convert.ToInt32(itemDataRow[0])); // Add the item ID
+                for (int i = 0; i < itemFolderArray.Length; i++) { // for each individual folder location
+                    if (Convert.ToInt32(itemFolderArray[i]) == -1) { // If the item does not have a location (List or hidden item)
+                        itemLocationSubList.Clear(); // Clear the list and break to the next item
+                        break;
+                    }
+                    itemLocationSubList.Add(Convert.ToInt32(itemFolderArray[i])); // add folder ID
+                    itemLocationSubList.Add(Convert.ToInt32(itemLocationArray[i])); // add location to that folder
+                }
+                if (itemLocationSubList.Count == 0) {
+                    continue;
+                }
+                itemLocationList.Add(itemLocationSubList); // add to the main list
+                
             }
         }
 

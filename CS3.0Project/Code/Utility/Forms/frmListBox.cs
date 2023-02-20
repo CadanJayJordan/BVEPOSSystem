@@ -34,7 +34,7 @@ namespace CS3._0Project.Code.Utility.Forms {
             lbxListDisplay.Items.Clear();
             displyedListItemIDs.Clear();
             lblName.Text = "";
-            returnItem = 0;
+            returnItem = -1;
             forceZeroPrice = false;
 
             this.listItemIDs = getListItemIDs(listItemID); // Get all items in this list

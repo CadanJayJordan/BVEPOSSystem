@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CS3._0Project.Forms.Utility;
+using System.Runtime.InteropServices;
 
 namespace CS3._0Project.Code.Table {
     public partial class frmTableOptions : Form {
@@ -87,7 +88,9 @@ namespace CS3._0Project.Code.Table {
             if (!editMode) {
                 List<int> selectedTillItems = new List<int>(); // Create item and quantity lists
                 List<int> selectedTillQuantity = new List<int>();
-                List<int> selectedtillAlts = new List<int>();
+                List<int> selectedTillAlts = new List<int>();
+                List<List<List<int>>> selectedTillListItems = new List<List<List<int>>>();
+                List<int> tillDisplayCopy = new List<int>();
                 int openTableID = 0;
                 if (isTableOpen(tableID)) { // If table is already open, load the table into the array
                     tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables\r\nWHERE (((tblEPOSOpenTables.openTableNumber)=" + tableID.ToString() + "));\r\n";
@@ -102,7 +105,24 @@ namespace CS3._0Project.Code.Table {
                             string[] tableArray = tableItem.Split(','); // Split the quantity and items
                             selectedTillItems.Add(Convert.ToInt32(tableArray[0])); // Add items to item array
                             selectedTillQuantity.Add(Convert.ToInt32(tableArray[1])); // Add quantity to qauntity array
-                            selectedtillAlts.Add(Convert.ToInt32(tableArray[2])); // Add quantity to qauntity array
+                            selectedTillAlts.Add(Convert.ToInt32(tableArray[2])); // Add quantity to qauntity array
+                            tillDisplayCopy.Add(Convert.ToInt32(tableArray[0]));
+
+                            string[] listItems = tableArray[3].Split(':'); // For the list items, split each indiviual item up
+                            List<List<int>> selectedListItems = new List<List<int>>();
+                            foreach (string listItem in listItems) { // For every itme in an item
+                                if (listItem != "") {
+                                    string[] listItemSplit = listItem.Split('.'); // Split into listID and itemID
+                                    List<int> selectedListItem = new List<int>();
+                                    selectedListItem.Add(Convert.ToInt32(listItemSplit[0]));
+                                    selectedListItem.Add(Convert.ToInt32(listItemSplit[1]));
+                                    selectedListItems.Add(selectedListItem);
+                                    tillDisplayCopy.Add(0);
+
+                                }
+                            }
+                            selectedTillListItems.Add(selectedListItems);
+
                         }
                     }
                 } else { // If table is not already open, open it with fresh arrays
@@ -124,7 +144,7 @@ namespace CS3._0Project.Code.Table {
                     openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[lastRowIndex][0]); // Get new table ID
                 }
 
-                frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, selectedtillAlts, openTableID); // Open a table in the till view
+                frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, selectedTillAlts, selectedTillListItems, tillDisplayCopy,openTableID); // Open a table in the till view
                 this.Hide(); // Hide this form
                 frmTablePlan.Hide(); // Hide the table plan
             }

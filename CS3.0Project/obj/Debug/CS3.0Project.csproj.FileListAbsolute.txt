@@ -369,3 +369,49 @@ C:\Users\cadan\Desktop\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Pr
 C:\Users\cadan\Desktop\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.exe
 C:\Users\cadan\Desktop\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.pdb
 C:\Users\cadan\Desktop\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Utility.Forms.frmListBox.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\bin\Debug\CS3.0Project.exe.config
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\bin\Debug\CS3.0Project.exe
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\bin\Debug\CS3.0Project.pdb
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.AssemblyReference.cache
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.SuggestedBindingRedirects.cache
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Configuration.frmConfiguration.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Forms.frmEPOSMenu.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.frmStartup.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Management.frmItemEditing.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Management.frmManagementFunctions.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Sales.frmRefundMode.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Sales.frmSalesMode.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Table.frmTableOptions.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Table.frmTablePlan.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Utility.Forms.frmKeyboard.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Utility.Forms.frmListBox.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Utility.Forms.frmMessageBox.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Forms.Utility.frmNumPad.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Properties.Resources.resources
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.GenerateResource.cache
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.CoreCompileInputs.cache
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.exe
+C:\Temporary Workspace\014_WC_130223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.pdb
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.AssemblyReference.cache
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.SuggestedBindingRedirects.cache
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Configuration.frmConfiguration.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Forms.frmEPOSMenu.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.frmStartup.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Management.frmItemEditing.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Management.frmManagementFunctions.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Sales.frmRefundMode.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Sales.frmSalesMode.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Table.frmTableOptions.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Table.frmTablePlan.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Utility.Forms.frmKeyboard.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Utility.Forms.frmListBox.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Code.Utility.Forms.frmMessageBox.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Forms.Utility.frmNumPad.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3._0Project.Properties.Resources.resources
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.GenerateResource.cache
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.csproj.CoreCompileInputs.cache
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.exe
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\obj\Debug\CS3.0Project.pdb
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\bin\Debug\CS3.0Project.exe.config
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\bin\Debug\CS3.0Project.exe
+C:\Users\cadan\Desktop\015_WC_200223\CS3.0Project\CS3.0Project\bin\Debug\CS3.0Project.pdb

@@ -2315,6 +2315,8 @@ namespace CS3._0Project {
             
             private global::System.Data.DataColumn columnListItemID;
             
+            private global::System.Data.DataColumn columnisListItem;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public tblEPOSItemsDataTable() {
@@ -2470,6 +2472,14 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn isListItemColumn {
+                get {
+                    return this.columnisListItem;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2505,7 +2515,7 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public tblEPOSItemsRow AddtblEPOSItemsRow(string eposItemName, int eposItemDepartmentID, string itemFolderIDs, string eposItemLocation, bool eposAllowZeroPrice, string eposItemPrinters, bool eposPrintRed, double eposItemAlt1Amount, double eposItemAlt2Amount, double eposItemAlt3Amount, string eposItemAlt1Modifier, string eposItemAlt2Modifier, string eposItemAlt3Modifier, tblEPOSListItemsRow parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems) {
+            public tblEPOSItemsRow AddtblEPOSItemsRow(string eposItemName, int eposItemDepartmentID, string itemFolderIDs, string eposItemLocation, bool eposAllowZeroPrice, string eposItemPrinters, bool eposPrintRed, double eposItemAlt1Amount, double eposItemAlt2Amount, double eposItemAlt3Amount, string eposItemAlt1Modifier, string eposItemAlt2Modifier, string eposItemAlt3Modifier, tblEPOSListItemsRow parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems, bool isListItem) {
                 tblEPOSItemsRow rowtblEPOSItemsRow = ((tblEPOSItemsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2522,7 +2532,8 @@ namespace CS3._0Project {
                         eposItemAlt1Modifier,
                         eposItemAlt2Modifier,
                         eposItemAlt3Modifier,
-                        null};
+                        null,
+                        isListItem};
                 if ((parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems != null)) {
                     columnValuesArray[14] = parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems[0];
                 }
@@ -2570,6 +2581,7 @@ namespace CS3._0Project {
                 this.columneposItemAlt2Modifier = base.Columns["eposItemAlt2Modifier"];
                 this.columneposItemAlt3Modifier = base.Columns["eposItemAlt3Modifier"];
                 this.columnListItemID = base.Columns["ListItemID"];
+                this.columnisListItem = base.Columns["isListItem"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2605,6 +2617,8 @@ namespace CS3._0Project {
                 base.Columns.Add(this.columneposItemAlt3Modifier);
                 this.columnListItemID = new global::System.Data.DataColumn("ListItemID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnListItemID);
+                this.columnisListItem = new global::System.Data.DataColumn("isListItem", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisListItem);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columneposItemID}, true));
                 this.columneposItemID.AutoIncrement = true;
@@ -5591,6 +5605,22 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool isListItem {
+                get {
+                    try {
+                        return ((bool)(this[this.tabletblEPOSItems.isListItemColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'isListItem\' in table \'tblEPOSItems\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblEPOSItems.isListItemColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public tblEPOSListItemsRow tblEPOSListItemsRow {
                 get {
                     return ((tblEPOSListItemsRow)(this.GetParentRow(this.Table.ParentRelations["tblEPOSListItemstblEPOSItems"])));
@@ -5766,6 +5796,18 @@ namespace CS3._0Project {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetListItemIDNull() {
                 this[this.tabletblEPOSItems.ListItemIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsisListItemNull() {
+                return this.IsNull(this.tabletblEPOSItems.isListItemColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetisListItemNull() {
+                this[this.tabletblEPOSItems.isListItemColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9242,10 +9284,11 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("eposItemAlt2Modifier", "eposItemAlt2Modifier");
             tableMapping.ColumnMappings.Add("eposItemAlt3Modifier", "eposItemAlt3Modifier");
             tableMapping.ColumnMappings.Add("ListItemID", "ListItemID");
+            tableMapping.ColumnMappings.Add("isListItem", "isListItem");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `tblEPOSItems` WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `tblEPOSItems` WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)) AND ((? = 1 AND `isListItem` IS NULL) OR (`isListItem` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Original, true, null));
@@ -9270,9 +9313,11 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemAlt3Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt3Modifier", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_isListItem", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO `tblEPOSItems` (`eposItemName`, `eposItemDepartmentID`, `itemFolderIDs`, `eposItemLocation`, `eposAllowZeroPrice`, `eposItemPrinters`, `eposPrintRed`, `eposItemAlt1Amount`, `eposItemAlt2Amount`, `eposItemAlt3Amount`, `eposItemAlt1Modifier`, `eposItemAlt2Modifier`, `eposItemAlt3Modifier`, `ListItemID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO `tblEPOSItems` (`eposItemName`, `eposItemDepartmentID`, `itemFolderIDs`, `eposItemLocation`, `eposAllowZeroPrice`, `eposItemPrinters`, `eposPrintRed`, `eposItemAlt1Amount`, `eposItemAlt2Amount`, `eposItemAlt3Amount`, `eposItemAlt1Modifier`, `eposItemAlt2Modifier`, `eposItemAlt3Modifier`, `ListItemID`, `isListItem`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemDepartmentID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemDepartmentID", global::System.Data.DataRowVersion.Current, false, null));
@@ -9288,9 +9333,10 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemAlt2Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt2Modifier", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemAlt3Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt3Modifier", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `tblEPOSItems` SET `eposItemName` = ?, `eposItemDepartmentID` = ?, `itemFolderIDs` = ?, `eposItemLocation` = ?, `eposAllowZeroPrice` = ?, `eposItemPrinters` = ?, `eposPrintRed` = ?, `eposItemAlt1Amount` = ?, `eposItemAlt2Amount` = ?, `eposItemAlt3Amount` = ?, `eposItemAlt1Modifier` = ?, `eposItemAlt2Modifier` = ?, `eposItemAlt3Modifier` = ?, `ListItemID` = ? WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `tblEPOSItems` SET `eposItemName` = ?, `eposItemDepartmentID` = ?, `itemFolderIDs` = ?, `eposItemLocation` = ?, `eposAllowZeroPrice` = ?, `eposItemPrinters` = ?, `eposPrintRed` = ?, `eposItemAlt1Amount` = ?, `eposItemAlt2Amount` = ?, `eposItemAlt3Amount` = ?, `eposItemAlt1Modifier` = ?, `eposItemAlt2Modifier` = ?, `eposItemAlt3Modifier` = ?, `ListItemID` = ?, `isListItem` = ? WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)) AND ((? = 1 AND `isListItem` IS NULL) OR (`isListItem` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemDepartmentID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemDepartmentID", global::System.Data.DataRowVersion.Current, false, null));
@@ -9306,6 +9352,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemAlt2Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt2Modifier", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemAlt3Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt3Modifier", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Original, false, null));
@@ -9329,6 +9376,8 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemAlt3Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt3Modifier", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_isListItem", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9344,7 +9393,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT eposItemID, eposItemName, eposItemDepartmentID, itemFolderIDs, eposItemLocation, eposAllowZeroPrice, eposItemPrinters, eposPrintRed, eposItemAlt1Amount, eposItemAlt2Amount, eposItemAlt3Amount, eposItemAlt1Modifier, eposItemAlt2Modifier, eposItemAlt3Modifier, ListItemID FROM tblEPOSItems";
+            this._commandCollection[0].CommandText = @"SELECT eposItemID, eposItemName, eposItemDepartmentID, itemFolderIDs, eposItemLocation, eposAllowZeroPrice, eposItemPrinters, eposPrintRed, eposItemAlt1Amount, eposItemAlt2Amount, eposItemAlt3Amount, eposItemAlt1Modifier, eposItemAlt2Modifier, eposItemAlt3Modifier, ListItemID, isListItem FROM tblEPOSItems";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -9405,7 +9454,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_eposItemID, string Original_eposItemName, global::System.Nullable<int> Original_eposItemDepartmentID, bool Original_eposAllowZeroPrice, bool Original_eposPrintRed, global::System.Nullable<double> Original_eposItemAlt1Amount, global::System.Nullable<double> Original_eposItemAlt2Amount, global::System.Nullable<double> Original_eposItemAlt3Amount, string Original_eposItemAlt1Modifier, string Original_eposItemAlt2Modifier, string Original_eposItemAlt3Modifier, global::System.Nullable<int> Original_ListItemID) {
+        public virtual int Delete(int Original_eposItemID, string Original_eposItemName, global::System.Nullable<int> Original_eposItemDepartmentID, bool Original_eposAllowZeroPrice, bool Original_eposPrintRed, global::System.Nullable<double> Original_eposItemAlt1Amount, global::System.Nullable<double> Original_eposItemAlt2Amount, global::System.Nullable<double> Original_eposItemAlt3Amount, string Original_eposItemAlt1Modifier, string Original_eposItemAlt2Modifier, string Original_eposItemAlt3Modifier, global::System.Nullable<int> Original_ListItemID, bool Original_isListItem) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_eposItemID));
             if ((Original_eposItemName == null)) {
                 throw new global::System.ArgumentNullException("Original_eposItemName");
@@ -9482,6 +9531,8 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
+            this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[24].Value = ((bool)(Original_isListItem));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9502,7 +9553,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string eposItemName, global::System.Nullable<int> eposItemDepartmentID, string itemFolderIDs, string eposItemLocation, bool eposAllowZeroPrice, string eposItemPrinters, bool eposPrintRed, global::System.Nullable<double> eposItemAlt1Amount, global::System.Nullable<double> eposItemAlt2Amount, global::System.Nullable<double> eposItemAlt3Amount, string eposItemAlt1Modifier, string eposItemAlt2Modifier, string eposItemAlt3Modifier, global::System.Nullable<int> ListItemID) {
+        public virtual int Insert(string eposItemName, global::System.Nullable<int> eposItemDepartmentID, string itemFolderIDs, string eposItemLocation, bool eposAllowZeroPrice, string eposItemPrinters, bool eposPrintRed, global::System.Nullable<double> eposItemAlt1Amount, global::System.Nullable<double> eposItemAlt2Amount, global::System.Nullable<double> eposItemAlt3Amount, string eposItemAlt1Modifier, string eposItemAlt2Modifier, string eposItemAlt3Modifier, global::System.Nullable<int> ListItemID, bool isListItem) {
             if ((eposItemName == null)) {
                 throw new global::System.ArgumentNullException("eposItemName");
             }
@@ -9522,7 +9573,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(itemFolderIDs));
             }
             if ((eposItemLocation == null)) {
-                throw new global::System.ArgumentNullException("eposItemLocation");
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(eposItemLocation));
@@ -9577,6 +9628,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
+            this.Adapter.InsertCommand.Parameters[14].Value = ((bool)(isListItem));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9612,6 +9664,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                     string eposItemAlt2Modifier, 
                     string eposItemAlt3Modifier, 
                     global::System.Nullable<int> ListItemID, 
+                    bool isListItem, 
                     int Original_eposItemID, 
                     string Original_eposItemName, 
                     global::System.Nullable<int> Original_eposItemDepartmentID, 
@@ -9623,7 +9676,8 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                     string Original_eposItemAlt1Modifier, 
                     string Original_eposItemAlt2Modifier, 
                     string Original_eposItemAlt3Modifier, 
-                    global::System.Nullable<int> Original_ListItemID) {
+                    global::System.Nullable<int> Original_ListItemID, 
+                    bool Original_isListItem) {
             if ((eposItemName == null)) {
                 throw new global::System.ArgumentNullException("eposItemName");
             }
@@ -9643,7 +9697,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(itemFolderIDs));
             }
             if ((eposItemLocation == null)) {
-                throw new global::System.ArgumentNullException("eposItemLocation");
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(eposItemLocation));
@@ -9698,82 +9752,85 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_eposItemID));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((bool)(isListItem));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_eposItemID));
             if ((Original_eposItemName == null)) {
                 throw new global::System.ArgumentNullException("Original_eposItemName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_eposItemName));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_eposItemName));
             }
             if ((Original_eposItemDepartmentID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_eposItemDepartmentID.Value));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_eposItemDepartmentID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((bool)(Original_eposAllowZeroPrice));
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[22].Value = ((bool)(Original_eposPrintRed));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((bool)(Original_eposAllowZeroPrice));
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((bool)(Original_eposPrintRed));
             if ((Original_eposItemAlt1Amount.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(Original_eposItemAlt1Amount.Value));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((double)(Original_eposItemAlt1Amount.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             if ((Original_eposItemAlt2Amount.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((double)(Original_eposItemAlt2Amount.Value));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((double)(Original_eposItemAlt2Amount.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
             if ((Original_eposItemAlt3Amount.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((double)(Original_eposItemAlt3Amount.Value));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((double)(Original_eposItemAlt3Amount.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
             if ((Original_eposItemAlt1Modifier == null)) {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_eposItemAlt1Modifier));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_eposItemAlt1Modifier));
             }
             if ((Original_eposItemAlt2Modifier == null)) {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((string)(Original_eposItemAlt2Modifier));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((string)(Original_eposItemAlt2Modifier));
             }
             if ((Original_eposItemAlt3Modifier == null)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((string)(Original_eposItemAlt3Modifier));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((string)(Original_eposItemAlt3Modifier));
             }
             if ((Original_ListItemID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((int)(Original_ListItemID.Value));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((int)(Original_ListItemID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
+            this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[39].Value = ((bool)(Original_isListItem));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

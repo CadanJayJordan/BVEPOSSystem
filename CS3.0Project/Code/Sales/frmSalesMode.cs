@@ -28,6 +28,8 @@ namespace CS3._0Project.Code.Sales {
         private List<int> tillSelectedItems = new List<int>();
         private List<int> tillSelectedQuantity = new List<int>();
         private List<int> tillSelectedAlts = new List<int>();
+        private List<List<List<int>>> tillSelectedLists = new List<List<List<int>>>();
+        private List<int> tillDisplayCopy = new List<int>();
         private decimal tillTotal = 0.0m;
         private decimal chequeDeductions = 0.0m;
         private decimal cashAmount = 0.0m;
@@ -44,7 +46,6 @@ namespace CS3._0Project.Code.Sales {
         // TODO: Modernise all form design
 
         // BIG TODO: Reservation System and storage
-        // BIG TODO: alt amounts on items
         // BIG TODO: Lists and item selection from a list
         public frmSalesMode(Size size, int userID, bool isRefundMode) {
             InitializeComponent();
@@ -67,7 +68,7 @@ namespace CS3._0Project.Code.Sales {
             this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice);
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
             this.tblEPOSItemFoldersTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemFolders);
-            tblEPOSOpenTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSOpenTables);
+            this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables);
 
 
             itemDisplayGenerator = new ItemDisplayGenerator(this, ePOSDBDataSet.tblEPOSItems, ePOSDBDataSet.tblEPOSItemFolders, pnlItemDisplay);
@@ -93,11 +94,21 @@ namespace CS3._0Project.Code.Sales {
             tillSelectedItems.Add(itemID); // Add the itemID to the list
             tillSelectedQuantity.Add(1);
             tillSelectedAlts.Add(0);
+            tillSelectedLists.Add(new List<List<int>>());
+            tillDisplayCopy.Add(itemID);
 
             int listItemID = getListItemID(itemID);
             if (listItemID > 0) {
-                
                 listItemBox.showList(listItemID);
+                int listReturnItem = listItemBox.returnItem; // Get item from the from
+                if (listReturnItem == -1) {
+                    return;
+                }
+                List<int> listReturn = new List<int>(); // Create the list item fromat
+                listReturn.Add(listItemID); // Add listbox ID
+                listReturn.Add(listReturnItem); // Add list box selected item   {ListID,SelectedItemID}
+                tillSelectedLists[tillSelectedLists.Count - 1].Add(listReturn); // Set the appropoiate item to this
+                tillDisplayCopy.Add(0);
             }
             
 
@@ -109,22 +120,97 @@ namespace CS3._0Project.Code.Sales {
             updateTillList();
         }
 
+        public void ListDynamicItemButton_Click(object sender, EventArgs e) { // TODO: COMMENT
+            Button button = (Button)sender;
+            int itemID = Convert.ToInt32(button.Name.Substring(4, button.Name.Length - 4)); // Get the itemID which is stored as part of the button name
+            int screenSelectedIndex = getSelectedIndex(); // Get the current selected index
+            if (screenSelectedIndex == -1) { // Stop if nothing is selected
+                return;
+            }
+            int listID = getListItemID(itemID);
+            listItemBox.showList(listID);
+            int listReturnItem = listItemBox.returnItem; // Get item from the from
+            if (listReturnItem == -1) {
+                return;
+            }
+            List<int> listReturn = new List<int>(); // Create the list item fromat
+            listReturn.Add(listID); // Add listbox ID
+            listReturn.Add(listReturnItem); // Add list box selected item   {ListID,SelectedItemID}
+            tillSelectedLists[screenSelectedIndex].Add(listReturn); // Set the appropoiate item to this
+            tillDisplayCopy.Add(0);
+
+            if (isListBoxLocked) {
+                changeListLock();
+            }
+
+            updateTotal();
+            updateTillList();
+        }
+
+
+
         private int getListItemID(int itemID) {
             int listItemID = 0;
             foreach (DataRow itemRow in ePOSDBDataSet.tblEPOSItems.Rows) { // If the row contains the item ID
                 if (Convert.ToInt32(itemRow[0]) == itemID) {
-                    listItemID = Convert.ToInt32(itemRow[14]); // Return list ITem ID
+                    listItemID = Convert.ToInt32(itemRow[14]); // Return list Item ID
                     break;
                 }
             }
             return listItemID;
         }
 
+        private decimal getListItemPrice(List<int> selectedItemList) {
+            if (selectedItemList.Count == 0) { // If the ITEM ID is 0 (no list item associated to this selection) then just return 0
+                return 0;
+            } // Otherwise get the item price from the DB table
+            decimal listItemPrice; 
+            int itemID = selectedItemList[1];
+            int priceIndex = getPriceIndex(itemID);
+            listItemPrice = Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[priceIndex][2]);
+            return listItemPrice;
+        }
+
+        private int getSelectedIndex() { // gets the current index in the lists (for itemid etc) for a selected item in the display, returns -1 if no item is selected
+            int count = 0;
+            int selectedIndex = lbxTillDisplay.SelectedIndex;
+            for (int i = 0; i < lbxTillDisplay.Items.Count; i++) {
+                if (Convert.ToInt32(tillDisplayCopy[i]) > 0){
+                    count++;
+                }
+                if (i == selectedIndex) {
+                    break;
+                }
+            }
+            return (count - 1);
+        }
+
+        private int getSelectedListIndex() { // Gets the index of the selected list item (under the selected item), returns -1 if not sub item is selected
+            int count = 0;
+            int selectedIndex = lbxTillDisplay.SelectedIndex;
+            for (int i = 0; i < lbxTillDisplay.Items.Count; i++) {
+                if (Convert.ToInt32(tillDisplayCopy[i]) == 0) {
+                    count++;
+                }
+                if (i == selectedIndex) {
+                    break;
+                }
+                if (Convert.ToInt32(tillDisplayCopy[i]) > 0) {
+                    count = 0;
+                }
+            }
+            return (count - 1);
+        }
+
         private void updateTotal() {
             tillTotal = 0;
 
             for (int i = 0; i < tillSelectedItems.Count; i++) {
-                tillTotal += tillSelectedQuantity[i] * Convert.ToDecimal(this.ePOSDBDataSet.tblEPOSItemPrice.Rows[getPriceIndex(tillSelectedItems[i])][2 + tillSelectedAlts[i]]); // Get the total an add it to the total
+                tillTotal += tillSelectedQuantity[i] * Convert.ToDecimal(this.ePOSDBDataSet.tblEPOSItemPrice.Rows[getPriceIndex(tillSelectedItems[i])][2 + tillSelectedAlts[i]]); // Get the total of each item and add it to the total
+                foreach (List<int> selectedItemList in tillSelectedLists[i]) {
+                    tillTotal += tillSelectedQuantity[i] * getListItemPrice(selectedItemList); // Get any modifieres that are attached to the current item
+                    
+                }
             }
             updateTotalDisplay(tillTotal);
         }
@@ -144,17 +230,33 @@ namespace CS3._0Project.Code.Sales {
                 int altNum = tillSelectedAlts[i];
 
                 string itemName = ePOSDBDataSet.tblEPOSItems.Rows[itemIndex][1].ToString();
+
                 if (altNum > 0) {
                     itemName = ePOSDBDataSet.tblEPOSItems.Rows[itemIndex][10 + altNum].ToString() + " " + itemName;
-                } 
-                
+                }
+
                 string itemPrice = String.Format("£{0}", (Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[priceIndex][2 + altNum]) * quantity).ToString("0.00")); // Get the item price and format it to be (£x.xx)
 
                 String displayString = String.Format("{0, -4}{1}{2," + (36 - itemName.Length - 4) + "}", quantity.ToString(), itemName, itemPrice); // Format the display string to be <qty><name><price> with adequete spacing
 
-                lbxTillDisplay.Items.Add(displayString); // Add each item to the db 
+                lbxTillDisplay.Items.Add(displayString); // Add each item to the list box
+
+                foreach (List<int> selectedList in tillSelectedLists[i]) {
+                    if (selectedList.Count == 0) {
+                        break;
+                    }
+                    decimal listItemPrice = getListItemPrice(selectedList);
+                    int listItemIndex = getItemIndex(Convert.ToInt32(selectedList[1]));
+                    int listPriceIndex = getPriceIndex(Convert.ToInt32(selectedList[1]));
+                    string listItemName = ePOSDBDataSet.tblEPOSItems.Rows[listItemIndex][1].ToString();
+                    string listItemPriceFormatted = String.Format("£{0}", (Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[listPriceIndex][2]) * quantity).ToString("0.00")); // Get the list item price and format it to be (£x.xx)
+                    String listDisplayString = String.Format("{0, 4}{1, 8}{2," + (36 - listItemName.Length - 10) + "}", quantity.ToString(), listItemName, listItemPriceFormatted);
+                    lbxTillDisplay.Items.Add(listDisplayString); // Add each selected list item to the list box
                 }
+                
+            }
         }
+
         private int getPriceIndex(int itemID) { // Returns the price index from the item ID
             int priceIndex = -1;
             for (int i = 0; i < ePOSDBDataSet.tblEPOSItemPrice.Rows.Count; i++) { // iterate through the itemPrices
@@ -284,7 +386,12 @@ namespace CS3._0Project.Code.Sales {
                     int itemID = tillSelectedItems[i]; // get their ID 
                     int quantity = tillSelectedQuantity[i];
                     int altNum = tillSelectedAlts[i];
-                    itemsOnCheque += String.Format("{0},{1},{2};", itemID.ToString(), quantity.ToString(), altNum.ToString()); // Add them to the cheque string
+                    String selectedListsFormatted = "";
+                    foreach (List<int> selectedItem in tillSelectedLists[i]) {
+                        selectedListsFormatted += String.Format("{0}.{1}:", selectedItem[0], selectedItem[1]);
+                    }
+
+                    itemsOnCheque += String.Format("{0},{1},{2},{3};", itemID.ToString(), quantity.ToString(), altNum.ToString(), selectedListsFormatted); // Add them to the cheque string
                 }
                 tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables;\r\n";
                 tblEPOSOpenTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSOpenTables); // Pull info from DB
@@ -321,6 +428,9 @@ namespace CS3._0Project.Code.Sales {
                         
                 tillSelectedItems.Clear(); // Clear the list of selected items
                 tillSelectedQuantity.Clear();
+                tillSelectedAlts.Clear();
+                tillSelectedLists.Clear();
+                tillDisplayCopy.Clear();
 
                 MessageBox.Show(userID + "\n" + cashedTime + "\n" + openTable + "\n" + itemsOnCheque + "\n" + chequeDeductions + "\n" + cashAmount);
 
@@ -338,15 +448,17 @@ namespace CS3._0Project.Code.Sales {
         private void tillErrorCorrect() { // Till error correction
             if (!isListBoxLocked) { // Only do so if list box is unlocked
                 if (lbxTillDisplay.SelectedItem != null) { // Assuming an item is selected 
-                    int selectedItemIndex = lbxTillDisplay.SelectedIndex; // Get the selected index 
+                    int selectedItemIndex = getSelectedIndex(); // Get the selected index 
                     int itemID = tillSelectedItems[selectedItemIndex]; // get the slected item ID
 
                     decimal itemPrice = Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[getPriceIndex(itemID)][2 + tillSelectedAlts[selectedItemIndex]]); // Get the item price
-                    lbxTillDisplay.Items.RemoveAt(selectedItemIndex); // Remove item from list box
                     tillSelectedItems.RemoveAt(selectedItemIndex); // remove item from list
                     tillSelectedQuantity.RemoveAt(selectedItemIndex); // Remove quantity
-                    tillSelectedAlts.RemoveAt(selectedItemIndex);
+                    tillSelectedAlts.RemoveAt(selectedItemIndex); // Remove any alts
+                    tillSelectedLists.RemoveAt(selectedItemIndex); // Remove any lists
+                    tillDisplayCopy.RemoveAt(lbxTillDisplay.SelectedIndex);
 
+                    updateTillList();
                     updateTotal(); // Update the till total
 
                     tbxTillDisplay.Text = "Error Correct: £" + itemPrice.ToString("0.00"); // Display errorr correct message
@@ -362,6 +474,8 @@ namespace CS3._0Project.Code.Sales {
                 tillSelectedItems.Clear(); // Clear all items from the list
                 tillSelectedQuantity.Clear(); // Clear all quantitys from the list
                 tillSelectedAlts.Clear(); // Clear Alts list
+                tillSelectedLists.Clear(); // Clear selected lists
+                tillDisplayCopy.Clear();
                 lbxTillDisplay.ClearSelected(); // Clear any selected index to ensure nothing can be editied
                 if (openTableID >= 0) { // If the table ID has been used
                     openTableID = -1; // Reset it
@@ -385,8 +499,13 @@ namespace CS3._0Project.Code.Sales {
                 for (int i = 0; i < ePOSDBDataSet.tblEPOSOpenTables.Rows.Count; i++) { // For every open table
                     if (Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[i][0]) == openTableID) { // Find open table
                         string newTableItemString = ""; // Create new string
-                        for (int x = 0; x < lbxTillDisplay.Items.Count; x++) { // For every item in the list box
-                            newTableItemString += String.Format("{0},{1},{2};", tillSelectedItems[x], tillSelectedQuantity[x], tillSelectedAlts[x]); // Add its quantity and itemid to the string
+                        for (int x = 0; x < tillSelectedItems.Count; x++) { // For every item in the list box
+                            String selectedListsFormatted = "";
+
+                            foreach (List<int> selectedItem in tillSelectedLists[x]) {
+                                    selectedListsFormatted += String.Format("{0}.{1}:", selectedItem[0], selectedItem[1]);
+                            }
+                            newTableItemString += String.Format("{0},{1},{2},{3};", tillSelectedItems[x], tillSelectedQuantity[x], tillSelectedAlts[x], selectedListsFormatted); // Add its quantity and itemid to the string
                         }
                         ePOSDBDataSet.tblEPOSOpenTables.Rows[i][2] = newTableItemString; // add string in DB
                         tblEPOSOpenTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSOpenTables.Rows[i]); // Update string
@@ -404,9 +523,10 @@ namespace CS3._0Project.Code.Sales {
 
         private void tillChangeQuantity() { // Function to multiply quantity
             usingCustomAmount = false; // Stops till thinking you usign a custom amoutn when entering a quantity change
-            if (lbxTillDisplay.SelectedIndex != -1 && tbxTillDisplay.Text != "") { // If an index is selected and text is in the box
+            int listIndex = getSelectedIndex();
+            if (listIndex != -1 && tbxTillDisplay.Text != "") { // If an index is selected and text is in the box
                 // TODO: Fix error if quantity is not int
-                tillSelectedQuantity[lbxTillDisplay.SelectedIndex] = Convert.ToInt32(tbxTillDisplay.Text);
+                tillSelectedQuantity[listIndex] = Convert.ToInt32(tbxTillDisplay.Text);
                 updateTotal();
                 updateTillList();
                 tbxTillDisplay.Text = "";
@@ -429,7 +549,7 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void tillToggleAlts() { // Toggle to alt quantities
-            int listIndex = lbxTillDisplay.SelectedIndex;
+            int listIndex = getSelectedIndex();
             if (listIndex == -1) { // If an item is selected
                 return;
             }
@@ -459,14 +579,15 @@ namespace CS3._0Project.Code.Sales {
             tillSelectedAlts[listIndex] = newAltIndex;
             updateTotal();
             updateTillList();
-            lbxTillDisplay.SelectedIndex = listIndex;
         }
 
-        public void openTable(List<int> tableSelectedTillItems, List<int> tableSelectedTillQuantity, List<int> tableSelectedAlts, int openTableID) { // public to open a table externally using an int list of the selected item IDs
+        public void openTable(List<int> tableSelectedTillItems, List<int> tableSelectedTillQuantity, List<int> tableSelectedAlts, List<List<List<int>>> tableSelectedLists, List<int> tableDisplayCopy, int openTableID) { // public to open a table externally using an int list of the selected item IDs
             this.tillSelectedItems = tableSelectedTillItems; // get the arrays from the other form
             this.tillSelectedQuantity = tableSelectedTillQuantity;
             this.tillSelectedAlts = tableSelectedAlts;
+            this.tillSelectedLists = tableSelectedLists;
             this.openTableID = openTableID; // Pull table ID to open
+            this.tillDisplayCopy = tableDisplayCopy;
 
             // TODO: Put notes on a table once opened
             // TODO: Allow moving tabs between tables
