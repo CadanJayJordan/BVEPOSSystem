@@ -62,6 +62,7 @@
             this.tblEPOSCashChequesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSCashChequesTableAdapter();
             this.bstblEPOSOpenTables = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSOpenTablesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             this.pnlTillDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemFolders)).BeginInit();
@@ -109,6 +110,7 @@
             // 
             // pnlTillDisplay
             // 
+            this.pnlTillDisplay.Controls.Add(this.button1);
             this.pnlTillDisplay.Controls.Add(this.btnTablePlan);
             this.pnlTillDisplay.Controls.Add(this.btnToggleAlts);
             this.pnlTillDisplay.Controls.Add(this.btnMultiply);
@@ -323,7 +325,7 @@
             this.btnTillErrorCorrect.Name = "btnTillErrorCorrect";
             this.btnTillErrorCorrect.Size = new System.Drawing.Size(75, 51);
             this.btnTillErrorCorrect.TabIndex = 6;
-            this.btnTillErrorCorrect.Text = "Error Correct";
+            this.btnTillErrorCorrect.Text = "Remove";
             this.btnTillErrorCorrect.UseVisualStyleBackColor = false;
             // 
             // btnCancel
@@ -446,6 +448,17 @@
             // 
             this.tblEPOSOpenTablesTableAdapter.ClearBeforeFill = true;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(388, 298);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 51);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Add Note";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // frmSalesMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,5 +531,6 @@
         private System.Windows.Forms.BindingSource bstblEPOSOpenTables;
         private EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter tblEPOSOpenTablesTableAdapter;
         private System.Windows.Forms.Button btnToggleAlts;
+        private System.Windows.Forms.Button button1;
     }
 }

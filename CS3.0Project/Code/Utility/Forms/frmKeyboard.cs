@@ -10,17 +10,19 @@ namespace CS3._0Project.Code.Utility.Forms {
         public frmKeyboard() {
             InitializeComponent();
             new ControlDragger(this, true, false); // Enable form dragging
+            AllowButtonClick(this); // Allows reading of text on pressed button
         }
 
         private void frmKeyboard_Load(object sender, EventArgs e) {
-            AllowButtonClick(this); // Allows reading of text on pressed button
+            rtxtOutput.Text = "";
+            textReturn = "";
         }
 
         public string getInput() { // Public function to return the text inputted into the form
             if (textReturn != null) {
                 return textReturn.Trim();
             } else {
-                return null;
+                return "";
             }
         }
 
@@ -29,6 +31,7 @@ namespace CS3._0Project.Code.Utility.Forms {
             string btnText = btn.Text; // Get text on button
             switch (btnText) { // Check for certain circumstances
                 case ("Close"): // Resets text box and closes form
+                    textReturn = "";
                     rtxtOutput.Text = "";
                     this.Close();
                     break;

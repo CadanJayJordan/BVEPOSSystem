@@ -151,7 +151,6 @@ namespace CS3._0Project.Code.Table {
             lblFloor.Text = String.Format("Floor: {0} ({1})", ePOSDBDataSet.tblEPOSTableFloors[0][2].ToString(), currentFloorIndex); // Update floor label
             drawTables(); // Draw Tables
         }
-        // TODO: Adapt class for table editing via a passd bool
         // TODO: Some error or warning if resolution is changed and tables are off the screen
         public void drawTables() { // Will place the tables in the GUI
             pnlFloorPanel.Controls.Clear(); // Clear the panel

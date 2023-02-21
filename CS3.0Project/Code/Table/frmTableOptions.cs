@@ -90,6 +90,7 @@ namespace CS3._0Project.Code.Table {
                 List<int> selectedTillQuantity = new List<int>();
                 List<int> selectedTillAlts = new List<int>();
                 List<List<List<int>>> selectedTillListItems = new List<List<List<int>>>();
+                List<string> selectedTillNotes = new List<string>();
                 List<int> tillDisplayCopy = new List<int>();
                 int openTableID = 0;
                 if (isTableOpen(tableID)) { // If table is already open, load the table into the array
@@ -100,12 +101,13 @@ namespace CS3._0Project.Code.Table {
                     string[] tableItemList = tableItemString.Split(';'); // Get the item lists
                     openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables[0][0]);
 
-                    foreach (string tableItem in tableItemList) {
+                    foreach (string tableItem in tableItemList) { // For every item
                         if (tableItem != "") {
                             string[] tableArray = tableItem.Split(','); // Split the quantity and items
                             selectedTillItems.Add(Convert.ToInt32(tableArray[0])); // Add items to item array
                             selectedTillQuantity.Add(Convert.ToInt32(tableArray[1])); // Add quantity to qauntity array
                             selectedTillAlts.Add(Convert.ToInt32(tableArray[2])); // Add quantity to qauntity array
+                            selectedTillNotes.Add(tableArray[4]); // Add notes to note array;
                             tillDisplayCopy.Add(Convert.ToInt32(tableArray[0]));
 
                             string[] listItems = tableArray[3].Split(':'); // For the list items, split each indiviual item up
@@ -113,15 +115,19 @@ namespace CS3._0Project.Code.Table {
                             foreach (string listItem in listItems) { // For every itme in an item
                                 if (listItem != "") {
                                     string[] listItemSplit = listItem.Split('.'); // Split into listID and itemID
-                                    List<int> selectedListItem = new List<int>();
-                                    selectedListItem.Add(Convert.ToInt32(listItemSplit[0]));
+                                    List<int> selectedListItem = new List<int>(); // Create sub list
+                                    selectedListItem.Add(Convert.ToInt32(listItemSplit[0])); // Add Items
                                     selectedListItem.Add(Convert.ToInt32(listItemSplit[1]));
                                     selectedListItems.Add(selectedListItem);
-                                    tillDisplayCopy.Add(0);
-
+                                    tillDisplayCopy.Add(0); // Add Display int
                                 }
                             }
-                            selectedTillListItems.Add(selectedListItems);
+                            selectedTillListItems.Add(selectedListItems); // Add to list items
+
+                            if (tableArray[4] != "") { // If there is a note
+
+                                tillDisplayCopy.Add(-1); // Add the note int to the display copy
+                            }
 
                         }
                     }
@@ -144,7 +150,7 @@ namespace CS3._0Project.Code.Table {
                     openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[lastRowIndex][0]); // Get new table ID
                 }
 
-                frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, selectedTillAlts, selectedTillListItems, tillDisplayCopy,openTableID); // Open a table in the till view
+                frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, selectedTillAlts, selectedTillListItems, selectedTillNotes, tillDisplayCopy, openTableID); // Open a table in the till view
                 this.Hide(); // Hide this form
                 frmTablePlan.Hide(); // Hide the table plan
             }

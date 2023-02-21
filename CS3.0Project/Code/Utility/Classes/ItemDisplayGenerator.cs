@@ -143,7 +143,6 @@ namespace CS3._0Project.Code.Utility.Classes {
 
 
             for (int i = 0; i < sortList.Count; i++) { // For every sorted item
-                // TODO: OPTIMISE - So it uses the sorted list and goes through the main DB table once, not for every list item
                 int itemId = sortList[i][0];
                 foreach (DataRow itemDataRow in items.Rows) {
                     if (itemId == Convert.ToInt32(itemDataRow[0])) {
@@ -287,7 +286,6 @@ namespace CS3._0Project.Code.Utility.Classes {
             if (currentFolderPath.Count == 0) {
                 currentFolderPath.Add(0);
             }
-            // TODO: Make DB follow 1st standard form. Have a seperate table linking folders and items to avoid this mess
             // TODO: Stop loads from appearing if you put two of the same item in the same folder.
             getItemFolders(); // Seperates the CSV fields in the db into lists
             sortFolderIDs(); // Sort the items based on their location setting
