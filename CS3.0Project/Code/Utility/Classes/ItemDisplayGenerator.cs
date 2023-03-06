@@ -179,32 +179,35 @@ namespace CS3._0Project.Code.Utility.Classes {
             int folderHeight = 80;
             if (folderWidth + 20 > pnlItemDisplay.Width) { // If the gbx is too small (to contain the width of one button + padding)
                 cMessageBox.ShowMessage("Screen Resolution Error"); // Error Message
+                return;
                 // TODO: Some form of backout sequence
-            } else {
-                parentFolderID = currentFolderPath[currentFolderPath.Count - 1]; // Get the parent folder
-                List<int> currentFolderIDs = getFolderIDsWithParentID(parentFolderID);
+            } 
+            parentFolderID = currentFolderPath[currentFolderPath.Count - 1]; // Get the parent folder
+            List<int> currentFolderIDs = getFolderIDsWithParentID(parentFolderID);
 
-                foreach (DataRow folderDataRow in folders.Rows) { // Iterate through each db table row 
-                    if (currentFolderIDs.Contains(Convert.ToInt32(folderDataRow[0]))) {
-                        Button dynamicFolderButton = new Button(); // Create a new button   
-                        dynamicFolderButton.Hide(); // Hide (to avoid funky buisness happening)
-                        dynamicFolderButton.Width = folderWidth; // Assign width + height
-                        dynamicFolderButton.Height = folderHeight;
-                        dynamicFolderButton.Name = "dfb" + folderDataRow[0].ToString().Trim(); // Set name based on its DB ID for later use
-                        dynamicFolderButton.Text = folderDataRow[1].ToString().Trim(); // Get the display text to be the DB Name
-                        dynamicFolderButton.Parent = pnlItemDisplay; // Assign parent
-                        dynamicFolderButton.Click += DynamicFolderButton_Click; // Assign the custom click event
-                        dynamicFolderButton.ForeColor = Color.White; // Change text colour
-                        if ((folderX + dynamicFolderButton.Width + 10) > pnlItemDisplay.Width) { // If the folders go off the right hand side of the gbx
-                            folderY += 100; // Move folder down
-                            folderX = 10; // reset the x coordinate
-                        }
-                        dynamicFolderButton.Location = new Point(folderX, folderY); // Assign its location
-                        folderX += 110; // Shift each folder along as not to overlap
-                        dynamicFolderButton.Show();
-                    }
+            foreach (DataRow folderDataRow in folders.Rows) { // Iterate through each db table row 
+                if (!currentFolderIDs.Contains(Convert.ToInt32(folderDataRow[0]))) {
+                    continue;
                 }
+                Button dynamicFolderButton = new Button(); // Create a new button   
+                dynamicFolderButton.Hide(); // Hide (to avoid funky buisness happening)
+                dynamicFolderButton.Width = folderWidth; // Assign width + height
+                dynamicFolderButton.Height = folderHeight;
+                dynamicFolderButton.Name = "dfb" + folderDataRow[0].ToString().Trim(); // Set name based on its DB ID for later use
+                dynamicFolderButton.Text = folderDataRow[1].ToString().Trim(); // Get the display text to be the DB Name
+                dynamicFolderButton.Parent = pnlItemDisplay; // Assign parent
+                dynamicFolderButton.Click += DynamicFolderButton_Click; // Assign the custom click event
+                dynamicFolderButton.ForeColor = Color.White; // Change text colour
+                if ((folderX + dynamicFolderButton.Width + 10) > pnlItemDisplay.Width) { // If the folders go off the right hand side of the gbx
+                    folderY += 100; // Move folder down
+                    folderX = 10; // reset the x coordinate
+                }
+                dynamicFolderButton.Location = new Point(folderX, folderY); // Assign its location
+                folderX += 110; // Shift each folder along as not to overlap
+                dynamicFolderButton.Show();
+                
             }
+            
         }
         private void DynamicFolderButton_Click(object sender, EventArgs e) { // If a folder is clicked
             pnlItemDisplay.Controls.Clear(); // Clear exitsting folders

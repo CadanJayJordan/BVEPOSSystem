@@ -31,11 +31,6 @@ namespace CS3._0Project.Code.Management {
         private void formLoad() {
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
             this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice);
-
-            /*TreeNode treeNode = new TreeNode()
-            treeView1.Nodes.AddRange()*/
-
-
         }
 
         private List<int> getItemIDs() {
@@ -66,9 +61,5 @@ namespace CS3._0Project.Code.Management {
         private void updateForm(int itemRowIndex) {
             lblName.Text = ePOSDBDataSet.tblEPOSItems.Rows[itemRowIndex][1].ToString();
         }
-
-        /*private TreeNode[] generateFolderTreeNodes() {
-
-        }*/
     }
 }

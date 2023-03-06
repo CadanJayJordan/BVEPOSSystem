@@ -32,12 +32,13 @@
             this.btnKeyboard = new System.Windows.Forms.Button();
             this.btnClock = new System.Windows.Forms.Button();
             this.btnMessage = new System.Windows.Forms.Button();
-            this.tblEPOSItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ePOSDBDataSet = new CS3._0Project.EPOSDBDataSet();
-            this.tblEPOSItemsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter();
             this.btnManagerFunctions = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.tblEPOSItemsBindingSource)).BeginInit();
+            this.bstblEPOSUsers = new System.Windows.Forms.BindingSource(this.components);
+            this.tblEPOSUsersTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSUsersTableAdapter();
+            this.lblUsername = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
@@ -57,7 +58,7 @@
             // 
             this.btnSalesMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnSalesMode.ForeColor = System.Drawing.Color.White;
-            this.btnSalesMode.Location = new System.Drawing.Point(66, 80);
+            this.btnSalesMode.Location = new System.Drawing.Point(67, 125);
             this.btnSalesMode.Name = "btnSalesMode";
             this.btnSalesMode.Size = new System.Drawing.Size(350, 150);
             this.btnSalesMode.TabIndex = 1;
@@ -69,7 +70,7 @@
             // 
             this.btnRefundMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnRefundMode.ForeColor = System.Drawing.Color.White;
-            this.btnRefundMode.Location = new System.Drawing.Point(66, 250);
+            this.btnRefundMode.Location = new System.Drawing.Point(67, 295);
             this.btnRefundMode.Name = "btnRefundMode";
             this.btnRefundMode.Size = new System.Drawing.Size(350, 150);
             this.btnRefundMode.TabIndex = 2;
@@ -81,7 +82,7 @@
             // 
             this.btnConfiguration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnConfiguration.ForeColor = System.Drawing.Color.White;
-            this.btnConfiguration.Location = new System.Drawing.Point(319, 421);
+            this.btnConfiguration.Location = new System.Drawing.Point(320, 466);
             this.btnConfiguration.Name = "btnConfiguration";
             this.btnConfiguration.Size = new System.Drawing.Size(97, 64);
             this.btnConfiguration.TabIndex = 3;
@@ -93,7 +94,7 @@
             // 
             this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(66, 12);
+            this.btnLogin.Location = new System.Drawing.Point(67, 57);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(350, 55);
             this.btnLogin.TabIndex = 4;
@@ -117,7 +118,7 @@
             // 
             this.btnClock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnClock.ForeColor = System.Drawing.Color.White;
-            this.btnClock.Location = new System.Drawing.Point(66, 421);
+            this.btnClock.Location = new System.Drawing.Point(67, 466);
             this.btnClock.Name = "btnClock";
             this.btnClock.Size = new System.Drawing.Size(247, 64);
             this.btnClock.TabIndex = 6;
@@ -137,31 +138,43 @@
             this.btnMessage.UseVisualStyleBackColor = false;
             this.btnMessage.Click += new System.EventHandler(this.btnMessage_Click);
             // 
-            // tblEPOSItemsBindingSource
-            // 
-            this.tblEPOSItemsBindingSource.DataMember = "tblEPOSItems";
-            this.tblEPOSItemsBindingSource.DataSource = this.ePOSDBDataSet;
-            // 
             // ePOSDBDataSet
             // 
             this.ePOSDBDataSet.DataSetName = "EPOSDBDataSet";
             this.ePOSDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // tblEPOSItemsTableAdapter
-            // 
-            this.tblEPOSItemsTableAdapter.ClearBeforeFill = true;
-            // 
             // btnManagerFunctions
             // 
             this.btnManagerFunctions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnManagerFunctions.ForeColor = System.Drawing.Color.White;
-            this.btnManagerFunctions.Location = new System.Drawing.Point(422, 80);
+            this.btnManagerFunctions.Location = new System.Drawing.Point(423, 125);
             this.btnManagerFunctions.Name = "btnManagerFunctions";
             this.btnManagerFunctions.Size = new System.Drawing.Size(133, 320);
             this.btnManagerFunctions.TabIndex = 8;
             this.btnManagerFunctions.Text = "Manager Functions";
             this.btnManagerFunctions.UseVisualStyleBackColor = false;
             this.btnManagerFunctions.Click += new System.EventHandler(this.btnManagerFunctions_Click);
+            // 
+            // bstblEPOSUsers
+            // 
+            this.bstblEPOSUsers.DataMember = "tblEPOSUsers";
+            this.bstblEPOSUsers.DataSource = this.ePOSDBDataSet;
+            // 
+            // tblEPOSUsersTableAdapter
+            // 
+            this.tblEPOSUsersTableAdapter.ClearBeforeFill = true;
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.BackColor = System.Drawing.Color.Black;
+            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblUsername.Location = new System.Drawing.Point(10, 10);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(38, 25);
+            this.lblUsername.TabIndex = 9;
+            this.lblUsername.Text = "{0}";
             // 
             // frmEPOSMenu
             // 
@@ -170,6 +183,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.btnManagerFunctions);
             this.Controls.Add(this.btnMessage);
             this.Controls.Add(this.btnClock);
@@ -187,9 +201,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "EPOSMenu";
             this.Load += new System.EventHandler(this.frmEPOSMenu_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.tblEPOSItemsBindingSource)).EndInit();
+            this.Shown += new System.EventHandler(this.frmEPOSMenu_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSUsers)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -206,8 +222,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemXDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemYDataGridViewTextBoxColumn;
         private EPOSDBDataSet ePOSDBDataSet;
-        private System.Windows.Forms.BindingSource tblEPOSItemsBindingSource;
-        private EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter tblEPOSItemsTableAdapter;
         private System.Windows.Forms.Button btnManagerFunctions;
+        private EPOSDBDataSetTableAdapters.tblEPOSUsersTableAdapter tblEPOSUsersTableAdapter;
+        private System.Windows.Forms.BindingSource bstblEPOSUsers;
+        private System.Windows.Forms.Label lblUsername;
     }
 }

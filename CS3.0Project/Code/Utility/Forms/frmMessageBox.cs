@@ -22,7 +22,7 @@ namespace CS3._0Project.Code.Utility.Forms {
 
         public void ShowMessage(string message) {
             this.message = message;
-            this.ShowDialog();
+            this.Show();
         }
 
         private void frmMessageBox_Shown(object sender, EventArgs e) {
@@ -30,7 +30,7 @@ namespace CS3._0Project.Code.Utility.Forms {
         }
 
         private void btnOk_Click(object sender, EventArgs e) {
-            this.Close();
+            this.Hide();
         }
     }
 }

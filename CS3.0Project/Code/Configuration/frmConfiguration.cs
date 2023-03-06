@@ -12,14 +12,14 @@ using CS3._0Project.Code.Utility.Forms;
 namespace CS3._0Project.Code.Configuration {
     public partial class frmConfiguration : Form {
         private Size screenSize;
-        private int loginCode;
+        private int userID;
 
-        // TODO: Allow item editing
-        // TODO: Settings and colour editing
-        public frmConfiguration(Size screenSize, int loginCode) {
+        // MAJOR TODO: Allow item editing
+        // MAJOR TODO: Settings and colour editing
+        public frmConfiguration(Size screenSize, int userID) {
             InitializeComponent();
             this.screenSize = screenSize;
-            this.loginCode = loginCode;
+            this.userID = userID;
         }
 
         private void frmConfiguration_Shown(object sender, EventArgs e) {

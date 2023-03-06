@@ -29,6 +29,8 @@
             this.btnFolderBack = new System.Windows.Forms.Button();
             this.pnlItemDisplay = new System.Windows.Forms.Panel();
             this.pnlTillDisplay = new System.Windows.Forms.Panel();
+            this.lbxTillDisplay = new CS3._0Project.Code.Utility.Classes.tillListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnTablePlan = new System.Windows.Forms.Button();
             this.btnToggleAlts = new System.Windows.Forms.Button();
             this.btnMultiply = new System.Windows.Forms.Button();
@@ -51,7 +53,6 @@
             this.btnTillCard = new System.Windows.Forms.Button();
             this.btnTillCash = new System.Windows.Forms.Button();
             this.tbxTillDisplay = new System.Windows.Forms.TextBox();
-            this.lbxTillDisplay = new System.Windows.Forms.ListBox();
             this.tblEPOSItemsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter();
             this.bstblEPOSItemFolders = new System.Windows.Forms.BindingSource(this.components);
             this.bstblEPOSItemPrice = new System.Windows.Forms.BindingSource(this.components);
@@ -62,7 +63,10 @@
             this.tblEPOSCashChequesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSCashChequesTableAdapter();
             this.bstblEPOSOpenTables = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSOpenTablesTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tableAdapterManager1 = new CS3._0Project.EPOSDBDataSetTableAdapters.TableAdapterManager();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.bstblEPOSUsers = new System.Windows.Forms.BindingSource(this.components);
+            this.tblEPOSUsersTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSUsersTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             this.pnlTillDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemFolders)).BeginInit();
@@ -70,13 +74,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSCashCheques)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemsTableAdapter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSOpenTables)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // btnHome
             // 
             this.btnHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnHome.ForeColor = System.Drawing.Color.White;
-            this.btnHome.Location = new System.Drawing.Point(12, 12);
+            this.btnHome.Location = new System.Drawing.Point(448, 11);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 75);
             this.btnHome.TabIndex = 0;
@@ -110,6 +115,7 @@
             // 
             // pnlTillDisplay
             // 
+            this.pnlTillDisplay.Controls.Add(this.lbxTillDisplay);
             this.pnlTillDisplay.Controls.Add(this.button1);
             this.pnlTillDisplay.Controls.Add(this.btnTablePlan);
             this.pnlTillDisplay.Controls.Add(this.btnToggleAlts);
@@ -133,11 +139,37 @@
             this.pnlTillDisplay.Controls.Add(this.btnTillCard);
             this.pnlTillDisplay.Controls.Add(this.btnTillCash);
             this.pnlTillDisplay.Controls.Add(this.tbxTillDisplay);
-            this.pnlTillDisplay.Controls.Add(this.lbxTillDisplay);
             this.pnlTillDisplay.Location = new System.Drawing.Point(624, 12);
             this.pnlTillDisplay.Name = "pnlTillDisplay";
             this.pnlTillDisplay.Size = new System.Drawing.Size(469, 750);
             this.pnlTillDisplay.TabIndex = 3;
+            // 
+            // lbxTillDisplay
+            // 
+            this.lbxTillDisplay.BackColor = System.Drawing.Color.Black;
+            this.lbxTillDisplay.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbxTillDisplay.Font = new System.Drawing.Font("Consolas", 14.25F);
+            this.lbxTillDisplay.ForeColor = System.Drawing.Color.White;
+            this.lbxTillDisplay.FormattingEnabled = true;
+            this.lbxTillDisplay.ItemHeight = 22;
+            this.lbxTillDisplay.Items.AddRange(new object[] {
+            "36"});
+            this.lbxTillDisplay.Location = new System.Drawing.Point(16, 58);
+            this.lbxTillDisplay.Name = "lbxTillDisplay";
+            this.lbxTillDisplay.ShowScrollbar = false;
+            this.lbxTillDisplay.Size = new System.Drawing.Size(366, 396);
+            this.lbxTillDisplay.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(388, 298);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 51);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Add Note";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // btnTablePlan
             // 
@@ -388,21 +420,6 @@
             this.tbxTillDisplay.TabIndex = 1;
             this.tbxTillDisplay.Text = "25";
             // 
-            // lbxTillDisplay
-            // 
-            this.lbxTillDisplay.BackColor = System.Drawing.Color.Black;
-            this.lbxTillDisplay.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbxTillDisplay.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbxTillDisplay.ForeColor = System.Drawing.Color.White;
-            this.lbxTillDisplay.FormattingEnabled = true;
-            this.lbxTillDisplay.ItemHeight = 22;
-            this.lbxTillDisplay.Items.AddRange(new object[] {
-            "36"});
-            this.lbxTillDisplay.Location = new System.Drawing.Point(16, 57);
-            this.lbxTillDisplay.Name = "lbxTillDisplay";
-            this.lbxTillDisplay.Size = new System.Drawing.Size(366, 396);
-            this.lbxTillDisplay.TabIndex = 0;
-            // 
             // tblEPOSItemsTableAdapter
             // 
             this.tblEPOSItemsTableAdapter.ClearBeforeFill = true;
@@ -448,16 +465,43 @@
             // 
             this.tblEPOSOpenTablesTableAdapter.ClearBeforeFill = true;
             // 
-            // button1
+            // tableAdapterManager1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(388, 298);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 51);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Add Note";
-            this.button1.UseVisualStyleBackColor = false;
+            this.tableAdapterManager1.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager1.tblClockLogTableAdapter = null;
+            this.tableAdapterManager1.tblEPOSCashChequesTableAdapter = this.tblEPOSCashChequesTableAdapter;
+            this.tableAdapterManager1.tblEPOSDepartmentsTableAdapter = null;
+            this.tableAdapterManager1.tblEPOSItemFoldersTableAdapter = this.tblEPOSItemFoldersTableAdapter;
+            this.tableAdapterManager1.tblEPOSItemPriceTableAdapter = this.tblEPOSItemPriceTableAdapter;
+            this.tableAdapterManager1.tblEPOSItemsTableAdapter = this.tblEPOSItemsTableAdapter;
+            this.tableAdapterManager1.tblEPOSListItemsTableAdapter = null;
+            this.tableAdapterManager1.tblEPOSOpenTablesTableAdapter = this.tblEPOSOpenTablesTableAdapter;
+            this.tableAdapterManager1.tblEPOSTableFloorsTableAdapter = null;
+            this.tableAdapterManager1.tblEPOSTablesTableAdapter = null;
+            this.tableAdapterManager1.tblEPOSUsersTableAdapter = null;
+            this.tableAdapterManager1.tblOrderLogTableAdapter = null;
+            this.tableAdapterManager1.UpdateOrder = CS3._0Project.EPOSDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.BackColor = System.Drawing.Color.Black;
+            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblUsername.Location = new System.Drawing.Point(10, 10);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(38, 25);
+            this.lblUsername.TabIndex = 10;
+            this.lblUsername.Text = "{0}";
+            // 
+            // bstblEPOSUsers
+            // 
+            this.bstblEPOSUsers.DataMember = "tblEPOSUsers";
+            this.bstblEPOSUsers.DataSource = this.ePOSDBDataSet;
+            // 
+            // tblEPOSUsersTableAdapter
+            // 
+            this.tblEPOSUsersTableAdapter.ClearBeforeFill = true;
             // 
             // frmSalesMode
             // 
@@ -466,6 +510,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1914, 1074);
             this.ControlBox = false;
+            this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.pnlTillDisplay);
             this.Controls.Add(this.pnlItemDisplay);
             this.Controls.Add(this.btnFolderBack);
@@ -487,7 +532,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSCashCheques)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemsTableAdapter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSOpenTables)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSUsers)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -500,7 +547,6 @@
         private System.Windows.Forms.Button btnFolderBack;
         private System.Windows.Forms.Panel pnlItemDisplay;
         private System.Windows.Forms.Panel pnlTillDisplay;
-        private System.Windows.Forms.ListBox lbxTillDisplay;
         private System.Windows.Forms.TextBox tbxTillDisplay;
         private EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter tblEPOSItemsTableAdapter;
         private System.Windows.Forms.Button btnTillCard;
@@ -532,5 +578,10 @@
         private EPOSDBDataSetTableAdapters.tblEPOSOpenTablesTableAdapter tblEPOSOpenTablesTableAdapter;
         private System.Windows.Forms.Button btnToggleAlts;
         private System.Windows.Forms.Button button1;
+        private Utility.Classes.tillListBox lbxTillDisplay;
+        private EPOSDBDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
+        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.BindingSource bstblEPOSUsers;
+        private EPOSDBDataSetTableAdapters.tblEPOSUsersTableAdapter tblEPOSUsersTableAdapter;
     }
 }

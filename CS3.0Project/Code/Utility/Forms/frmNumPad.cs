@@ -5,20 +5,21 @@ using CS3._0Project.Forms.Utility.Classes;
 namespace CS3._0Project.Forms.Utility {
     public partial class frmNumPad : Form {
 
-        private bool isLoginCode = false;
+        private int maxCharacters = -1;
 
         public frmNumPad() {
             InitializeComponent();
             new ControlDragger(this, true, false); // Allow Moving form via dragging
         }
 
-        public frmNumPad(bool isLoginCode) { // Overload for if login code
+        public frmNumPad(int maxCharacters) { // Overload for if login code
             InitializeComponent();
-            this.isLoginCode = isLoginCode; // Get input, if it is login, numbers cannot exceed 3 chars
+            this.maxCharacters = maxCharacters; // Get input, if it is login, numbers cannot exceed 3 chars
             new ControlDragger(this, true, false); // Allow Moving form via dragging
         }
 
         public string getInput() { // Get text from textbox
+            this.ShowDialog();
             return txtInput.Text;
         }
 
@@ -42,10 +43,10 @@ namespace CS3._0Project.Forms.Utility {
             this.Close();
         }
         private void txtInput_TextChanged(object sender, EventArgs e) { // Ensure text length does not exceed 3 (codes cannot be more than 3 chars for login)
-            if (isLoginCode) {
+            if (maxCharacters > -1) {
                 string text = txtInput.Text;
-                if (text.Length > 3) {
-                    txtInput.Text = text.Substring(0, 3);
+                if (text.Length > maxCharacters) {
+                    txtInput.Text = text.Substring(0, maxCharacters);
                 }
             }
         }

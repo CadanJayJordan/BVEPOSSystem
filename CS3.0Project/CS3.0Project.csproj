@@ -82,7 +82,13 @@
     <Compile Include="Code\frmEPOSMenu.Designer.cs">
       <DependentUpon>frmEPOSMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\Login\LoginClass.cs" />
+    <Compile Include="Code\Login\LoginTools.cs" />
+    <Compile Include="Code\Management\frmClock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmClock.Designer.cs">
+      <DependentUpon>frmClock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Code\Management\frmItemEditing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,12 @@
     </Compile>
     <Compile Include="Code\Management\frmManagementFunctions.Designer.cs">
       <DependentUpon>frmManagementFunctions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Management\frmShiftAddDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmShiftAddDialog.Designer.cs">
+      <DependentUpon>frmShiftAddDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Sales\frmRefundMode.cs">
       <SubType>Form</SubType>
@@ -119,11 +131,15 @@
     <Compile Include="Code\Table\frmTablePlan.Designer.cs">
       <DependentUpon>frmTablePlan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Code\Utility\Classes\DBTools.cs" />
     <Compile Include="Code\Utility\Classes\ItemDisplayGenerator.cs" />
     <Compile Include="Code\Utility\Classes\SizeableButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Code\Utility\Classes\ControlDragger.cs" />
+    <Compile Include="Code\Utility\Classes\tillListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Code\Utility\Forms\frmKeyboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,11 +183,17 @@
     <EmbeddedResource Include="Code\frmStartup.resx">
       <DependentUpon>frmStartup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmClock.resx">
+      <DependentUpon>frmClock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Code\Management\frmItemEditing.resx">
       <DependentUpon>frmItemEditing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Management\frmManagementFunctions.resx">
       <DependentUpon>frmManagementFunctions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmShiftAddDialog.resx">
+      <DependentUpon>frmShiftAddDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Sales\frmRefundMode.resx">
       <DependentUpon>frmRefundMode.cs</DependentUpon>
