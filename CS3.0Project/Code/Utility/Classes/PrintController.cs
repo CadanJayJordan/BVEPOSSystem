@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CS3._0Project.Code.Utility.Classes {
     
-    internal class PrintController {
+    internal class PrintController { // Handles all the print events
 
         private string username = "";
         private int tableNumber = 0;
@@ -20,6 +20,7 @@ namespace CS3._0Project.Code.Utility.Classes {
 
         private List<decimal> itemPrice = new List<decimal>();
 
+        //Printer from config
         private string billPrinter = ConfigurationSettings.AppSettings.Get("billPrinter");
         private string kitchenPrinter = ConfigurationSettings.AppSettings.Get("kitchenPrinter");
 

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Configuration;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing.Printing;
 using System.Windows.Forms;
-using CS3._0Project.Code.Utility.Forms;
 
 namespace CS3._0Project.Code.Configuration {
     public partial class frmConfiguration : Form {
@@ -15,8 +10,6 @@ namespace CS3._0Project.Code.Configuration {
         private int userID;
         private string username;
 
-        // MAJOR TODO: Allow item editing
-        // MAJOR TODO: Settings and colour editing
         public frmConfiguration(Size screenSize, int userID, string username) {
             InitializeComponent();
             this.screenSize = screenSize;
@@ -24,12 +17,37 @@ namespace CS3._0Project.Code.Configuration {
             this.username = username;
         }
 
-        private void frmConfiguration_Shown(object sender, EventArgs e) {
+        private void frmConfiguration_Load(object sender, EventArgs e) {
             this.Size = screenSize; // On show ensure screen is the correct size
+            lblUsername.Text = username;
+            this.Location = new Point(0, 0);
+
+            fillPrinters();
         }
 
-        private void btnBack_Click(object sender, EventArgs e) {
+        private void btnExit_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void fillPrinters() { // Get all system printers, show them in the cbxs
+            foreach (String printer in PrinterSettings.InstalledPrinters) {
+                cbxBillPrinter.Items.Add(printer);
+                cbxKitchenPrinter.Items.Add(printer);
+            }
+            cbxBillPrinter.SelectedItem = ConfigurationSettings.AppSettings.Get("billPrinter");
+            cbxKitchenPrinter.SelectedItem = ConfigurationSettings.AppSettings.Get("kitchenPrinter");
+        }
+
+        // Writing new settings to config file
+        private void cbxBillPrinter_SelectedIndexChanged(object sender, EventArgs e) { 
+            ConfigurationSettings.AppSettings.Set("billPrinter", cbxBillPrinter.Text);
+        }
+
+        private void cbxKitchenPrinter_SelectedIndexChanged(object sender, EventArgs e) {
+            ConfigurationSettings.AppSettings.Set("kitchenPrinter", cbxKitchenPrinter.Text);
+
+        }
+
+        
     }
 }

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
 namespace CS3._0Project.Code.Utility.Classes {
-    class tillListBox : ListBox{ // TODO: Make Work
+    class tillListBox : ListBox{ // Was originally going to be an extension of hte listbox with no scrollbar but it didnt work and was never fixed
         
-        private bool scrollDisplay;
+        /*private bool scrollDisplay;
         
         public tillListBox() {
             //this.DrawMode = DrawMode.OwnerDrawFixed;
@@ -42,9 +38,6 @@ namespace CS3._0Project.Code.Utility.Classes {
             
         }
 
-
-
-
         private void listBox_DrawItem(object sender, DrawItemEventArgs e) { // Draw a seperate background colour
             Graphics g = e.Graphics;
             ListBox lb = (ListBox)sender;
@@ -60,6 +53,6 @@ namespace CS3._0Project.Code.Utility.Classes {
             }
 
             e.DrawFocusRectangle();
-        }
+        } */
     }
 }

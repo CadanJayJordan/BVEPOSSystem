@@ -105,7 +105,7 @@
             this.btnFolderBack.BackColor = System.Drawing.Color.CadetBlue;
             this.btnFolderBack.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFolderBack.ForeColor = System.Drawing.Color.White;
-            this.btnFolderBack.Location = new System.Drawing.Point(786, 12);
+            this.btnFolderBack.Location = new System.Drawing.Point(849, 12);
             this.btnFolderBack.Name = "btnFolderBack";
             this.btnFolderBack.Size = new System.Drawing.Size(104, 76);
             this.btnFolderBack.TabIndex = 2;
@@ -121,7 +121,7 @@
             this.pnlItemDisplay.BackColor = System.Drawing.Color.Transparent;
             this.pnlItemDisplay.Location = new System.Drawing.Point(12, 94);
             this.pnlItemDisplay.Name = "pnlItemDisplay";
-            this.pnlItemDisplay.Size = new System.Drawing.Size(878, 692);
+            this.pnlItemDisplay.Size = new System.Drawing.Size(941, 715);
             this.pnlItemDisplay.TabIndex = 0;
             // 
             // pnlTillDisplay
@@ -154,9 +154,9 @@
             this.pnlTillDisplay.Controls.Add(this.btnCancel);
             this.pnlTillDisplay.Controls.Add(this.tbxTillTotal);
             this.pnlTillDisplay.Controls.Add(this.tbxTillDisplay);
-            this.pnlTillDisplay.Location = new System.Drawing.Point(896, 12);
+            this.pnlTillDisplay.Location = new System.Drawing.Point(959, 12);
             this.pnlTillDisplay.Name = "pnlTillDisplay";
-            this.pnlTillDisplay.Size = new System.Drawing.Size(605, 774);
+            this.pnlTillDisplay.Size = new System.Drawing.Size(605, 797);
             this.pnlTillDisplay.TabIndex = 3;
             // 
             // btnTillCard
@@ -165,7 +165,7 @@
             this.btnTillCard.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTillCard.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTillCard.ForeColor = System.Drawing.Color.White;
-            this.btnTillCard.Location = new System.Drawing.Point(236, 479);
+            this.btnTillCard.Location = new System.Drawing.Point(236, 502);
             this.btnTillCard.Name = "btnTillCard";
             this.btnTillCard.Size = new System.Drawing.Size(146, 65);
             this.btnTillCard.TabIndex = 3;
@@ -178,7 +178,7 @@
             this.btnTillCash.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTillCash.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTillCash.ForeColor = System.Drawing.Color.White;
-            this.btnTillCash.Location = new System.Drawing.Point(236, 550);
+            this.btnTillCash.Location = new System.Drawing.Point(236, 573);
             this.btnTillCash.Name = "btnTillCash";
             this.btnTillCash.Size = new System.Drawing.Size(146, 65);
             this.btnTillCash.TabIndex = 2;
@@ -191,7 +191,7 @@
             this.btnMultiply.BackColor = System.Drawing.Color.CadetBlue;
             this.btnMultiply.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMultiply.ForeColor = System.Drawing.Color.White;
-            this.btnMultiply.Location = new System.Drawing.Point(236, 621);
+            this.btnMultiply.Location = new System.Drawing.Point(236, 644);
             this.btnMultiply.Name = "btnMultiply";
             this.btnMultiply.Size = new System.Drawing.Size(146, 65);
             this.btnMultiply.TabIndex = 21;
@@ -216,7 +216,7 @@
             this.lbxTillDisplay.Location = new System.Drawing.Point(16, 58);
             this.lbxTillDisplay.Name = "lbxTillDisplay";
             this.lbxTillDisplay.ShowScrollbar = true;
-            this.lbxTillDisplay.Size = new System.Drawing.Size(428, 391);
+            this.lbxTillDisplay.Size = new System.Drawing.Size(428, 414);
             this.lbxTillDisplay.TabIndex = 0;
             // 
             // button1
@@ -225,7 +225,7 @@
             this.button1.BackColor = System.Drawing.Color.CadetBlue;
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(450, 388);
+            this.button1.Location = new System.Drawing.Point(450, 399);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 86);
             this.button1.TabIndex = 23;
@@ -251,7 +251,7 @@
             this.btnToggleAlts.BackColor = System.Drawing.Color.CadetBlue;
             this.btnToggleAlts.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToggleAlts.ForeColor = System.Drawing.Color.White;
-            this.btnToggleAlts.Location = new System.Drawing.Point(450, 246);
+            this.btnToggleAlts.Location = new System.Drawing.Point(450, 257);
             this.btnToggleAlts.Name = "btnToggleAlts";
             this.btnToggleAlts.Size = new System.Drawing.Size(135, 65);
             this.btnToggleAlts.TabIndex = 22;
@@ -277,7 +277,7 @@
             this.btnTill00.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill00.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill00.ForeColor = System.Drawing.Color.White;
-            this.btnTill00.Location = new System.Drawing.Point(16, 692);
+            this.btnTill00.Location = new System.Drawing.Point(16, 715);
             this.btnTill00.Name = "btnTill00";
             this.btnTill00.Size = new System.Drawing.Size(65, 65);
             this.btnTill00.TabIndex = 18;
@@ -290,7 +290,7 @@
             this.btnTill0.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill0.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill0.ForeColor = System.Drawing.Color.White;
-            this.btnTill0.Location = new System.Drawing.Point(87, 692);
+            this.btnTill0.Location = new System.Drawing.Point(87, 715);
             this.btnTill0.Name = "btnTill0";
             this.btnTill0.Size = new System.Drawing.Size(65, 65);
             this.btnTill0.TabIndex = 17;
@@ -303,7 +303,7 @@
             this.btnTillDecimal.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTillDecimal.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTillDecimal.ForeColor = System.Drawing.Color.White;
-            this.btnTillDecimal.Location = new System.Drawing.Point(158, 692);
+            this.btnTillDecimal.Location = new System.Drawing.Point(158, 715);
             this.btnTillDecimal.Name = "btnTillDecimal";
             this.btnTillDecimal.Size = new System.Drawing.Size(65, 65);
             this.btnTillDecimal.TabIndex = 16;
@@ -316,7 +316,7 @@
             this.btnTill9.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill9.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill9.ForeColor = System.Drawing.Color.White;
-            this.btnTill9.Location = new System.Drawing.Point(158, 621);
+            this.btnTill9.Location = new System.Drawing.Point(158, 644);
             this.btnTill9.Name = "btnTill9";
             this.btnTill9.Size = new System.Drawing.Size(65, 65);
             this.btnTill9.TabIndex = 15;
@@ -329,7 +329,7 @@
             this.btnTill8.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill8.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill8.ForeColor = System.Drawing.Color.White;
-            this.btnTill8.Location = new System.Drawing.Point(87, 621);
+            this.btnTill8.Location = new System.Drawing.Point(87, 644);
             this.btnTill8.Name = "btnTill8";
             this.btnTill8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnTill8.Size = new System.Drawing.Size(65, 65);
@@ -343,7 +343,7 @@
             this.btnTill7.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill7.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill7.ForeColor = System.Drawing.Color.White;
-            this.btnTill7.Location = new System.Drawing.Point(16, 621);
+            this.btnTill7.Location = new System.Drawing.Point(16, 644);
             this.btnTill7.Name = "btnTill7";
             this.btnTill7.Size = new System.Drawing.Size(65, 65);
             this.btnTill7.TabIndex = 13;
@@ -356,7 +356,7 @@
             this.btnTill6.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill6.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill6.ForeColor = System.Drawing.Color.White;
-            this.btnTill6.Location = new System.Drawing.Point(158, 550);
+            this.btnTill6.Location = new System.Drawing.Point(158, 573);
             this.btnTill6.Name = "btnTill6";
             this.btnTill6.Size = new System.Drawing.Size(65, 65);
             this.btnTill6.TabIndex = 12;
@@ -369,7 +369,7 @@
             this.btnTill5.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill5.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill5.ForeColor = System.Drawing.Color.White;
-            this.btnTill5.Location = new System.Drawing.Point(87, 550);
+            this.btnTill5.Location = new System.Drawing.Point(87, 573);
             this.btnTill5.Name = "btnTill5";
             this.btnTill5.Size = new System.Drawing.Size(65, 65);
             this.btnTill5.TabIndex = 11;
@@ -382,7 +382,7 @@
             this.btnTill4.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill4.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill4.ForeColor = System.Drawing.Color.White;
-            this.btnTill4.Location = new System.Drawing.Point(16, 550);
+            this.btnTill4.Location = new System.Drawing.Point(16, 573);
             this.btnTill4.Name = "btnTill4";
             this.btnTill4.Size = new System.Drawing.Size(65, 65);
             this.btnTill4.TabIndex = 10;
@@ -395,7 +395,7 @@
             this.btnTill3.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill3.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill3.ForeColor = System.Drawing.Color.White;
-            this.btnTill3.Location = new System.Drawing.Point(158, 479);
+            this.btnTill3.Location = new System.Drawing.Point(158, 502);
             this.btnTill3.Name = "btnTill3";
             this.btnTill3.Size = new System.Drawing.Size(65, 65);
             this.btnTill3.TabIndex = 9;
@@ -408,7 +408,7 @@
             this.btnTill2.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill2.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill2.ForeColor = System.Drawing.Color.White;
-            this.btnTill2.Location = new System.Drawing.Point(87, 479);
+            this.btnTill2.Location = new System.Drawing.Point(87, 502);
             this.btnTill2.Name = "btnTill2";
             this.btnTill2.Size = new System.Drawing.Size(65, 65);
             this.btnTill2.TabIndex = 8;
@@ -421,7 +421,7 @@
             this.btnTill1.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTill1.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTill1.ForeColor = System.Drawing.Color.White;
-            this.btnTill1.Location = new System.Drawing.Point(16, 479);
+            this.btnTill1.Location = new System.Drawing.Point(16, 502);
             this.btnTill1.Name = "btnTill1";
             this.btnTill1.Size = new System.Drawing.Size(65, 65);
             this.btnTill1.TabIndex = 7;
@@ -434,7 +434,7 @@
             this.btnTillErrorCorrect.BackColor = System.Drawing.Color.CadetBlue;
             this.btnTillErrorCorrect.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTillErrorCorrect.ForeColor = System.Drawing.Color.White;
-            this.btnTillErrorCorrect.Location = new System.Drawing.Point(450, 317);
+            this.btnTillErrorCorrect.Location = new System.Drawing.Point(450, 328);
             this.btnTillErrorCorrect.Name = "btnTillErrorCorrect";
             this.btnTillErrorCorrect.Size = new System.Drawing.Size(135, 65);
             this.btnTillErrorCorrect.TabIndex = 6;
@@ -447,7 +447,7 @@
             this.btnCancel.BackColor = System.Drawing.Color.CadetBlue;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(236, 692);
+            this.btnCancel.Location = new System.Drawing.Point(236, 715);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(146, 65);
             this.btnCancel.TabIndex = 5;
@@ -462,7 +462,7 @@
             this.tbxTillTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbxTillTotal.Font = new System.Drawing.Font("Consolas", 15F);
             this.tbxTillTotal.ForeColor = System.Drawing.Color.White;
-            this.tbxTillTotal.Location = new System.Drawing.Point(16, 449);
+            this.tbxTillTotal.Location = new System.Drawing.Point(16, 472);
             this.tbxTillTotal.Name = "tbxTillTotal";
             this.tbxTillTotal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbxTillTotal.Size = new System.Drawing.Size(428, 24);
@@ -582,7 +582,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(154)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1513, 817);
+            this.ClientSize = new System.Drawing.Size(1576, 840);
             this.ControlBox = false;
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.pnlTillDisplay);

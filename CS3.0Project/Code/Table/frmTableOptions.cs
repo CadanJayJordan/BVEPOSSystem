@@ -1,18 +1,10 @@
 ﻿using CS3._0Project.Code.Sales;
 using CS3._0Project.Forms.Utility.Classes;
-using CS3._0Project.Code.Utility.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CS3._0Project.Forms.Utility;
-using System.Runtime.InteropServices;
 using CS3._0Project.Code.Utility.Classes;
 
 namespace CS3._0Project.Code.Table {

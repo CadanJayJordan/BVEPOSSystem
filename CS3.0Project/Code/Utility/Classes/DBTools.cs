@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CS3._0Project.Code.Utility.Classes {
-    class DBTools {
+    class DBTools { // Handles a lot of common DB requests
 
         private int userID = 0;
         private string username = "";
@@ -187,7 +185,7 @@ namespace CS3._0Project.Code.Utility.Classes {
             return printRed;
         }
 
-        public List<string> getItemPrinters(DataTable tblEPOSItems, int itemID) {
+        public List<string> getItemPrinters(DataTable tblEPOSItems, int itemID) { // get the printers from an item in the DB
             List<string> itemPrinters = new List<string>();
             foreach (DataRow item in tblEPOSItems.Rows) {
                 if (Convert.ToInt32(item[0]) != itemID) {

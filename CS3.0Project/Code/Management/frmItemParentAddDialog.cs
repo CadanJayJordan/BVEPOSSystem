@@ -1,12 +1,7 @@
-﻿using CS3._0Project.Code.Utility.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CS3._0Project.Code.Management {
@@ -44,7 +39,7 @@ namespace CS3._0Project.Code.Management {
             return parentFolderList;
         }
 
-        private void fillListBox() {
+        private void fillListBox() { // Fills the list box with folders from the db
             foreach(DataRow folder in tblEPOSItemFolders.Rows) {
                 int folderID = Convert.ToInt32(folder[0]);
                 folderIDs.Add(folderID);
@@ -52,7 +47,7 @@ namespace CS3._0Project.Code.Management {
             }
         }
 
-        private void displayExistingInformation() {
+        private void displayExistingInformation() { // Selects folders that are already the parent folders
             foreach(int selectedFolderIndex in currentFolderIndexs) {
                 if (selectedFolderIndex > -1) {
                     clbSelectedParents.SetItemChecked(selectedFolderIndex, true);
@@ -64,7 +59,7 @@ namespace CS3._0Project.Code.Management {
             }
         }
 
-        private void frmItemParentAddDialog_Load(object sender, EventArgs e) {
+        private void frmItemParentAddDialog_Load(object sender, EventArgs e) {// Sizeing information
             this.MaximumSize = new Size(357, Screen.PrimaryScreen.Bounds.Height);
             fillListBox();
             displayExistingInformation();

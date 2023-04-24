@@ -40,6 +40,7 @@
             this.bstblEPOSDepartments = new System.Windows.Forms.BindingSource(this.components);
             this.tblEPOSDepartmentsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSDepartmentsTableAdapter();
             this.pnlItemEditing = new System.Windows.Forms.Panel();
+            this.btnClearListItem = new System.Windows.Forms.Button();
             this.cbPrintBar = new System.Windows.Forms.CheckBox();
             this.cbPrintKitchen = new System.Windows.Forms.CheckBox();
             this.lblPrintSettings = new System.Windows.Forms.Label();
@@ -86,7 +87,6 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.btnRemoveItem = new System.Windows.Forms.Button();
-            this.btnClearListItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemPrice)).BeginInit();
@@ -247,6 +247,20 @@
             this.pnlItemEditing.Name = "pnlItemEditing";
             this.pnlItemEditing.Size = new System.Drawing.Size(786, 575);
             this.pnlItemEditing.TabIndex = 5;
+            // 
+            // btnClearListItem
+            // 
+            this.btnClearListItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClearListItem.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnClearListItem.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnClearListItem.ForeColor = System.Drawing.Color.White;
+            this.btnClearListItem.Location = new System.Drawing.Point(350, 368);
+            this.btnClearListItem.Name = "btnClearListItem";
+            this.btnClearListItem.Size = new System.Drawing.Size(66, 58);
+            this.btnClearListItem.TabIndex = 48;
+            this.btnClearListItem.Text = "Clear";
+            this.btnClearListItem.UseVisualStyleBackColor = false;
+            this.btnClearListItem.Click += new System.EventHandler(this.btnClearListItem_Click);
             // 
             // cbPrintBar
             // 
@@ -771,20 +785,6 @@
             this.btnRemoveItem.Text = "Remove Item";
             this.btnRemoveItem.UseVisualStyleBackColor = false;
             this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
-            // 
-            // btnClearListItem
-            // 
-            this.btnClearListItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClearListItem.BackColor = System.Drawing.Color.CadetBlue;
-            this.btnClearListItem.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
-            this.btnClearListItem.ForeColor = System.Drawing.Color.White;
-            this.btnClearListItem.Location = new System.Drawing.Point(350, 368);
-            this.btnClearListItem.Name = "btnClearListItem";
-            this.btnClearListItem.Size = new System.Drawing.Size(66, 58);
-            this.btnClearListItem.TabIndex = 48;
-            this.btnClearListItem.Text = "Clear";
-            this.btnClearListItem.UseVisualStyleBackColor = false;
-            this.btnClearListItem.Click += new System.EventHandler(this.btnClearListItem_Click);
             // 
             // frmItemEditing
             // 

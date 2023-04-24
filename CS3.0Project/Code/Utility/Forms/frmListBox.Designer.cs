@@ -124,12 +124,11 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.lbxListDisplay);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmListBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "List Box";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSListItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).EndInit();

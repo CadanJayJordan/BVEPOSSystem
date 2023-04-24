@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CS3._0Project.Code.Utility.Forms;
 using CS3._0Project.Forms.Utility;
 
-namespace CS3._0Project.Forms.Login {
+namespace CS3._0Project.Forms.Login { // Handles Login
     class LoginTools {
 
         public int userID = -1;

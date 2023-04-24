@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CS3._0Project.Code.Sales;
 using CS3._0Project.Code.Utility.Forms;
 
-namespace CS3._0Project.Code.Utility.Classes {
-    class ItemDisplayGenerator { // TODO: Finish abstracting the sales mode stuff for later use
+namespace CS3._0Project.Code.Utility.Classes { 
+    class ItemDisplayGenerator { // Deals with a lot of frmSalesMode item display
 
         private frmSalesMode frmSalesMode;
         private DataTable items;

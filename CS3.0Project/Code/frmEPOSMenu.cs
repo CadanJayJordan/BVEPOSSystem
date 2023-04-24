@@ -22,7 +22,6 @@ namespace CS3._0Project.Forms {
         
         private frmClock frmClock;
         private frmSalesMode frmSalesMode;
-        private frmSalesMode frmRefundMode;
         private frmConfiguration frmConfiguration;
         private frmManagementFunctions frmManagementFunctions;
 
@@ -36,7 +35,7 @@ namespace CS3._0Project.Forms {
             // Ensure the form is on the screen correctly
             this.Location = new Point(0, 0);
             // Make window the size of the screen
-            //screenSize = new Size(1258, 900); 
+            //screenSize = new Size(1258, 900); // DEBUG FOR SCREEN SIZES
             screenSize = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
             this.Size = screenSize;
@@ -64,7 +63,7 @@ namespace CS3._0Project.Forms {
             getLogin();
         }
 
-        private void getLogin() {
+        private void getLogin() { // Gets login form
             lblUsername.Text = "";
             // Open login form and bring values out
             LoginTools.getLogin(ePOSDBDataSet.tblEPOSUsers);
@@ -105,19 +104,6 @@ namespace CS3._0Project.Forms {
             frmConfiguration.ShowDialog();
 
         }
-        private void btnKeyboard_Click(object sender, EventArgs e) {
-            //REMOVE LATER
-            frmKeyboard frmKeyboard = new frmKeyboard();
-            frmKeyboard.ShowDialog();
-            MessageBox.Show(frmKeyboard.getInput());
-        }
-
-        private void btnMessage_Click(object sender, EventArgs e) {
-            //REMOVE LATER
-
-            frmMessageBox frmMessageBox = new frmMessageBox();
-            frmMessageBox.ShowMessage("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-        }
 
         private bool isLoggedIn() { // Bool to check for login
             if (userID < 1) {
@@ -129,17 +115,15 @@ namespace CS3._0Project.Forms {
 
         }
 
-        private bool isManager() {
+        private bool isManager() { // Checks permission level
             if (!LoginTools.isManager) {
                 cMessageBox.ShowMessage("You don't have permission to do that");
                 return false;
             }
-
             return true;
-
         }
 
-        private void btnManagerFunctions_Click(object sender, EventArgs e) {
+        private void btnManagerFunctions_Click(object sender, EventArgs e) { // Open manager functions if manager
             if (!isLoggedIn()) {
                 return;
             }
@@ -151,8 +135,7 @@ namespace CS3._0Project.Forms {
             frmManagementFunctions.ShowDialog();
         }
 
-        private void btnClock_Click(object sender, EventArgs e) {
-            // MAJOR TODO: Clock in/out functionallity
+        private void btnClock_Click(object sender, EventArgs e) { // Clock in/out open if logged in
             if (!isLoggedIn()) {
                 return;
             }
@@ -160,7 +143,5 @@ namespace CS3._0Project.Forms {
             frmClock = new frmClock(screenSize, userID, LoginTools.isManager);
             frmClock.ShowDialog();
         }
-
-        
     }
 }

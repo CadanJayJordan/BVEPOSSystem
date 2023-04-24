@@ -45,7 +45,7 @@
             this.btnExit.BackColor = System.Drawing.Color.CadetBlue;
             this.btnExit.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(1808, 12);
+            this.btnExit.Location = new System.Drawing.Point(1304, 12);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 100);
             this.btnExit.TabIndex = 0;
@@ -81,7 +81,6 @@
             // 
             // btnConfiguration
             // 
-            this.btnConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfiguration.BackColor = System.Drawing.Color.CadetBlue;
             this.btnConfiguration.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfiguration.ForeColor = System.Drawing.Color.White;
@@ -126,7 +125,6 @@
             // 
             // btnManagerFunctions
             // 
-            this.btnManagerFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnManagerFunctions.BackColor = System.Drawing.Color.CadetBlue;
             this.btnManagerFunctions.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManagerFunctions.ForeColor = System.Drawing.Color.White;
@@ -166,7 +164,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(154)))));
             this.BackgroundImage = global::CS3._0Project.Properties.Resources.BVIcon;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.ClientSize = new System.Drawing.Size(1416, 629);
             this.ControlBox = false;
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.btnManagerFunctions);

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace CS3._0Project.Code.Management {
     public partial class frmShiftAddDialog : Form {
 
-        // Variable Innit
+        // Variable Init
 
         private frmClock frmClock;
         private frmMessageBox cMessagebox = new frmMessageBox();

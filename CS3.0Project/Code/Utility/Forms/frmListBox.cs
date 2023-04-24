@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CS3._0Project.Code.Utility.Classes;
 using CS3._0Project.Forms.Utility.Classes;
 
 namespace CS3._0Project.Code.Utility.Forms {
@@ -77,11 +71,11 @@ namespace CS3._0Project.Code.Utility.Forms {
             return listItemIDs; // Return the in list
         }
 
-        private void btnCancel_Click(object sender, EventArgs e) {
-            this.Hide();
+        private void btnCancel_Click(object sender, EventArgs e) { // Close on cancel
+            this.Close();
         }
 
-        private void btnOk_Click(object sender, EventArgs e) {
+        private void btnOk_Click(object sender, EventArgs e) { // Return item ID on ok
             if (lbxListDisplay.SelectedIndex == -1) {
                 return;
             }
