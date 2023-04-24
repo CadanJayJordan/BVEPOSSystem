@@ -63,9 +63,9 @@ namespace CS3._0Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap exit_button_png__1600 {
+        internal static System.Drawing.Bitmap BVIcon {
             get {
-                object obj = ResourceManager.GetObject("exit-button-png--1600", resourceCulture);
+                object obj = ResourceManager.GetObject("BVIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

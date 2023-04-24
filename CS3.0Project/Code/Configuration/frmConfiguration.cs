@@ -13,13 +13,15 @@ namespace CS3._0Project.Code.Configuration {
     public partial class frmConfiguration : Form {
         private Size screenSize;
         private int userID;
+        private string username;
 
         // MAJOR TODO: Allow item editing
         // MAJOR TODO: Settings and colour editing
-        public frmConfiguration(Size screenSize, int userID) {
+        public frmConfiguration(Size screenSize, int userID, string username) {
             InitializeComponent();
             this.screenSize = screenSize;
             this.userID = userID;
+            this.username = username;
         }
 
         private void frmConfiguration_Shown(object sender, EventArgs e) {

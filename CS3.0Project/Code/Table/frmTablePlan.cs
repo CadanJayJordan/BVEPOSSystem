@@ -18,6 +18,7 @@ namespace CS3._0Project.Code.Table {
         // Constructor Objects
         private Size screenSize;
         private int userID;
+        private string username;
         private bool editMode = false;
         private frmSalesMode frmSalesMode;
 
@@ -32,16 +33,18 @@ namespace CS3._0Project.Code.Table {
 
         // TODO: Allow creatation and ordering of new floors
 
-        public frmTablePlan(Size screenSize, int userID, frmSalesMode frmSalesMode) { // Initial constructor for sales and table item loading
+        public frmTablePlan(Size screenSize, int userID, string username, frmSalesMode frmSalesMode) { // Initial constructor for sales and table item loading
             InitializeComponent();
             this.screenSize = screenSize;
+            this.username = username;
             this.frmSalesMode = frmSalesMode;
             this.userID = userID;
         }
 
-        public frmTablePlan(Size screenSize, int userID, bool editMode) { // Use for when you are not opening tables, only editing them
+        public frmTablePlan(Size screenSize, int userID, string username, bool editMode) { // Use for when you are not opening tables, only editing them
             InitializeComponent();
             this.screenSize = screenSize;
+            this.username = username;
             this.userID = userID;
             this.editMode = editMode;
         }
@@ -56,6 +59,7 @@ namespace CS3._0Project.Code.Table {
             } else { // If we are using the sales mode of the atable plan
                 frmTableOptions = new frmTableOptions(userID, frmSalesMode, this, false); // Create a new instance of the options form on load
             }
+
             currentFloorIndex = 0; // Ensure floors are reset
             getFloors(); // Gett all current floors
             sortFloors(0, floors.Count - 1); // Sort them via quicksort in order of the floor sorting number
@@ -65,7 +69,9 @@ namespace CS3._0Project.Code.Table {
         private void frmTablePlan_Shown(object sender, EventArgs e) {
             this.Location = new Point(0, 0); // Ensure size and location of form are correct
             this.Size = screenSize;
+            lblUsername.Text = username;
         }
+
         private void btnPlanClose_Click(object sender, EventArgs e) {
             if (editMode) { // Update the DB with any edits if in editing mode
                 updateTables();
@@ -169,6 +175,7 @@ namespace CS3._0Project.Code.Table {
 
                     // Draw table
                     dynamicTableButton.ForeColor = Color.Black; // Set button text colour
+                    dynamicTableButton.Font = new Font("Segoe UI Semibold", 18, FontStyle.Bold);
                     dynamicTableButton.Parent = pnlFloorPanel; // Assign parent
                     dynamicTableButton.Name = "dtb" + table[0].ToString(); // Name = "dtb{tableID}"
                     dynamicTableButton.Text = tableText; // Text is the table number + open (if open)

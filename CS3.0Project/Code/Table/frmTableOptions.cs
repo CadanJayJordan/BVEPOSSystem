@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CS3._0Project.Forms.Utility;
 using System.Runtime.InteropServices;
+using CS3._0Project.Code.Utility.Classes;
 
 namespace CS3._0Project.Code.Table {
     public partial class frmTableOptions : Form {
@@ -22,6 +23,7 @@ namespace CS3._0Project.Code.Table {
         private bool editMode;
         private frmSalesMode frmSalesMode;
         private frmTablePlan frmTablePlan;
+        private DBTools DBTools = new DBTools();
 
         // TODO: Cost on open tables?
 
@@ -48,8 +50,13 @@ namespace CS3._0Project.Code.Table {
         }
 
         private void frmTableOptions_Load(object sender, EventArgs e) {
-            this.tblEPOSTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSTables); // Fill adapter on form load
+            // Fill adapters on form load
+            this.tblEPOSItemPriceTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemPrice);
+            this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
+            this.tblEPOSUsersTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSUsers);
+            this.tblEPOSTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSTables); 
             this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables);
+
             if (editMode) { // Show buttons according to weather we are editing the tables or using the tables
                 btnOpen.Visible = false;
                 btnBill.Visible = false;
@@ -85,75 +92,77 @@ namespace CS3._0Project.Code.Table {
         }
 
         private void btnOpen_Click(object sender, EventArgs e) { // On table open
-            if (!editMode) {
-                List<int> selectedTillItems = new List<int>(); // Create item and quantity lists
-                List<int> selectedTillQuantity = new List<int>();
-                List<int> selectedTillAlts = new List<int>();
-                List<List<List<int>>> selectedTillListItems = new List<List<List<int>>>();
-                List<string> selectedTillNotes = new List<string>();
-                List<int> tillDisplayCopy = new List<int>();
-                int openTableID = 0;
-                if (isTableOpen(tableID)) { // If table is already open, load the table into the array
-                    tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables\r\nWHERE (((tblEPOSOpenTables.openTableNumber)=" + tableID.ToString() + "));\r\n";
-                    this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables); // Fill table with tableID
-
-                    string tableItemString = ePOSDBDataSet.tblEPOSOpenTables[0][2].ToString(); // Get the table store string
-                    string[] tableItemList = tableItemString.Split(';'); // Get the item lists
-                    openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables[0][0]);
-
-                    foreach (string tableItem in tableItemList) { // For every item
-                        if (tableItem != "") {
-                            string[] tableArray = tableItem.Split(','); // Split the quantity and items
-                            selectedTillItems.Add(Convert.ToInt32(tableArray[0])); // Add items to item array
-                            selectedTillQuantity.Add(Convert.ToInt32(tableArray[1])); // Add quantity to qauntity array
-                            selectedTillAlts.Add(Convert.ToInt32(tableArray[2])); // Add quantity to qauntity array
-                            selectedTillNotes.Add(tableArray[4]); // Add notes to note array;
-                            tillDisplayCopy.Add(Convert.ToInt32(tableArray[0]));
-
-                            string[] listItems = tableArray[3].Split(':'); // For the list items, split each indiviual item up
-                            List<List<int>> selectedListItems = new List<List<int>>();
-                            foreach (string listItem in listItems) { // For every itme in an item
-                                if (listItem != "") {
-                                    string[] listItemSplit = listItem.Split('.'); // Split into listID and itemID
-                                    List<int> selectedListItem = new List<int>(); // Create sub list
-                                    selectedListItem.Add(Convert.ToInt32(listItemSplit[0])); // Add Items
-                                    selectedListItem.Add(Convert.ToInt32(listItemSplit[1]));
-                                    selectedListItems.Add(selectedListItem);
-                                    tillDisplayCopy.Add(0); // Add Display int
-                                }
-                            }
-                            selectedTillListItems.Add(selectedListItems); // Add to list items
-
-                            if (tableArray[4] != "") { // If there is a note
-
-                                tillDisplayCopy.Add(-1); // Add the note int to the display copy
-                            }
-
-                        }
-                    }
-                } else { // If table is not already open, open it with fresh arrays
-                    tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables;";
-                    this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables); // Fill table
-
-                    DataTable openTablesTable = ePOSDBDataSet.tblEPOSOpenTables;
-                    openTablesTable.Rows.Add(); // Add new row
-                    int lastRowIndex = openTablesTable.Rows.Count - 1; // Get index of new row
-
-                    // Add data to new row
-                    openTablesTable.Rows[lastRowIndex][1] = tableID;
-                    openTablesTable.Rows[lastRowIndex][2] = "";
-                    openTablesTable.Rows[lastRowIndex][3] = false;
-                    openTablesTable.Rows[lastRowIndex][4] = userID;
-
-                    tblEPOSOpenTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSOpenTables); // Update table with new row
-                    this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables); // Fill table
-                    openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[lastRowIndex][0]); // Get new table ID
-                }
-
-                frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, selectedTillAlts, selectedTillListItems, selectedTillNotes, tillDisplayCopy, openTableID); // Open a table in the till view
-                this.Hide(); // Hide this form
-                frmTablePlan.Hide(); // Hide the table plan
+            if (editMode) {
+                return;
             }
+            List<int> selectedTillItems = new List<int>(); // Create item and quantity lists
+            List<int> selectedTillQuantity = new List<int>();
+            List<int> selectedTillAlts = new List<int>();
+            List<List<List<int>>> selectedTillListItems = new List<List<List<int>>>();
+            List<string> selectedTillNotes = new List<string>();
+            List<int> tillDisplayCopy = new List<int>();
+            int openTableID = 0;
+            if (isTableOpen(tableID)) { // If table is already open, load the table into the array
+                tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables\r\nWHERE (((tblEPOSOpenTables.openTableNumber)=" + tableID.ToString() + "));\r\n";
+                this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables); // Fill table with tableID
+
+                string tableItemString = ePOSDBDataSet.tblEPOSOpenTables[0][2].ToString(); // Get the table store string
+                string[] tableItemList = tableItemString.Split(';'); // Get the item lists
+                openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables[0][0]);
+
+                foreach (string tableItem in tableItemList) { // For every item
+                    if (tableItem != "") {
+                        string[] tableArray = tableItem.Split(','); // Split the quantity and items
+                        selectedTillItems.Add(Convert.ToInt32(tableArray[0])); // Add items to item array
+                        selectedTillQuantity.Add(Convert.ToInt32(tableArray[1])); // Add quantity to qauntity array
+                        selectedTillAlts.Add(Convert.ToInt32(tableArray[2])); // Add quantity to qauntity array
+                        selectedTillNotes.Add(tableArray[4]); // Add notes to note array;
+                        tillDisplayCopy.Add(Convert.ToInt32(tableArray[0]));
+
+                        string[] listItems = tableArray[3].Split(':'); // For the list items, split each indiviual item up
+                        List<List<int>> selectedListItems = new List<List<int>>();
+                        foreach (string listItem in listItems) { // For every itme in an item
+                            if (listItem != "") {
+                                string[] listItemSplit = listItem.Split('.'); // Split into listID and itemID
+                                List<int> selectedListItem = new List<int>(); // Create sub list
+                                selectedListItem.Add(Convert.ToInt32(listItemSplit[0])); // Add Items
+                                selectedListItem.Add(Convert.ToInt32(listItemSplit[1]));
+                                selectedListItems.Add(selectedListItem);
+                                tillDisplayCopy.Add(0); // Add Display int
+                            }
+                        }
+                        selectedTillListItems.Add(selectedListItems); // Add to list items
+
+                        if (tableArray[4] != "") { // If there is a note
+
+                            tillDisplayCopy.Add(-1); // Add the note int to the display copy
+                        }
+
+                    }
+                }
+            } else { // If table is not already open, open it with fresh arrays
+                tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables;";
+                this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables); // Fill table
+
+                DataTable openTablesTable = ePOSDBDataSet.tblEPOSOpenTables;
+                openTablesTable.Rows.Add(); // Add new row
+                int lastRowIndex = openTablesTable.Rows.Count - 1; // Get index of new row
+
+                // Add data to new row
+                openTablesTable.Rows[lastRowIndex][1] = tableID;
+                openTablesTable.Rows[lastRowIndex][2] = "";
+                openTablesTable.Rows[lastRowIndex][3] = false;
+                openTablesTable.Rows[lastRowIndex][4] = userID;
+
+                tblEPOSOpenTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSOpenTables); // Update table with new row
+                this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables); // Fill table
+                openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[lastRowIndex][0]); // Get new table ID
+            }
+
+            frmSalesMode.openTable(selectedTillItems, selectedTillQuantity, selectedTillAlts, selectedTillListItems, selectedTillNotes, tillDisplayCopy, openTableID); // Open a table in the till view
+            this.Hide(); // Hide this form
+            frmTablePlan.Hide(); // Hide the table plan
+            
         }
 
         public bool isTableOpen(int tableID) {
@@ -171,7 +180,73 @@ namespace CS3._0Project.Code.Table {
         }
 
         private void btnBill_Click(object sender, EventArgs e) {
-            // TODO: BIll print featurel
+            if (!isTableOpen(tableID)) {
+                return;
+            }// If table is already open, load the table into the array
+
+            List<int> selectedTillItems = new List<int>(); // Create item and quantity lists
+            List<int> selectedTillQuantity = new List<int>();
+            List<int> selectedTillAlts = new List<int>();
+            List<List<List<int>>> selectedTillListItems = new List<List<List<int>>>();
+            List<string> selectedTillNotes = new List<string>();
+            int openTableID = 0;
+
+            tblEPOSOpenTablesTableAdapter.Adapter.SelectCommand.CommandText = "SELECT tblEPOSOpenTables.*\r\nFROM tblEPOSOpenTables\r\nWHERE (((tblEPOSOpenTables.openTableNumber)=" + tableID.ToString() + "));\r\n";
+            this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables); // Fill table with tableID
+
+            string tableItemString = ePOSDBDataSet.tblEPOSOpenTables[0][2].ToString(); // Get the table store string
+            string[] tableItemList = tableItemString.Split(';'); // Get the item lists
+            openTableID = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables[0][0]);
+
+            foreach (string tableItem in tableItemList) { // For every item
+                if (tableItem != "") {
+                    string[] tableArray = tableItem.Split(','); // Split the quantity and items
+                    selectedTillItems.Add(Convert.ToInt32(tableArray[0])); // Add items to item array
+                    selectedTillQuantity.Add(Convert.ToInt32(tableArray[1])); // Add quantity to qauntity array
+                    selectedTillAlts.Add(Convert.ToInt32(tableArray[2])); // Add quantity to qauntity array
+                    selectedTillNotes.Add(tableArray[4]); // Add notes to note array;
+
+                    string[] listItems = tableArray[3].Split(':'); // For the list items, split each indiviual item up
+                    List<List<int>> selectedListItems = new List<List<int>>();
+                    foreach (string listItem in listItems) { // For every itme in an item
+                        if (listItem != "") {
+                            string[] listItemSplit = listItem.Split('.'); // Split into listID and itemID
+                            List<int> selectedListItem = new List<int>(); // Create sub list
+                            selectedListItem.Add(Convert.ToInt32(listItemSplit[0])); // Add Items
+                            selectedListItem.Add(Convert.ToInt32(listItemSplit[1]));
+                            selectedListItems.Add(selectedListItem);
+                        }
+                    }
+                    selectedTillListItems.Add(selectedListItems); // Add to list items
+                }
+            }
+
+            // Format into printable items
+            List<string> printItemName = new List<string>();
+            List<List<string>> printItemListItems = new List<List<string>>();
+            List<decimal> printItemPrice = new List<decimal>();
+
+            for(int i = 0; i < selectedTillItems.Count; i++) { // For each item
+                if (selectedTillAlts[i] > 0) { // Get name based on if it is an alt or not
+                    printItemName.Add(ePOSDBDataSet.tblEPOSItems.Rows[DBTools.getItemIndex(ePOSDBDataSet.tblEPOSItems, selectedTillItems[i])][10 + selectedTillAlts[i]] + " " + DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, selectedTillItems[i]));
+                } else {
+                    printItemName.Add(DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, selectedTillItems[i]));
+                }
+                // Add item price
+                printItemPrice.Add(Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[DBTools.getPriceIndex(ePOSDBDataSet.tblEPOSItemPrice, selectedTillItems[i])][2 + selectedTillAlts[i]]));
+
+                List<string> printItemSubList = new List<string>();
+
+                foreach (List<int> selectedItem in selectedTillListItems[i]) { // Get list items
+                    printItemSubList.Add(DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, selectedItem[1])); // Add list item
+                    printItemPrice.Add(Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[DBTools.getPriceIndex(ePOSDBDataSet.tblEPOSItemPrice, selectedItem[1])][2])); // Add price
+
+                }
+                printItemListItems.Add(printItemSubList);
+            }
+            // Initate the print
+            PrintController printCtrl = new PrintController();
+            printCtrl.printBill(DBTools.getUsername(ePOSDBDataSet.tblEPOSUsers, userID), DBTools.getTableNumber(ePOSDBDataSet.tblEPOSTables, tableID), printItemName, selectedTillQuantity, printItemListItems, selectedTillNotes, printItemPrice);
         }
 
         private void btnNumber_Click(object sender, EventArgs e) { // Change table number (not ID)

@@ -62,11 +62,12 @@
             // btnHome
             // 
             this.btnHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnHome.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnHome.Font = new System.Drawing.Font("Segoe UI", 18F);
             this.btnHome.ForeColor = System.Drawing.Color.White;
-            this.btnHome.Location = new System.Drawing.Point(1192, 12);
+            this.btnHome.Location = new System.Drawing.Point(1144, 12);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(75, 75);
+            this.btnHome.Size = new System.Drawing.Size(123, 106);
             this.btnHome.TabIndex = 3;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = false;
@@ -75,10 +76,10 @@
             // lblNameText
             // 
             this.lblNameText.AutoSize = true;
-            this.lblNameText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNameText.Location = new System.Drawing.Point(12, 9);
+            this.lblNameText.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameText.Location = new System.Drawing.Point(7, -4);
             this.lblNameText.Name = "lblNameText";
-            this.lblNameText.Size = new System.Drawing.Size(106, 50);
+            this.lblNameText.Size = new System.Drawing.Size(103, 60);
             this.lblNameText.TabIndex = 4;
             this.lblNameText.Text = "User: {0}\r\nName: {1}\r\n";
             // 
@@ -102,20 +103,20 @@
             // lblMangrClocked
             // 
             this.lblMangrClocked.AutoSize = true;
-            this.lblMangrClocked.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMangrClocked.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblMangrClocked.Location = new System.Drawing.Point(5, 89);
             this.lblMangrClocked.Name = "lblMangrClocked";
-            this.lblMangrClocked.Size = new System.Drawing.Size(114, 20);
+            this.lblMangrClocked.Size = new System.Drawing.Size(114, 21);
             this.lblMangrClocked.TabIndex = 14;
             this.lblMangrClocked.Text = "Clocked In/Out";
             // 
             // lblSelectedUser
             // 
             this.lblSelectedUser.AutoSize = true;
-            this.lblSelectedUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedUser.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblSelectedUser.Location = new System.Drawing.Point(5, 35);
             this.lblSelectedUser.Name = "lblSelectedUser";
-            this.lblSelectedUser.Size = new System.Drawing.Size(114, 20);
+            this.lblSelectedUser.Size = new System.Drawing.Size(107, 21);
             this.lblSelectedUser.TabIndex = 13;
             this.lblSelectedUser.Text = "Selected User:";
             // 
@@ -145,7 +146,8 @@
             // 
             // btnAddShift
             // 
-            this.btnAddShift.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnAddShift.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnAddShift.Font = new System.Drawing.Font("Segoe UI", 18F);
             this.btnAddShift.ForeColor = System.Drawing.Color.White;
             this.btnAddShift.Location = new System.Drawing.Point(249, 3);
             this.btnAddShift.Name = "btnAddShift";
@@ -157,7 +159,8 @@
             // 
             // btnDeleteShift
             // 
-            this.btnDeleteShift.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnDeleteShift.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDeleteShift.Font = new System.Drawing.Font("Segoe UI", 18F);
             this.btnDeleteShift.ForeColor = System.Drawing.Color.White;
             this.btnDeleteShift.Location = new System.Drawing.Point(249, 82);
             this.btnDeleteShift.Name = "btnDeleteShift";
@@ -170,10 +173,10 @@
             // lblManager
             // 
             this.lblManager.AutoSize = true;
-            this.lblManager.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblManager.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManager.Location = new System.Drawing.Point(4, 4);
             this.lblManager.Name = "lblManager";
-            this.lblManager.Size = new System.Drawing.Size(203, 25);
+            this.lblManager.Size = new System.Drawing.Size(201, 30);
             this.lblManager.TabIndex = 0;
             this.lblManager.Text = "Manager Functions:";
             // 
@@ -204,10 +207,10 @@
             this.dgvClockDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvClockDisplay.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvClockDisplay.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(154)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -221,7 +224,7 @@
             this.dgvColClockNotes});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -251,7 +254,7 @@
             this.dgvColClockIn.HeaderText = "Clock In";
             this.dgvColClockIn.Name = "dgvColClockIn";
             this.dgvColClockIn.ReadOnly = true;
-            this.dgvColClockIn.Width = 108;
+            this.dgvColClockIn.Width = 110;
             // 
             // dgvColClockOut
             // 
@@ -259,7 +262,7 @@
             this.dgvColClockOut.HeaderText = "Clock Out";
             this.dgvColClockOut.Name = "dgvColClockOut";
             this.dgvColClockOut.ReadOnly = true;
-            this.dgvColClockOut.Width = 114;
+            this.dgvColClockOut.Width = 115;
             // 
             // dgvColDuration
             // 
@@ -267,7 +270,7 @@
             this.dgvColDuration.HeaderText = "Duration";
             this.dgvColDuration.Name = "dgvColDuration";
             this.dgvColDuration.ReadOnly = true;
-            this.dgvColDuration.Width = 110;
+            this.dgvColDuration.Width = 116;
             // 
             // dgvColClockNotes
             // 
@@ -278,7 +281,8 @@
             // 
             // btnClockIn
             // 
-            this.btnClockIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnClockIn.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnClockIn.Font = new System.Drawing.Font("Segoe UI", 18F);
             this.btnClockIn.ForeColor = System.Drawing.Color.White;
             this.btnClockIn.Location = new System.Drawing.Point(3, 3);
             this.btnClockIn.Name = "btnClockIn";
@@ -290,7 +294,8 @@
             // 
             // btnClockOut
             // 
-            this.btnClockOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnClockOut.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnClockOut.Font = new System.Drawing.Font("Segoe UI", 18F);
             this.btnClockOut.ForeColor = System.Drawing.Color.White;
             this.btnClockOut.Location = new System.Drawing.Point(165, 3);
             this.btnClockOut.Name = "btnClockOut";
@@ -313,6 +318,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(154)))));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1279, 619);
             this.ControlBox = false;
             this.Controls.Add(this.pnlStandard);
@@ -320,6 +327,7 @@
             this.Controls.Add(this.pnlManager);
             this.Controls.Add(this.lblNameText);
             this.Controls.Add(this.btnHome);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;

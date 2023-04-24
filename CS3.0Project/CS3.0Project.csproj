@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -48,6 +48,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,12 +74,6 @@
     <Compile Include="Code\Configuration\frmConfiguration.Designer.cs">
       <DependentUpon>frmConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\frmStartup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Code\frmStartup.Designer.cs">
-      <DependentUpon>frmStartup.cs</DependentUpon>
-    </Compile>
     <Compile Include="Code\frmEPOSMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,11 +87,35 @@
     <Compile Include="Code\Management\frmClock.Designer.cs">
       <DependentUpon>frmClock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Code\Management\frmDepartmentEditing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmDepartmentEditing.Designer.cs">
+      <DependentUpon>frmDepartmentEditing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Management\frmFolderEditing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmFolderEditing.Designer.cs">
+      <DependentUpon>frmFolderEditing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Code\Management\frmItemEditing.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Code\Management\frmItemEditing.Designer.cs">
       <DependentUpon>frmItemEditing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Management\frmItemParentAddDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmItemParentAddDialog.Designer.cs">
+      <DependentUpon>frmItemParentAddDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Management\frmListItemEditing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmListItemEditing.Designer.cs">
+      <DependentUpon>frmListItemEditing.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Management\frmManagementFunctions.cs">
       <SubType>Form</SubType>
@@ -107,11 +129,17 @@
     <Compile Include="Code\Management\frmShiftAddDialog.Designer.cs">
       <DependentUpon>frmShiftAddDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\Sales\frmRefundMode.cs">
+    <Compile Include="Code\Management\frmTableFloorEditing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Code\Sales\frmRefundMode.Designer.cs">
-      <DependentUpon>frmRefundMode.cs</DependentUpon>
+    <Compile Include="Code\Management\frmTableFloorEditing.Designer.cs">
+      <DependentUpon>frmTableFloorEditing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Management\frmUserEditing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Management\frmUserEditing.Designer.cs">
+      <DependentUpon>frmUserEditing.cs</DependentUpon>
     </Compile>
     <Compile Include="Code\Sales\frmSalesMode.cs">
       <SubType>Form</SubType>
@@ -133,6 +161,10 @@
     </Compile>
     <Compile Include="Code\Utility\Classes\DBTools.cs" />
     <Compile Include="Code\Utility\Classes\ItemDisplayGenerator.cs" />
+    <Compile Include="Code\Utility\Classes\PrintController.cs" />
+    <Compile Include="Code\Utility\Classes\RoundedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Code\Utility\Classes\SizeableButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -180,14 +212,23 @@
     <EmbeddedResource Include="Code\frmEPOSMenu.resx">
       <DependentUpon>frmEPOSMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Code\frmStartup.resx">
-      <DependentUpon>frmStartup.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Code\Management\frmClock.resx">
       <DependentUpon>frmClock.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmDepartmentEditing.resx">
+      <DependentUpon>frmDepartmentEditing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmFolderEditing.resx">
+      <DependentUpon>frmFolderEditing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Code\Management\frmItemEditing.resx">
       <DependentUpon>frmItemEditing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmItemParentAddDialog.resx">
+      <DependentUpon>frmItemParentAddDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmListItemEditing.resx">
+      <DependentUpon>frmListItemEditing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Management\frmManagementFunctions.resx">
       <DependentUpon>frmManagementFunctions.cs</DependentUpon>
@@ -195,8 +236,11 @@
     <EmbeddedResource Include="Code\Management\frmShiftAddDialog.resx">
       <DependentUpon>frmShiftAddDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Code\Sales\frmRefundMode.resx">
-      <DependentUpon>frmRefundMode.cs</DependentUpon>
+    <EmbeddedResource Include="Code\Management\frmTableFloorEditing.resx">
+      <DependentUpon>frmTableFloorEditing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Management\frmUserEditing.resx">
+      <DependentUpon>frmUserEditing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Sales\frmSalesMode.resx">
       <DependentUpon>frmSalesMode.cs</DependentUpon>
@@ -254,9 +298,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\exit-button-png--1600.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
@@ -267,6 +308,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\BVIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

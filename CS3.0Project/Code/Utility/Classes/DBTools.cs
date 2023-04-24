@@ -6,19 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CS3._0Project.Code.Utility.Classes {
-    internal class DBTools {
+    class DBTools {
+
+        private int userID = 0;
+        private string username = "";
 
         public DBTools() {
         }
 
         public string getUsername(DataTable tblEPOSUsers, int userID) { // Gets UserID, returns an empty string if not found
             string username = "";
-            foreach (DataRow user in tblEPOSUsers.Rows) {
-                if (Convert.ToInt32(user[0]) != userID) {
-                    continue;
+            if (userID == this.userID) {
+                username = this.username;
+            } else {
+                foreach (DataRow user in tblEPOSUsers.Rows) {
+                    if (Convert.ToInt32(user[0]) != userID) {
+                        continue;
+                    }
+                    username = user[1].ToString();
+                    this.username = username;
+                    break;
                 }
-                username = user[1].ToString();
-                break;
             }
             return username;
         }
@@ -75,5 +83,121 @@ namespace CS3._0Project.Code.Utility.Classes {
             }
             return -1;
         }
+
+        public List<int> getItemFolderLocations(DataTable tblEPOSItems, int itemID) { // Gets the locations of this item where the folder resides
+            List<int> itemFolderLocations = new List<int>();
+
+            DataRow item = tblEPOSItems.Rows[getItemIndex(tblEPOSItems, itemID)];
+            string itemFolderLocationsS = item[4].ToString();
+            string[] itemFolderLocationSA = itemFolderLocationsS.Split(',');
+
+            foreach (string itemFolderLocation in itemFolderLocationSA) {
+                itemFolderLocations.Add(Convert.ToInt32(itemFolderLocation));
+            }
+
+            return itemFolderLocations;
+        }
+
+        public List<int> getItemParentFolderIndexs(DataTable tblEPOSItems, DataTable tblEPOSItemFolders, int itemID) { // Gets the indexes of all folders that the item resides in
+            List<int> itemParentFolderIndexs = new List<int>();
+
+            List<int> itemParentFolderIDs = getItemParentFolderIDs(tblEPOSItems, itemID); // Gets folder IDs
+
+            foreach (int folderID in itemParentFolderIDs) { // For every folder ID
+                if (folderID == -1) { // Check for no display
+                    itemParentFolderIndexs.Add(-2); // Index of -2 for no display
+                    continue;
+                }
+
+                if (folderID == 0) { // Check for root folder
+                    itemParentFolderIndexs.Add(-1); // Index of -1 for root folder
+                    continue;
+                }
+
+                for (int i = 0; i < tblEPOSItemFolders.Rows.Count; i++) { // Check for every other folder (index > 0)
+                    if (folderID != Convert.ToInt32(tblEPOSItemFolders.Rows[i][0])) {
+                        continue;
+                    }
+                    itemParentFolderIndexs.Add(i);
+                    break;
+                }
+            }
+
+            return itemParentFolderIndexs;
+        }
+
+        public List<int> getItemParentFolderIDs(DataTable tblEPOSItems, int itemID) { // Gets the IDs of all the folders an item is in.
+            string parentFolderIDString = "";
+            List<int> itemParentFolderIDs = new List<int>();
+            foreach (DataRow item in tblEPOSItems.Rows) {
+                if (Convert.ToInt32(item[0]) != itemID) {
+                    continue;
+                }
+                parentFolderIDString = item[3].ToString();
+                break;
+            }
+
+            string[] itemParentFolderIDsStrings = parentFolderIDString.Split(',');
+            foreach (string parentFolderID in itemParentFolderIDsStrings) {
+                if (parentFolderID.Length == 0) {
+                    continue;
+                }
+                itemParentFolderIDs.Add(Convert.ToInt32(parentFolderID));
+            }
+            return itemParentFolderIDs;
+        }
+
+        public int getID(DataTable dataTable, int index) { // Gets the ID of a given index for a given table
+            return Convert.ToInt32(dataTable.Rows[index][0]);
+        }
+
+        public int getTableNumber(DataTable tblEPOSTables, int tableID) { // Get table number
+            int tableNumber = -1;
+            foreach (DataRow table in tblEPOSTables.Rows) {
+                if (Convert.ToInt32(table[0]) != tableID) {
+                    continue;
+                }
+                tableNumber = Convert.ToInt32(table[1]);
+                break;
+            }
+            return tableNumber;
+        }
+
+        public string getItemName(DataTable tblEPOSItems, int itemID) { // Get table number
+            string itemname = "";
+            foreach (DataRow item in tblEPOSItems.Rows) {
+                if (Convert.ToInt32(item[0]) != itemID) {
+                    continue;
+                }
+                itemname = item[1].ToString();
+                break;
+            }
+            return itemname;
+        }
+
+        public bool getItemPrintRed(DataTable tblEPOSItems, int itemID) { // Get if the items is to be printed in red on tickets.
+            bool printRed = false;
+            foreach(DataRow item in tblEPOSItems.Rows) {
+                if (Convert.ToInt32(item[0]) != itemID) {
+                    continue;
+                }
+                printRed = Convert.ToBoolean(item[7]);
+                break;
+            }
+            return printRed;
+        }
+
+        public List<string> getItemPrinters(DataTable tblEPOSItems, int itemID) {
+            List<string> itemPrinters = new List<string>();
+            foreach (DataRow item in tblEPOSItems.Rows) {
+                if (Convert.ToInt32(item[0]) != itemID) {
+                    continue;
+                }
+                itemPrinters = item[6].ToString().Split(';').ToList();
+                break;
+            }
+            return itemPrinters;
+        }
+
     }
 }

@@ -13,7 +13,8 @@ namespace CS3._0Project.Forms {
 
         private Size screenSize;
 
-        private int userID = 0; // MAJOR TODO: Make user ID Work
+        private int userID = 0;
+        private string username = "";
 
         private frmMessageBox cMessageBox = new frmMessageBox();
         private DBTools DBTools = new DBTools();
@@ -47,8 +48,9 @@ namespace CS3._0Project.Forms {
         }
 
         private void formInit() {
-            lblUsername.Text = DBTools.getUsername(ePOSDBDataSet.tblEPOSUsers, userID);
-            
+            string dbName = DBTools.getUsername(ePOSDBDataSet.tblEPOSUsers, userID);
+            username = dbName;
+            lblUsername.Text = dbName;
         }
 
 
@@ -57,6 +59,12 @@ namespace CS3._0Project.Forms {
         }
 
         private void btnLogin_Click(object sender, EventArgs e) {
+            this.tblEPOSUsersTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSUsers);
+
+            getLogin();
+        }
+
+        private void getLogin() {
             lblUsername.Text = "";
             // Open login form and bring values out
             LoginTools.getLogin(ePOSDBDataSet.tblEPOSUsers);
@@ -71,18 +79,17 @@ namespace CS3._0Project.Forms {
             if (!isLoggedIn()) { // if we are logged in, open the sales mode
                 return;
             }
-            frmSalesMode = new frmSalesMode(screenSize, userID, false);
+            frmSalesMode = new frmSalesMode(this, screenSize, userID, username, false);
             frmSalesMode.ShowDialog();
             
         }
 
         private void btnRefundMode_Click(object sender, EventArgs e) {
-            /*if (!isLoggedIn()) {
-                  return;
-                }
-              frmRefundMode = new frmSalesMode(screenSize, userID, true);
-              frmRefundMode.ShowDialog();
-            }*/
+            if (!isLoggedIn()) { // if we are logged in, open the sales mode with refund setting on
+                return;
+            }
+            frmSalesMode = new frmSalesMode(this, screenSize, userID, username, true);
+            frmSalesMode.ShowDialog();
         }
 
         private void btnConfiguration_Click(object sender, EventArgs e) {
@@ -94,7 +101,7 @@ namespace CS3._0Project.Forms {
                 return;
             }
 
-            frmConfiguration = new frmConfiguration(screenSize, userID);
+            frmConfiguration = new frmConfiguration(screenSize, userID, username);
             frmConfiguration.ShowDialog();
 
         }
@@ -140,7 +147,7 @@ namespace CS3._0Project.Forms {
                 return;
             }
 
-            frmManagementFunctions = new frmManagementFunctions(screenSize, userID);
+            frmManagementFunctions = new frmManagementFunctions(screenSize, userID, username);
             frmManagementFunctions.ShowDialog();
         }
 

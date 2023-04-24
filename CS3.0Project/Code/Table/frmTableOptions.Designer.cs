@@ -36,9 +36,18 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnNumber = new System.Windows.Forms.Button();
+            this.bstblEPOSUsers = new System.Windows.Forms.BindingSource(this.components);
+            this.tblEPOSUsersTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSUsersTableAdapter();
+            this.bstblEPOSItems = new System.Windows.Forms.BindingSource(this.components);
+            this.tblEPOSItemsTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter();
+            this.bstblEPOSItemPrice = new System.Windows.Forms.BindingSource(this.components);
+            this.tblEPOSItemPriceTableAdapter = new CS3._0Project.EPOSDBDataSetTableAdapters.tblEPOSItemPriceTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSTables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSOpenTables)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // txtOptionsDisplay
@@ -57,22 +66,28 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(12, 93);
+            this.btnOpen.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnOpen.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnOpen.ForeColor = System.Drawing.Color.White;
+            this.btnOpen.Location = new System.Drawing.Point(13, 93);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(75, 39);
+            this.btnOpen.Size = new System.Drawing.Size(92, 65);
             this.btnOpen.TabIndex = 1;
             this.btnOpen.Text = "Open";
-            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.UseVisualStyleBackColor = false;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // btnBill
             // 
-            this.btnBill.Location = new System.Drawing.Point(93, 93);
+            this.btnBill.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnBill.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnBill.ForeColor = System.Drawing.Color.White;
+            this.btnBill.Location = new System.Drawing.Point(111, 93);
             this.btnBill.Name = "btnBill";
-            this.btnBill.Size = new System.Drawing.Size(75, 39);
+            this.btnBill.Size = new System.Drawing.Size(92, 65);
             this.btnBill.TabIndex = 2;
             this.btnBill.Text = "Bill";
-            this.btnBill.UseVisualStyleBackColor = true;
+            this.btnBill.UseVisualStyleBackColor = false;
             this.btnBill.Click += new System.EventHandler(this.btnBill_Click);
             // 
             // bstblEPOSTables
@@ -91,12 +106,15 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(360, 93);
+            this.btnClose.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Location = new System.Drawing.Point(343, 93);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 39);
+            this.btnClose.Size = new System.Drawing.Size(92, 65);
             this.btnClose.TabIndex = 3;
             this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // bstblEPOSOpenTables
@@ -110,39 +128,76 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(13, 93);
+            this.btnAdd.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.Location = new System.Drawing.Point(14, 93);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 39);
+            this.btnAdd.Size = new System.Drawing.Size(91, 65);
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(93, 93);
+            this.btnRemove.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnRemove.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnRemove.ForeColor = System.Drawing.Color.White;
+            this.btnRemove.Location = new System.Drawing.Point(111, 93);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 39);
+            this.btnRemove.Size = new System.Drawing.Size(92, 65);
             this.btnRemove.TabIndex = 5;
             this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.UseVisualStyleBackColor = false;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnNumber
             // 
-            this.btnNumber.Location = new System.Drawing.Point(174, 93);
+            this.btnNumber.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.btnNumber.ForeColor = System.Drawing.Color.White;
+            this.btnNumber.Location = new System.Drawing.Point(209, 93);
             this.btnNumber.Name = "btnNumber";
-            this.btnNumber.Size = new System.Drawing.Size(75, 39);
+            this.btnNumber.Size = new System.Drawing.Size(92, 65);
             this.btnNumber.TabIndex = 6;
             this.btnNumber.Text = "Number";
-            this.btnNumber.UseVisualStyleBackColor = true;
+            this.btnNumber.UseVisualStyleBackColor = false;
             this.btnNumber.Click += new System.EventHandler(this.btnNumber_Click);
+            // 
+            // bstblEPOSUsers
+            // 
+            this.bstblEPOSUsers.DataMember = "tblEPOSUsers";
+            this.bstblEPOSUsers.DataSource = this.ePOSDBDataSet;
+            // 
+            // tblEPOSUsersTableAdapter
+            // 
+            this.tblEPOSUsersTableAdapter.ClearBeforeFill = true;
+            // 
+            // bstblEPOSItems
+            // 
+            this.bstblEPOSItems.DataMember = "tblEPOSItems";
+            this.bstblEPOSItems.DataSource = this.ePOSDBDataSet;
+            // 
+            // tblEPOSItemsTableAdapter
+            // 
+            this.tblEPOSItemsTableAdapter.ClearBeforeFill = true;
+            // 
+            // bstblEPOSItemPrice
+            // 
+            this.bstblEPOSItemPrice.DataMember = "tblEPOSItemPrice";
+            this.bstblEPOSItemPrice.DataSource = this.ePOSDBDataSet;
+            // 
+            // tblEPOSItemPriceTableAdapter
+            // 
+            this.tblEPOSItemPriceTableAdapter.ClearBeforeFill = true;
             // 
             // frmTableOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 144);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(154)))));
+            this.ClientSize = new System.Drawing.Size(447, 170);
             this.ControlBox = false;
             this.Controls.Add(this.btnNumber);
             this.Controls.Add(this.btnRemove);
@@ -151,18 +206,20 @@
             this.Controls.Add(this.btnBill);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.txtOptionsDisplay);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmTableOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Table Options";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.frmTableOptions_Load);
             this.Shown += new System.EventHandler(this.frmTableOptions_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSTables)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ePOSDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSOpenTables)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bstblEPOSItemPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,5 +239,11 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnNumber;
+        private System.Windows.Forms.BindingSource bstblEPOSUsers;
+        private EPOSDBDataSetTableAdapters.tblEPOSUsersTableAdapter tblEPOSUsersTableAdapter;
+        private System.Windows.Forms.BindingSource bstblEPOSItems;
+        private EPOSDBDataSetTableAdapters.tblEPOSItemsTableAdapter tblEPOSItemsTableAdapter;
+        private System.Windows.Forms.BindingSource bstblEPOSItemPrice;
+        private EPOSDBDataSetTableAdapters.tblEPOSItemPriceTableAdapter tblEPOSItemPriceTableAdapter;
     }
 }

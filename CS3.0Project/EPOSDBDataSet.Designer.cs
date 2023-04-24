@@ -1349,6 +1349,10 @@ namespace CS3._0Project {
             
             private global::System.Data.DataColumn columnitemFolderLocation;
             
+            private global::System.Data.DataColumn columnitemFolderColour;
+            
+            private global::System.Data.DataColumn columnitemFolderTextColour;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public tblEPOSItemFoldersDataTable() {
@@ -1416,6 +1420,22 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn itemFolderColourColumn {
+                get {
+                    return this.columnitemFolderColour;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn itemFolderTextColourColumn {
+                get {
+                    return this.columnitemFolderTextColour;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1451,13 +1471,15 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public tblEPOSItemFoldersRow AddtblEPOSItemFoldersRow(string itemFolderName, int parentFolderID, int itemFolderLocation) {
+            public tblEPOSItemFoldersRow AddtblEPOSItemFoldersRow(string itemFolderName, int parentFolderID, int itemFolderLocation, int itemFolderColour, int itemFolderTextColour) {
                 tblEPOSItemFoldersRow rowtblEPOSItemFoldersRow = ((tblEPOSItemFoldersRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         itemFolderName,
                         parentFolderID,
-                        itemFolderLocation};
+                        itemFolderLocation,
+                        itemFolderColour,
+                        itemFolderTextColour};
                 rowtblEPOSItemFoldersRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtblEPOSItemFoldersRow);
                 return rowtblEPOSItemFoldersRow;
@@ -1491,6 +1513,8 @@ namespace CS3._0Project {
                 this.columnitemFolderName = base.Columns["itemFolderName"];
                 this.columnparentFolderID = base.Columns["parentFolderID"];
                 this.columnitemFolderLocation = base.Columns["itemFolderLocation"];
+                this.columnitemFolderColour = base.Columns["itemFolderColour"];
+                this.columnitemFolderTextColour = base.Columns["itemFolderTextColour"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1504,6 +1528,10 @@ namespace CS3._0Project {
                 base.Columns.Add(this.columnparentFolderID);
                 this.columnitemFolderLocation = new global::System.Data.DataColumn("itemFolderLocation", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemFolderLocation);
+                this.columnitemFolderColour = new global::System.Data.DataColumn("itemFolderColour", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnitemFolderColour);
+                this.columnitemFolderTextColour = new global::System.Data.DataColumn("itemFolderTextColour", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnitemFolderTextColour);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnitemFolderID}, true));
                 this.columnitemFolderID.AutoIncrement = true;
@@ -2011,6 +2039,10 @@ namespace CS3._0Project {
             
             private global::System.Data.DataColumn columnisListItem;
             
+            private global::System.Data.DataColumn columneposItemColour;
+            
+            private global::System.Data.DataColumn columneposItemTextColour;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public tblEPOSItemsDataTable() {
@@ -2174,6 +2206,22 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn eposItemColourColumn {
+                get {
+                    return this.columneposItemColour;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn eposItemTextColourColumn {
+                get {
+                    return this.columneposItemTextColour;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2209,7 +2257,24 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public tblEPOSItemsRow AddtblEPOSItemsRow(string eposItemName, int eposItemDepartmentID, string itemFolderIDs, string eposItemLocation, bool eposAllowZeroPrice, string eposItemPrinters, bool eposPrintRed, double eposItemAlt1Amount, double eposItemAlt2Amount, double eposItemAlt3Amount, string eposItemAlt1Modifier, string eposItemAlt2Modifier, string eposItemAlt3Modifier, tblEPOSListItemsRow parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems, bool isListItem) {
+            public tblEPOSItemsRow AddtblEPOSItemsRow(
+                        string eposItemName, 
+                        int eposItemDepartmentID, 
+                        string itemFolderIDs, 
+                        string eposItemLocation, 
+                        bool eposAllowZeroPrice, 
+                        string eposItemPrinters, 
+                        bool eposPrintRed, 
+                        double eposItemAlt1Amount, 
+                        double eposItemAlt2Amount, 
+                        double eposItemAlt3Amount, 
+                        string eposItemAlt1Modifier, 
+                        string eposItemAlt2Modifier, 
+                        string eposItemAlt3Modifier, 
+                        tblEPOSListItemsRow parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems, 
+                        bool isListItem, 
+                        int eposItemColour, 
+                        int eposItemTextColour) {
                 tblEPOSItemsRow rowtblEPOSItemsRow = ((tblEPOSItemsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2227,7 +2292,9 @@ namespace CS3._0Project {
                         eposItemAlt2Modifier,
                         eposItemAlt3Modifier,
                         null,
-                        isListItem};
+                        isListItem,
+                        eposItemColour,
+                        eposItemTextColour};
                 if ((parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems != null)) {
                     columnValuesArray[14] = parenttblEPOSListItemsRowBytblEPOSListItemstblEPOSItems[0];
                 }
@@ -2276,6 +2343,8 @@ namespace CS3._0Project {
                 this.columneposItemAlt3Modifier = base.Columns["eposItemAlt3Modifier"];
                 this.columnListItemID = base.Columns["ListItemID"];
                 this.columnisListItem = base.Columns["isListItem"];
+                this.columneposItemColour = base.Columns["eposItemColour"];
+                this.columneposItemTextColour = base.Columns["eposItemTextColour"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2313,6 +2382,10 @@ namespace CS3._0Project {
                 base.Columns.Add(this.columnListItemID);
                 this.columnisListItem = new global::System.Data.DataColumn("isListItem", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnisListItem);
+                this.columneposItemColour = new global::System.Data.DataColumn("eposItemColour", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columneposItemColour);
+                this.columneposItemTextColour = new global::System.Data.DataColumn("eposItemTextColour", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columneposItemTextColour);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columneposItemID}, true));
                 this.columneposItemID.AutoIncrement = true;
@@ -5096,6 +5169,39 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int itemFolderColour {
+                get {
+                    try {
+                        return ((int)(this[this.tabletblEPOSItemFolders.itemFolderColourColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'itemFolderColour\' in table \'tblEPOSItemFolders\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblEPOSItemFolders.itemFolderColourColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int itemFolderTextColour {
+                get {
+                    try {
+                        return ((int)(this[this.tabletblEPOSItemFolders.itemFolderTextColourColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'itemFolderTextColour\' in table \'tblEPOSItemFolders\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblEPOSItemFolders.itemFolderTextColourColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsitemFolderNameNull() {
                 return this.IsNull(this.tabletblEPOSItemFolders.itemFolderNameColumn);
             }
@@ -5128,6 +5234,30 @@ namespace CS3._0Project {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetitemFolderLocationNull() {
                 this[this.tabletblEPOSItemFolders.itemFolderLocationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsitemFolderColourNull() {
+                return this.IsNull(this.tabletblEPOSItemFolders.itemFolderColourColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetitemFolderColourNull() {
+                this[this.tabletblEPOSItemFolders.itemFolderColourColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsitemFolderTextColourNull() {
+                return this.IsNull(this.tabletblEPOSItemFolders.itemFolderTextColourColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetitemFolderTextColourNull() {
+                this[this.tabletblEPOSItemFolders.itemFolderTextColourColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5575,6 +5705,38 @@ namespace CS3._0Project {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int eposItemColour {
+                get {
+                    try {
+                        return ((int)(this[this.tabletblEPOSItems.eposItemColourColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'eposItemColour\' in table \'tblEPOSItems\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblEPOSItems.eposItemColourColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int eposItemTextColour {
+                get {
+                    try {
+                        return ((int)(this[this.tabletblEPOSItems.eposItemTextColourColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'eposItemTextColour\' in table \'tblEPOSItems\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblEPOSItems.eposItemTextColourColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public tblEPOSListItemsRow tblEPOSListItemsRow {
                 get {
                     return ((tblEPOSListItemsRow)(this.GetParentRow(this.Table.ParentRelations["tblEPOSListItemstblEPOSItems"])));
@@ -5762,6 +5924,30 @@ namespace CS3._0Project {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetisListItemNull() {
                 this[this.tabletblEPOSItems.isListItemColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IseposItemColourNull() {
+                return this.IsNull(this.tabletblEPOSItems.eposItemColourColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SeteposItemColourNull() {
+                this[this.tabletblEPOSItems.eposItemColourColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IseposItemTextColourNull() {
+                return this.IsNull(this.tabletblEPOSItems.eposItemTextColourColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SeteposItemTextColourNull() {
+                this[this.tabletblEPOSItems.eposItemTextColourColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8272,10 +8458,12 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("itemFolderName", "itemFolderName");
             tableMapping.ColumnMappings.Add("parentFolderID", "parentFolderID");
             tableMapping.ColumnMappings.Add("itemFolderLocation", "itemFolderLocation");
+            tableMapping.ColumnMappings.Add("itemFolderColour", "itemFolderColour");
+            tableMapping.ColumnMappings.Add("itemFolderTextColour", "itemFolderTextColour");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `tblEPOSItemFolders` WHERE ((`itemFolderID` = ?) AND ((? = 1 AND `itemFolderName` IS NULL) OR (`itemFolderName` = ?)) AND ((? = 1 AND `parentFolderID` IS NULL) OR (`parentFolderID` = ?)) AND ((? = 1 AND `itemFolderLocation` IS NULL) OR (`itemFolderLocation` = ?)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `tblEPOSItemFolders` WHERE ((`itemFolderID` = ?) AND ((? = 1 AND `itemFolderName` IS NULL) OR (`itemFolderName` = ?)) AND ((? = 1 AND `parentFolderID` IS NULL) OR (`parentFolderID` = ?)) AND ((? = 1 AND `itemFolderLocation` IS NULL) OR (`itemFolderLocation` = ?)) AND ((? = 1 AND `itemFolderColour` IS NULL) OR (`itemFolderColour` = ?)) AND ((? = 1 AND `itemFolderTextColour` IS NULL) OR (`itemFolderTextColour` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderName", global::System.Data.DataRowVersion.Original, true, null));
@@ -8284,21 +8472,29 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_parentFolderID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "parentFolderID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderLocation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderLocation", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderLocation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderLocation", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderColour", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderTextColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderTextColour", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO `tblEPOSItemFolders` (`itemFolderName`, `parentFolderID`, `itemFolder" +
-                "Location`) VALUES (?, ?, ?)";
+                "Location`, `itemFolderColour`, `itemFolderTextColour`) VALUES (?, ?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderName", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("parentFolderID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "parentFolderID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderLocation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderLocation", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderColour", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderTextColour", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `tblEPOSItemFolders` SET `itemFolderName` = ?, `parentFolderID` = ?, `itemFolderLocation` = ? WHERE ((`itemFolderID` = ?) AND ((? = 1 AND `itemFolderName` IS NULL) OR (`itemFolderName` = ?)) AND ((? = 1 AND `parentFolderID` IS NULL) OR (`parentFolderID` = ?)) AND ((? = 1 AND `itemFolderLocation` IS NULL) OR (`itemFolderLocation` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `tblEPOSItemFolders` SET `itemFolderName` = ?, `parentFolderID` = ?, `itemFolderLocation` = ?, `itemFolderColour` = ?, `itemFolderTextColour` = ? WHERE ((`itemFolderID` = ?) AND ((? = 1 AND `itemFolderName` IS NULL) OR (`itemFolderName` = ?)) AND ((? = 1 AND `parentFolderID` IS NULL) OR (`parentFolderID` = ?)) AND ((? = 1 AND `itemFolderLocation` IS NULL) OR (`itemFolderLocation` = ?)) AND ((? = 1 AND `itemFolderColour` IS NULL) OR (`itemFolderColour` = ?)) AND ((? = 1 AND `itemFolderTextColour` IS NULL) OR (`itemFolderTextColour` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderName", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("parentFolderID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "parentFolderID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderLocation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderLocation", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderColour", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("itemFolderTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderTextColour", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderName", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderName", global::System.Data.DataRowVersion.Original, false, null));
@@ -8306,6 +8502,10 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_parentFolderID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "parentFolderID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderLocation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderLocation", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderLocation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderLocation", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderColour", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_itemFolderTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderTextColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_itemFolderTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "itemFolderTextColour", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8321,8 +8521,8 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT itemFolderID, itemFolderName, parentFolderID, itemFolderLocation FROM tblE" +
-                "POSItemFolders";
+            this._commandCollection[0].CommandText = "SELECT itemFolderID, itemFolderName, parentFolderID, itemFolderLocation, itemFold" +
+                "erColour, itemFolderTextColour FROM tblEPOSItemFolders";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8383,7 +8583,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_itemFolderID, string Original_itemFolderName, global::System.Nullable<int> Original_parentFolderID, global::System.Nullable<int> Original_itemFolderLocation) {
+        public virtual int Delete(int Original_itemFolderID, string Original_itemFolderName, global::System.Nullable<int> Original_parentFolderID, global::System.Nullable<int> Original_itemFolderLocation, global::System.Nullable<int> Original_itemFolderColour, global::System.Nullable<int> Original_itemFolderTextColour) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_itemFolderID));
             if ((Original_itemFolderName == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -8409,6 +8609,22 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
+            if ((Original_itemFolderColour.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_itemFolderColour.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_itemFolderTextColour.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_itemFolderTextColour.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8429,7 +8645,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string itemFolderName, global::System.Nullable<int> parentFolderID, global::System.Nullable<int> itemFolderLocation) {
+        public virtual int Insert(string itemFolderName, global::System.Nullable<int> parentFolderID, global::System.Nullable<int> itemFolderLocation, global::System.Nullable<int> itemFolderColour, global::System.Nullable<int> itemFolderTextColour) {
             if ((itemFolderName == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -8447,6 +8663,18 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((itemFolderColour.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(itemFolderColour.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((itemFolderTextColour.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(itemFolderTextColour.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8468,7 +8696,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string itemFolderName, global::System.Nullable<int> parentFolderID, global::System.Nullable<int> itemFolderLocation, int Original_itemFolderID, string Original_itemFolderName, global::System.Nullable<int> Original_parentFolderID, global::System.Nullable<int> Original_itemFolderLocation) {
+        public virtual int Update(string itemFolderName, global::System.Nullable<int> parentFolderID, global::System.Nullable<int> itemFolderLocation, global::System.Nullable<int> itemFolderColour, global::System.Nullable<int> itemFolderTextColour, int Original_itemFolderID, string Original_itemFolderName, global::System.Nullable<int> Original_parentFolderID, global::System.Nullable<int> Original_itemFolderLocation, global::System.Nullable<int> Original_itemFolderColour, global::System.Nullable<int> Original_itemFolderTextColour) {
             if ((itemFolderName == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -8487,30 +8715,58 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_itemFolderID));
+            if ((itemFolderColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(itemFolderColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((itemFolderTextColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(itemFolderTextColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_itemFolderID));
             if ((Original_itemFolderName == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_itemFolderName));
-            }
-            if ((Original_parentFolderID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_parentFolderID.Value));
-            }
-            else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((Original_itemFolderLocation.HasValue == true)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_itemFolderName));
+            }
+            if ((Original_parentFolderID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_itemFolderLocation.Value));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_parentFolderID.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_itemFolderLocation.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_itemFolderLocation.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_itemFolderColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_itemFolderColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((Original_itemFolderTextColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_itemFolderTextColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -9118,10 +9374,12 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("eposItemAlt3Modifier", "eposItemAlt3Modifier");
             tableMapping.ColumnMappings.Add("ListItemID", "ListItemID");
             tableMapping.ColumnMappings.Add("isListItem", "isListItem");
+            tableMapping.ColumnMappings.Add("eposItemColour", "eposItemColour");
+            tableMapping.ColumnMappings.Add("eposItemTextColour", "eposItemTextColour");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `tblEPOSItems` WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)) AND ((? = 1 AND `isListItem` IS NULL) OR (`isListItem` = ?)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `tblEPOSItems` WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)) AND ((? = 1 AND `isListItem` IS NULL) OR (`isListItem` = ?)) AND ((? = 1 AND `eposItemColour` IS NULL) OR (`eposItemColour` = ?)) AND ((? = 1 AND `eposItemTextColour` IS NULL) OR (`eposItemTextColour` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Original, true, null));
@@ -9148,9 +9406,13 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_isListItem", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemColour", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemTextColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemTextColour", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO `tblEPOSItems` (`eposItemName`, `eposItemDepartmentID`, `itemFolderIDs`, `eposItemLocation`, `eposAllowZeroPrice`, `eposItemPrinters`, `eposPrintRed`, `eposItemAlt1Amount`, `eposItemAlt2Amount`, `eposItemAlt3Amount`, `eposItemAlt1Modifier`, `eposItemAlt2Modifier`, `eposItemAlt3Modifier`, `ListItemID`, `isListItem`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO `tblEPOSItems` (`eposItemName`, `eposItemDepartmentID`, `itemFolderIDs`, `eposItemLocation`, `eposAllowZeroPrice`, `eposItemPrinters`, `eposPrintRed`, `eposItemAlt1Amount`, `eposItemAlt2Amount`, `eposItemAlt3Amount`, `eposItemAlt1Modifier`, `eposItemAlt2Modifier`, `eposItemAlt3Modifier`, `ListItemID`, `isListItem`, `eposItemColour`, `eposItemTextColour`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemDepartmentID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemDepartmentID", global::System.Data.DataRowVersion.Current, false, null));
@@ -9167,9 +9429,11 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemAlt3Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt3Modifier", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemColour", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemTextColour", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `tblEPOSItems` SET `eposItemName` = ?, `eposItemDepartmentID` = ?, `itemFolderIDs` = ?, `eposItemLocation` = ?, `eposAllowZeroPrice` = ?, `eposItemPrinters` = ?, `eposPrintRed` = ?, `eposItemAlt1Amount` = ?, `eposItemAlt2Amount` = ?, `eposItemAlt3Amount` = ?, `eposItemAlt1Modifier` = ?, `eposItemAlt2Modifier` = ?, `eposItemAlt3Modifier` = ?, `ListItemID` = ?, `isListItem` = ? WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)) AND ((? = 1 AND `isListItem` IS NULL) OR (`isListItem` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `tblEPOSItems` SET `eposItemName` = ?, `eposItemDepartmentID` = ?, `itemFolderIDs` = ?, `eposItemLocation` = ?, `eposAllowZeroPrice` = ?, `eposItemPrinters` = ?, `eposPrintRed` = ?, `eposItemAlt1Amount` = ?, `eposItemAlt2Amount` = ?, `eposItemAlt3Amount` = ?, `eposItemAlt1Modifier` = ?, `eposItemAlt2Modifier` = ?, `eposItemAlt3Modifier` = ?, `ListItemID` = ?, `isListItem` = ?, `eposItemColour` = ?, `eposItemTextColour` = ? WHERE ((`eposItemID` = ?) AND ((? = 1 AND `eposItemName` IS NULL) OR (`eposItemName` = ?)) AND ((? = 1 AND `eposItemDepartmentID` IS NULL) OR (`eposItemDepartmentID` = ?)) AND ((? = 1 AND `eposAllowZeroPrice` IS NULL) OR (`eposAllowZeroPrice` = ?)) AND ((? = 1 AND `eposPrintRed` IS NULL) OR (`eposPrintRed` = ?)) AND ((? = 1 AND `eposItemAlt1Amount` IS NULL) OR (`eposItemAlt1Amount` = ?)) AND ((? = 1 AND `eposItemAlt2Amount` IS NULL) OR (`eposItemAlt2Amount` = ?)) AND ((? = 1 AND `eposItemAlt3Amount` IS NULL) OR (`eposItemAlt3Amount` = ?)) AND ((? = 1 AND `eposItemAlt1Modifier` IS NULL) OR (`eposItemAlt1Modifier` = ?)) AND ((? = 1 AND `eposItemAlt2Modifier` IS NULL) OR (`eposItemAlt2Modifier` = ?)) AND ((? = 1 AND `eposItemAlt3Modifier` IS NULL) OR (`eposItemAlt3Modifier` = ?)) AND ((? = 1 AND `ListItemID` IS NULL) OR (`ListItemID` = ?)) AND ((? = 1 AND `isListItem` IS NULL) OR (`isListItem` = ?)) AND ((? = 1 AND `eposItemColour` IS NULL) OR (`eposItemColour` = ?)) AND ((? = 1 AND `eposItemTextColour` IS NULL) OR (`eposItemTextColour` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemDepartmentID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemDepartmentID", global::System.Data.DataRowVersion.Current, false, null));
@@ -9186,6 +9450,8 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemAlt3Modifier", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemAlt3Modifier", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemColour", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("eposItemTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemTextColour", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemName", global::System.Data.DataRowVersion.Original, false, null));
@@ -9211,6 +9477,10 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ListItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ListItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_isListItem", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_isListItem", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "isListItem", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemColour", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_eposItemTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemTextColour", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_eposItemTextColour", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "eposItemTextColour", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9226,7 +9496,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT eposItemID, eposItemName, eposItemDepartmentID, itemFolderIDs, eposItemLocation, eposAllowZeroPrice, eposItemPrinters, eposPrintRed, eposItemAlt1Amount, eposItemAlt2Amount, eposItemAlt3Amount, eposItemAlt1Modifier, eposItemAlt2Modifier, eposItemAlt3Modifier, ListItemID, isListItem FROM tblEPOSItems";
+            this._commandCollection[0].CommandText = @"SELECT eposItemID, eposItemName, eposItemDepartmentID, itemFolderIDs, eposItemLocation, eposAllowZeroPrice, eposItemPrinters, eposPrintRed, eposItemAlt1Amount, eposItemAlt2Amount, eposItemAlt3Amount, eposItemAlt1Modifier, eposItemAlt2Modifier, eposItemAlt3Modifier, ListItemID, isListItem, eposItemColour, eposItemTextColour FROM tblEPOSItems";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -9287,7 +9557,7 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_eposItemID, string Original_eposItemName, global::System.Nullable<int> Original_eposItemDepartmentID, bool Original_eposAllowZeroPrice, bool Original_eposPrintRed, global::System.Nullable<double> Original_eposItemAlt1Amount, global::System.Nullable<double> Original_eposItemAlt2Amount, global::System.Nullable<double> Original_eposItemAlt3Amount, string Original_eposItemAlt1Modifier, string Original_eposItemAlt2Modifier, string Original_eposItemAlt3Modifier, global::System.Nullable<int> Original_ListItemID, bool Original_isListItem) {
+        public virtual int Delete(int Original_eposItemID, string Original_eposItemName, global::System.Nullable<int> Original_eposItemDepartmentID, bool Original_eposAllowZeroPrice, bool Original_eposPrintRed, global::System.Nullable<double> Original_eposItemAlt1Amount, global::System.Nullable<double> Original_eposItemAlt2Amount, global::System.Nullable<double> Original_eposItemAlt3Amount, string Original_eposItemAlt1Modifier, string Original_eposItemAlt2Modifier, string Original_eposItemAlt3Modifier, global::System.Nullable<int> Original_ListItemID, bool Original_isListItem, global::System.Nullable<int> Original_eposItemColour, global::System.Nullable<int> Original_eposItemTextColour) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_eposItemID));
             if ((Original_eposItemName == null)) {
                 throw new global::System.ArgumentNullException("Original_eposItemName");
@@ -9366,6 +9636,22 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
             }
             this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
             this.Adapter.DeleteCommand.Parameters[24].Value = ((bool)(Original_isListItem));
+            if ((Original_eposItemColour.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((int)(Original_eposItemColour.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_eposItemTextColour.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((int)(Original_eposItemTextColour.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9386,7 +9672,24 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string eposItemName, global::System.Nullable<int> eposItemDepartmentID, string itemFolderIDs, string eposItemLocation, bool eposAllowZeroPrice, string eposItemPrinters, bool eposPrintRed, global::System.Nullable<double> eposItemAlt1Amount, global::System.Nullable<double> eposItemAlt2Amount, global::System.Nullable<double> eposItemAlt3Amount, string eposItemAlt1Modifier, string eposItemAlt2Modifier, string eposItemAlt3Modifier, global::System.Nullable<int> ListItemID, bool isListItem) {
+        public virtual int Insert(
+                    string eposItemName, 
+                    global::System.Nullable<int> eposItemDepartmentID, 
+                    string itemFolderIDs, 
+                    string eposItemLocation, 
+                    bool eposAllowZeroPrice, 
+                    string eposItemPrinters, 
+                    bool eposPrintRed, 
+                    global::System.Nullable<double> eposItemAlt1Amount, 
+                    global::System.Nullable<double> eposItemAlt2Amount, 
+                    global::System.Nullable<double> eposItemAlt3Amount, 
+                    string eposItemAlt1Modifier, 
+                    string eposItemAlt2Modifier, 
+                    string eposItemAlt3Modifier, 
+                    global::System.Nullable<int> ListItemID, 
+                    bool isListItem, 
+                    global::System.Nullable<int> eposItemColour, 
+                    global::System.Nullable<int> eposItemTextColour) {
             if ((eposItemName == null)) {
                 throw new global::System.ArgumentNullException("eposItemName");
             }
@@ -9462,6 +9765,18 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             this.Adapter.InsertCommand.Parameters[14].Value = ((bool)(isListItem));
+            if ((eposItemColour.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[15].Value = ((int)(eposItemColour.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((eposItemTextColour.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[16].Value = ((int)(eposItemTextColour.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9498,6 +9813,8 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                     string eposItemAlt3Modifier, 
                     global::System.Nullable<int> ListItemID, 
                     bool isListItem, 
+                    global::System.Nullable<int> eposItemColour, 
+                    global::System.Nullable<int> eposItemTextColour, 
                     int Original_eposItemID, 
                     string Original_eposItemName, 
                     global::System.Nullable<int> Original_eposItemDepartmentID, 
@@ -9510,7 +9827,9 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                     string Original_eposItemAlt2Modifier, 
                     string Original_eposItemAlt3Modifier, 
                     global::System.Nullable<int> Original_ListItemID, 
-                    bool Original_isListItem) {
+                    bool Original_isListItem, 
+                    global::System.Nullable<int> Original_eposItemColour, 
+                    global::System.Nullable<int> Original_eposItemTextColour) {
             if ((eposItemName == null)) {
                 throw new global::System.ArgumentNullException("eposItemName");
             }
@@ -9586,84 +9905,112 @@ namespace CS3._0Project.EPOSDBDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[14].Value = ((bool)(isListItem));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_eposItemID));
+            if ((eposItemColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(eposItemColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((eposItemTextColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(eposItemTextColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_eposItemID));
             if ((Original_eposItemName == null)) {
                 throw new global::System.ArgumentNullException("Original_eposItemName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_eposItemName));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_eposItemName));
             }
             if ((Original_eposItemDepartmentID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_eposItemDepartmentID.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_eposItemDepartmentID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((bool)(Original_eposAllowZeroPrice));
             this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[23].Value = ((bool)(Original_eposPrintRed));
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((bool)(Original_eposAllowZeroPrice));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((bool)(Original_eposPrintRed));
             if ((Original_eposItemAlt1Amount.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((double)(Original_eposItemAlt1Amount.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
-            }
-            if ((Original_eposItemAlt2Amount.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((double)(Original_eposItemAlt2Amount.Value));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((double)(Original_eposItemAlt1Amount.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
-            if ((Original_eposItemAlt3Amount.HasValue == true)) {
+            if ((Original_eposItemAlt2Amount.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((double)(Original_eposItemAlt3Amount.Value));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((double)(Original_eposItemAlt2Amount.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
-            if ((Original_eposItemAlt1Modifier == null)) {
+            if ((Original_eposItemAlt3Amount.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((double)(Original_eposItemAlt3Amount.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_eposItemAlt1Modifier));
-            }
-            if ((Original_eposItemAlt2Modifier == null)) {
+            if ((Original_eposItemAlt1Modifier == null)) {
                 this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((string)(Original_eposItemAlt2Modifier));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((string)(Original_eposItemAlt1Modifier));
             }
-            if ((Original_eposItemAlt3Modifier == null)) {
+            if ((Original_eposItemAlt2Modifier == null)) {
                 this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((string)(Original_eposItemAlt3Modifier));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((string)(Original_eposItemAlt2Modifier));
             }
-            if ((Original_ListItemID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((int)(Original_ListItemID.Value));
-            }
-            else {
+            if ((Original_eposItemAlt3Modifier == null)) {
                 this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[39].Value = ((bool)(Original_isListItem));
+            else {
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((string)(Original_eposItemAlt3Modifier));
+            }
+            if ((Original_ListItemID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((int)(Original_ListItemID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[41].Value = ((bool)(Original_isListItem));
+            if ((Original_eposItemColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((int)(Original_eposItemColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[43].Value = global::System.DBNull.Value;
+            }
+            if ((Original_eposItemTextColour.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((int)(Original_eposItemTextColour.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[45].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

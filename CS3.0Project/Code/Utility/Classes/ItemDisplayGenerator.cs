@@ -43,19 +43,17 @@ namespace CS3._0Project.Code.Utility.Classes {
                 string[] itemFolderArray = itemDataRow[3].ToString().Split(','); // Get the folders that contain this item in a list
                 string[] itemLocationArray = itemDataRow[4].ToString().Split(','); // Get the location in the folders for this item in a list
 
-                if (itemFolderArray.Length != itemLocationArray.Length) { // if there are not equal items, something has gone horribly wrong
-                    // TODO: Report Error
-                    itemLocationList = null;
-                    break;
-                } else { // The lists are equal and we can now add it to the location list
-                    List<int> itemLocationSubList = new List<int>(); // new sub list (for each individual items)
-                    itemLocationSubList.Add(Convert.ToInt32(itemDataRow[0])); // Add the item ID
-                    for (int i = 0; i < itemFolderArray.Length; i++) { // for each individual folder location
-                        itemLocationSubList.Add(Convert.ToInt32(itemFolderArray[i])); // add folder ID
-                        itemLocationSubList.Add(Convert.ToInt32(itemLocationArray[i])); // add location to that folder
+                List<int> itemLocationSubList = new List<int>(); // new sub list (for each individual items)
+                itemLocationSubList.Add(Convert.ToInt32(itemDataRow[0])); // Add the item ID
+                for (int i = 0; i < itemFolderArray.Length; i++) { // for each individual folder location
+                    if (itemFolderArray[i].Length == 0 || itemLocationArray[i].Length == 0) {
+                        continue;
                     }
-                    itemLocationList.Add(itemLocationSubList); // add to the main list
+                    itemLocationSubList.Add(Convert.ToInt32(itemFolderArray[i])); // add folder ID
+                    itemLocationSubList.Add(Convert.ToInt32(itemLocationArray[i])); // add location to that folder
                 }
+                itemLocationList.Add(itemLocationSubList); // add to the main list
+                
             }
             return itemLocationList;
         }
@@ -139,17 +137,17 @@ namespace CS3._0Project.Code.Utility.Classes {
         }
         private void createItemButtons() { // Create a button in the group box for all items in the db table
             int itemX = 10;
-            int itemY = folderY + 100;
+            int itemY = folderY + 120;
 
 
             for (int i = 0; i < sortList.Count; i++) { // For every sorted item
                 int itemId = sortList[i][0];
                 foreach (DataRow itemDataRow in items.Rows) {
                     if (itemId == Convert.ToInt32(itemDataRow[0])) {
-                        Button dynamicItemButton = new Button(); // Create a button
+                        RoundedButton dynamicItemButton = new RoundedButton(); // Create a button
                         dynamicItemButton.Hide();
-                        dynamicItemButton.Width = 100; // Assign width + height
-                        dynamicItemButton.Height = 80;
+                        dynamicItemButton.Width = 130; // Assign width + height
+                        dynamicItemButton.Height = 100;
                         if (Convert.ToBoolean(itemDataRow[15])) { // check to see if it is a list box button
                             dynamicItemButton.Name = "ldib" + itemDataRow[0].ToString().Trim(); // Get the ID For later use (name = ldib[ID]), for all items that are list items 
                             dynamicItemButton.Click += frmSalesMode.ListDynamicItemButton_Click;
@@ -157,16 +155,20 @@ namespace CS3._0Project.Code.Utility.Classes {
                             dynamicItemButton.Name = "dib" + itemDataRow[0].ToString().Trim(); // Get the ID For later use (name = dib[ID]), for all items that are independent items and not a list
                             dynamicItemButton.Click += frmSalesMode.DynamicItemButton_Click; // Custom click event, for buttons
                         }
+                        dynamicItemButton.Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold);
                         dynamicItemButton.Text = itemDataRow[1].ToString().Trim(); // Name of item
                         dynamicItemButton.Parent = pnlItemDisplay; // Put it inside the gbx
-                        dynamicItemButton.ForeColor = Color.White; // Change text colour
+                        dynamicItemButton.BackColor = Color.FromArgb(Convert.ToInt32(itemDataRow[16]));
+                        dynamicItemButton.ForeColor = Color.FromArgb(Convert.ToInt32(itemDataRow[17]));
                         if ((itemX + dynamicItemButton.Width + 10) > pnlItemDisplay.Width) { // If the items go off the right hand side of the gbx
-                            itemY += 100; // Move item down
+                            itemY += 120; // Move item down
                             itemX = 10; // reset the x coordinate
                         }
                         dynamicItemButton.Location = new Point(itemX, itemY); // Set location
+                        dynamicItemButton.FlatStyle = FlatStyle.Flat; // Set flat style to stop border showing
+                        dynamicItemButton.FlatAppearance.BorderSize = 0;
                         dynamicItemButton.Show();
-                        itemX += 110; // To stop items overflowing
+                        itemX += 140; // To stop items overflowing
                     }
                 }
             }
@@ -175,8 +177,8 @@ namespace CS3._0Project.Code.Utility.Classes {
         private void createFolderButtons(Panel pnlItemDisplay, int parentFolderID) {
             // Folder Properties
             int folderX = 10;
-            int folderWidth = 100;
-            int folderHeight = 80;
+            int folderWidth = 130;
+            int folderHeight = 100;
             if (folderWidth + 20 > pnlItemDisplay.Width) { // If the gbx is too small (to contain the width of one button + padding)
                 cMessageBox.ShowMessage("Screen Resolution Error"); // Error Message
                 return;
@@ -197,13 +199,15 @@ namespace CS3._0Project.Code.Utility.Classes {
                 dynamicFolderButton.Text = folderDataRow[1].ToString().Trim(); // Get the display text to be the DB Name
                 dynamicFolderButton.Parent = pnlItemDisplay; // Assign parent
                 dynamicFolderButton.Click += DynamicFolderButton_Click; // Assign the custom click event
-                dynamicFolderButton.ForeColor = Color.White; // Change text colour
+                dynamicFolderButton.Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold);
+                dynamicFolderButton.BackColor = Color.FromArgb(Convert.ToInt32(folderDataRow[4]));
+                dynamicFolderButton.ForeColor = Color.FromArgb(Convert.ToInt32(folderDataRow[5])); // Change text colour
                 if ((folderX + dynamicFolderButton.Width + 10) > pnlItemDisplay.Width) { // If the folders go off the right hand side of the gbx
-                    folderY += 100; // Move folder down
+                    folderY += 120; // Move folder down
                     folderX = 10; // reset the x coordinate
                 }
                 dynamicFolderButton.Location = new Point(folderX, folderY); // Assign its location
-                folderX += 110; // Shift each folder along as not to overlap
+                folderX += 140; // Shift each folder along as not to overlap
                 dynamicFolderButton.Show();
                 
             }

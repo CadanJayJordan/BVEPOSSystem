@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CS3._0Project.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace CS3._0Project {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmStartup());
+            Application.Run(new frmEPOSMenu());
         }
     }
 }

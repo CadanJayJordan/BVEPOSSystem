@@ -29,9 +29,7 @@
             this.btnRefundMode = new System.Windows.Forms.Button();
             this.btnConfiguration = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.btnKeyboard = new System.Windows.Forms.Button();
             this.btnClock = new System.Windows.Forms.Button();
-            this.btnMessage = new System.Windows.Forms.Button();
             this.ePOSDBDataSet = new CS3._0Project.EPOSDBDataSet();
             this.btnManagerFunctions = new System.Windows.Forms.Button();
             this.bstblEPOSUsers = new System.Windows.Forms.BindingSource(this.components);
@@ -44,23 +42,25 @@
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnExit.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.White;
             this.btnExit.Location = new System.Drawing.Point(1808, 12);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 100);
             this.btnExit.TabIndex = 0;
-            this.btnExit.Text = "exit";
+            this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnSalesMode
             // 
-            this.btnSalesMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnSalesMode.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnSalesMode.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalesMode.ForeColor = System.Drawing.Color.White;
-            this.btnSalesMode.Location = new System.Drawing.Point(67, 125);
+            this.btnSalesMode.Location = new System.Drawing.Point(67, 157);
             this.btnSalesMode.Name = "btnSalesMode";
-            this.btnSalesMode.Size = new System.Drawing.Size(350, 150);
+            this.btnSalesMode.Size = new System.Drawing.Size(381, 176);
             this.btnSalesMode.TabIndex = 1;
             this.btnSalesMode.Text = "Sale";
             this.btnSalesMode.UseVisualStyleBackColor = false;
@@ -68,11 +68,12 @@
             // 
             // btnRefundMode
             // 
-            this.btnRefundMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnRefundMode.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnRefundMode.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefundMode.ForeColor = System.Drawing.Color.White;
-            this.btnRefundMode.Location = new System.Drawing.Point(67, 295);
+            this.btnRefundMode.Location = new System.Drawing.Point(67, 339);
             this.btnRefundMode.Name = "btnRefundMode";
-            this.btnRefundMode.Size = new System.Drawing.Size(350, 150);
+            this.btnRefundMode.Size = new System.Drawing.Size(381, 176);
             this.btnRefundMode.TabIndex = 2;
             this.btnRefundMode.Text = "Refund";
             this.btnRefundMode.UseVisualStyleBackColor = false;
@@ -80,11 +81,13 @@
             // 
             // btnConfiguration
             // 
-            this.btnConfiguration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfiguration.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnConfiguration.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfiguration.ForeColor = System.Drawing.Color.White;
-            this.btnConfiguration.Location = new System.Drawing.Point(320, 466);
+            this.btnConfiguration.Location = new System.Drawing.Point(454, 437);
             this.btnConfiguration.Name = "btnConfiguration";
-            this.btnConfiguration.Size = new System.Drawing.Size(97, 64);
+            this.btnConfiguration.Size = new System.Drawing.Size(288, 78);
             this.btnConfiguration.TabIndex = 3;
             this.btnConfiguration.Text = "Config";
             this.btnConfiguration.UseVisualStyleBackColor = false;
@@ -92,51 +95,29 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnLogin.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.Location = new System.Drawing.Point(67, 57);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(350, 55);
+            this.btnLogin.Size = new System.Drawing.Size(381, 94);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // btnKeyboard
-            // 
-            this.btnKeyboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnKeyboard.ForeColor = System.Drawing.Color.White;
-            this.btnKeyboard.Location = new System.Drawing.Point(707, 331);
-            this.btnKeyboard.Name = "btnKeyboard";
-            this.btnKeyboard.Size = new System.Drawing.Size(350, 55);
-            this.btnKeyboard.TabIndex = 5;
-            this.btnKeyboard.Text = "Keyboard";
-            this.btnKeyboard.UseVisualStyleBackColor = false;
-            this.btnKeyboard.Click += new System.EventHandler(this.btnKeyboard_Click);
-            // 
             // btnClock
             // 
-            this.btnClock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnClock.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnClock.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClock.ForeColor = System.Drawing.Color.White;
-            this.btnClock.Location = new System.Drawing.Point(67, 466);
+            this.btnClock.Location = new System.Drawing.Point(454, 57);
             this.btnClock.Name = "btnClock";
-            this.btnClock.Size = new System.Drawing.Size(247, 64);
+            this.btnClock.Size = new System.Drawing.Size(288, 94);
             this.btnClock.TabIndex = 6;
             this.btnClock.Text = "Clock In/Out";
             this.btnClock.UseVisualStyleBackColor = false;
             this.btnClock.Click += new System.EventHandler(this.btnClock_Click);
-            // 
-            // btnMessage
-            // 
-            this.btnMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnMessage.ForeColor = System.Drawing.Color.White;
-            this.btnMessage.Location = new System.Drawing.Point(707, 392);
-            this.btnMessage.Name = "btnMessage";
-            this.btnMessage.Size = new System.Drawing.Size(350, 55);
-            this.btnMessage.TabIndex = 7;
-            this.btnMessage.Text = "Message";
-            this.btnMessage.UseVisualStyleBackColor = false;
-            this.btnMessage.Click += new System.EventHandler(this.btnMessage_Click);
             // 
             // ePOSDBDataSet
             // 
@@ -145,11 +126,13 @@
             // 
             // btnManagerFunctions
             // 
-            this.btnManagerFunctions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnManagerFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnManagerFunctions.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnManagerFunctions.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManagerFunctions.ForeColor = System.Drawing.Color.White;
-            this.btnManagerFunctions.Location = new System.Drawing.Point(423, 125);
+            this.btnManagerFunctions.Location = new System.Drawing.Point(454, 339);
             this.btnManagerFunctions.Name = "btnManagerFunctions";
-            this.btnManagerFunctions.Size = new System.Drawing.Size(133, 320);
+            this.btnManagerFunctions.Size = new System.Drawing.Size(288, 92);
             this.btnManagerFunctions.TabIndex = 8;
             this.btnManagerFunctions.Text = "Manager Functions";
             this.btnManagerFunctions.UseVisualStyleBackColor = false;
@@ -168,11 +151,11 @@
             // 
             this.lblUsername.AutoSize = true;
             this.lblUsername.BackColor = System.Drawing.Color.Black;
-            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Font = new System.Drawing.Font("Segoe UI", 15.75F);
             this.lblUsername.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblUsername.Location = new System.Drawing.Point(10, 10);
+            this.lblUsername.Location = new System.Drawing.Point(0, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(38, 25);
+            this.lblUsername.Size = new System.Drawing.Size(36, 30);
             this.lblUsername.TabIndex = 9;
             this.lblUsername.Text = "{0}";
             // 
@@ -180,19 +163,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(154)))));
+            this.BackgroundImage = global::CS3._0Project.Properties.Resources.BVIcon;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.btnManagerFunctions);
-            this.Controls.Add(this.btnMessage);
             this.Controls.Add(this.btnClock);
-            this.Controls.Add(this.btnKeyboard);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnConfiguration);
             this.Controls.Add(this.btnRefundMode);
             this.Controls.Add(this.btnSalesMode);
             this.Controls.Add(this.btnExit);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -216,9 +200,7 @@
         private System.Windows.Forms.Button btnRefundMode;
         private System.Windows.Forms.Button btnConfiguration;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button btnKeyboard;
         private System.Windows.Forms.Button btnClock;
-        private System.Windows.Forms.Button btnMessage;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemXDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eposItemYDataGridViewTextBoxColumn;
         private EPOSDBDataSet ePOSDBDataSet;

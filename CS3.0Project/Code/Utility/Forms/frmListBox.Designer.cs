@@ -41,36 +41,37 @@
             // lbxListDisplay
             // 
             this.lbxListDisplay.BackColor = System.Drawing.Color.Black;
-            this.lbxListDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbxListDisplay.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxListDisplay.ForeColor = System.Drawing.Color.White;
             this.lbxListDisplay.FormattingEnabled = true;
-            this.lbxListDisplay.ItemHeight = 25;
+            this.lbxListDisplay.ItemHeight = 24;
             this.lbxListDisplay.Items.AddRange(new object[] {
-            "20"});
+            "23"});
             this.lbxListDisplay.Location = new System.Drawing.Point(12, 38);
             this.lbxListDisplay.Name = "lbxListDisplay";
-            this.lbxListDisplay.Size = new System.Drawing.Size(246, 329);
+            this.lbxListDisplay.Size = new System.Drawing.Size(288, 364);
             this.lbxListDisplay.TabIndex = 0;
             // 
             // lblName
             // 
             this.lblName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.ForeColor = System.Drawing.Color.White;
             this.lblName.Location = new System.Drawing.Point(12, 9);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(246, 25);
+            this.lblName.Size = new System.Drawing.Size(288, 25);
             this.lblName.TabIndex = 1;
-            this.lblName.Text = "20";
+            this.lblName.Text = "23";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnOk
             // 
-            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnOk.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnOk.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             this.btnOk.ForeColor = System.Drawing.Color.White;
-            this.btnOk.Location = new System.Drawing.Point(12, 373);
+            this.btnOk.Location = new System.Drawing.Point(12, 408);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(109, 38);
+            this.btnOk.Size = new System.Drawing.Size(138, 69);
             this.btnOk.TabIndex = 2;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = false;
@@ -78,11 +79,12 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnCancel.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(149, 373);
+            this.btnCancel.Location = new System.Drawing.Point(162, 408);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(109, 38);
+            this.btnCancel.Size = new System.Drawing.Size(138, 69);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -115,8 +117,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(270, 423);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(154)))));
+            this.ClientSize = new System.Drawing.Size(312, 486);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);

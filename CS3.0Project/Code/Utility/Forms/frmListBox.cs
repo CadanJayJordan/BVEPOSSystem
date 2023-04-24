@@ -68,6 +68,9 @@ namespace CS3._0Project.Code.Utility.Forms {
             List<int> listItemIDs = new List<int>(); // new int list
 
             foreach(string itemID in listItems) { // For each item in the string[] convert it to an int and add to the int list
+                if (itemID == "") {
+                    continue;
+                }
                 listItemIDs.Add(Convert.ToInt32(itemID));
             }
 

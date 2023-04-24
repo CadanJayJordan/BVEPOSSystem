@@ -2,19 +2,12 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using CS3._0Project.Code.Table;
 using CS3._0Project.Code.Utility.Classes;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.PerformanceData;
+using CS3._0Project.Forms;
 
 namespace CS3._0Project.Code.Sales {
     public partial class frmSalesMode : Form {
@@ -23,8 +16,8 @@ namespace CS3._0Project.Code.Sales {
 
         private Size screenSize;
         private int userID;
-
-        private bool isRefundMode; // TODO: Make refun mode work        
+        private string username;
+        private bool isRefundMode;   
 
         // FOR ITEM DISPLAY AND CALC
         private List<int> tillSelectedItems = new List<int>();
@@ -41,20 +34,32 @@ namespace CS3._0Project.Code.Sales {
 
         // FOR TABLE OPENING
         private int openTableID = -1;
+        private int tableItemCountOnOpen = 0;
 
+        private frmEPOSMenu frmEPOSMenu;
         private frmMessageBox cMessageBox = new frmMessageBox(); // Custom message box
         private frmKeyboard keyboard = new frmKeyboard();
         private DBTools DBTools = new DBTools();
         private ItemDisplayGenerator itemDisplayGenerator;
         private frmListBox listItemBox = new frmListBox();
+        private PrintController printCtrl = new PrintController();
 
-        // MAJOR TODO: Modernise all form design
         // TODO: Add login to sales form
         // MAJOR TODO: Reservation System and storage
-        public frmSalesMode(Size size, int userID, bool isRefundMode) {
+        public frmSalesMode(frmEPOSMenu frmEPOSMenu, Size size, int userID, string username, bool isRefundMode) {
+            InitializeComponent();
+            this.frmEPOSMenu = frmEPOSMenu;
+            this.screenSize = size;
+            this.userID = userID;
+            this.username = username;
+            this.isRefundMode = isRefundMode;
+        }
+
+        public frmSalesMode(Size size, int userID, string username, bool isRefundMode) {
             InitializeComponent();
             this.screenSize = size;
             this.userID = userID;
+            this.username = username;
             this.isRefundMode = isRefundMode;
         }
 
@@ -74,7 +79,7 @@ namespace CS3._0Project.Code.Sales {
             AllowButtonClick(pnlTillDisplay);
 
             
-            lblUsername.Text = DBTools.getUsername(ePOSDBDataSet.tblEPOSUsers, userID);
+            lblUsername.Text = username;
         }
 
         private void refreshDB() {
@@ -85,6 +90,8 @@ namespace CS3._0Project.Code.Sales {
             this.tblEPOSItemsTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItems);
             this.tblEPOSItemFoldersTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSItemFolders);
             this.tblEPOSOpenTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSOpenTables);
+            this.tblEPOSTablesTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSTables);
+
 
             itemDisplayGenerator = new ItemDisplayGenerator(this, ePOSDBDataSet.tblEPOSItems, ePOSDBDataSet.tblEPOSItemFolders, pnlItemDisplay);
         }
@@ -122,25 +129,18 @@ namespace CS3._0Project.Code.Sales {
             int itemID = Convert.ToInt32(button.Name.Substring(3, button.Name.Length - 3)); // Get the itemID which is stored as part of the button name
             
             tillSelectedItems.Add(itemID); // Add the itemID to the list
-            tillSelectedQuantity.Add(1);
+            if (isRefundMode) { // Get quantity based on refund mode
+                tillSelectedQuantity.Add(-1);
+            } else {
+                tillSelectedQuantity.Add(1);
+            }
             tillSelectedAlts.Add(0);
             tillSelectedLists.Add(new List<List<int>>());
             tillSelectedNotes.Add("");
             tillDisplayCopy.Add(itemID);
 
-            int listItemID = DBTools.getListItemID(ePOSDBDataSet.tblEPOSItems, itemID); 
-            if (listItemID > 0) { // If the list item > 0 then a list needs to be shown on item press so show the list and deal with output
-                listItemBox.showList(listItemID);
-                int listReturnItem = listItemBox.returnItem; // Get item from the from
-                if (listReturnItem == -1) {
-                    return;
-                }
-                List<int> listReturn = new List<int>(); // Create the list item fromat
-                listReturn.Add(listItemID); // Add listbox ID
-                listReturn.Add(listReturnItem); // Add list box selected item   {ListID,SelectedItemID}
-                tillSelectedLists[tillSelectedLists.Count - 1].Add(listReturn); // Set the appropoiate item to this
-                tillDisplayCopy.Add(0);
-            }
+            addListItems(itemID, false);
+  
 
             if (isListBoxLocked) {
                 changeListLock();
@@ -150,38 +150,56 @@ namespace CS3._0Project.Code.Sales {
             updateTillList();
         }
 
+        private void addListItems(int itemID, bool insert) { // Adds any list items to the item
+    
+            int listItemID = DBTools.getListItemID(ePOSDBDataSet.tblEPOSItems, itemID);
+
+            if (listItemID > 0) { // If the list item > 0 then a list needs to be shown on item press so show the list and deal with output
+                listItemBox.showList(listItemID);
+                int listReturnItem = listItemBox.returnItem; // Get item from the from
+                if (listReturnItem == -1) {
+                    return;
+                }
+                List<int> listReturn = new List<int>(); // Create the list item fromat
+                listReturn.Add(listItemID); // Add listbox ID
+                listReturn.Add(listReturnItem); // Add list box selected item   {ListID,SelectedItemID}
+
+                if (!insert) { // IF adding to the end (new item)
+                    tillSelectedLists[tillSelectedLists.Count - 1].Add(listReturn); // Set the appropoiate item to this
+                    tillDisplayCopy.Add(0);
+                } else { // If inserting into the list
+                    int screenSelectedIndex = getSelectedIndex(); // Get the current selected index
+                    if (screenSelectedIndex == -1) { // Stop if nothing is selected
+                        return;
+                    }
+
+                    tillSelectedLists[screenSelectedIndex].Add(listReturn); // Set the appropoiate item to this
+
+                    // Get the display copy and locate where were inserting/adding the display item (Add 0 just after the item)
+                    int selectedItemScreenIndex;
+                    for (int i = 0; i < lbxTillDisplay.Items.Count; i++) { // For every item in the screen list
+                        selectedItemScreenIndex = getParentIndex(i); // Get its parent item index
+                        if (i == lbxTillDisplay.Items.Count - 1) { // If this is the final item in the list, just add 
+                            tillDisplayCopy.Add(0);
+                            break;
+                        }
+                        if (selectedItemScreenIndex == screenSelectedIndex) { // If the item is found not at the end of the list, insert the item just after the item.
+                            tillDisplayCopy.Insert(i + 1, 0);
+                            break;
+                        }
+                    }
+                }
+
+                addListItems(listReturnItem, insert);
+            }
+            
+        }
+
         public void ListDynamicItemButton_Click(object sender, EventArgs e) { // List Items are buttons which show a list of modifiers that you can add to an item
             Button button = (Button)sender;
             int itemID = Convert.ToInt32(button.Name.Substring(4, button.Name.Length - 4)); // Get the itemID which is stored as part of the button name
-            int screenSelectedIndex = getSelectedIndex(); // Get the current selected index
-            if (screenSelectedIndex == -1) { // Stop if nothing is selected
-                return;
-            }
-            int listID = DBTools.getListItemID(ePOSDBDataSet.tblEPOSItems, itemID);
-            listItemBox.showList(listID);
-            int listReturnItem = listItemBox.returnItem; // Get item from the from
-            if (listReturnItem == -1) {
-                return;
-            }
-            List<int> listReturn = new List<int>(); // Create the list item fromat
-            listReturn.Add(listID); // Add listbox ID
-            listReturn.Add(listReturnItem); // Add list box selected item   {ListID,SelectedItemID}
-            tillSelectedLists[screenSelectedIndex].Add(listReturn); // Set the appropoiate item to this
 
-            // Get the display copy and locate where were inserting/adding the display item (Add 0 just after the item
-            int selectedItemScreenIndex;
-            for (int i = 0; i < lbxTillDisplay.Items.Count; i++) { // For every item in the screen list
-                selectedItemScreenIndex = getParentIndex(i); // Get its parent item index
-                if (i == lbxTillDisplay.Items.Count - 1) { // If this is the final item in the list, just add 
-                    tillDisplayCopy.Add(0);
-                    break;
-                }
-                if (selectedItemScreenIndex == screenSelectedIndex) { // If the item is found not at the end of the list, insert the item just after the item.
-                    tillDisplayCopy.Insert(i + 1, 0);
-                    break;
-                }
-            }
-            
+            addListItems(itemID, true);
 
             if (isListBoxLocked) {
                 changeListLock();
@@ -210,40 +228,6 @@ namespace CS3._0Project.Code.Sales {
                 return -1;
             }
             return getParentIndex(selectedIndex);
-        }
-
-        private int getSelectedListIndex() { // Gets the index of the selected list item (under the selected item), returns -1 if not sub item is selected
-            int count = 0;
-            int selectedIndex = lbxTillDisplay.SelectedIndex;
-            for (int i = 0; i < lbxTillDisplay.Items.Count; i++) {
-                if (Convert.ToInt32(tillDisplayCopy[i]) == 0) {
-                    count++;
-                }
-                if (i == selectedIndex) {
-                    break;
-                }
-                if (Convert.ToInt32(tillDisplayCopy[i]) > 0) {
-                    count = 0;
-                }
-            }
-            return (count - 1);
-        }
-
-        private int getSelectedNoteIndex() { // Gets the index of the selected note item (under the selected item), returns -1 if not sub item is selected
-            int count = 0;
-            int selectedIndex = lbxTillDisplay.SelectedIndex;
-            for (int i = 0; i < lbxTillDisplay.Items.Count; i++) {
-                if (Convert.ToInt32(tillDisplayCopy[i]) == -1) {
-                    count++;
-                }
-                if (i == selectedIndex) {
-                    break;
-                }
-                if (Convert.ToInt32(tillDisplayCopy[i]) > 0) {
-                    count = 0;
-                }
-            }
-            return (count - 1);
         }
 
         private void updateTotal() { // Recalculate the total amount in the till list
@@ -277,7 +261,6 @@ namespace CS3._0Project.Code.Sales {
                 if (altNum > 0) { // If it is a modified alt item
                     itemName = ePOSDBDataSet.tblEPOSItems.Rows[itemIndex][10 + altNum].ToString() + " " + itemName; // Amend name
                 }
-
                 string itemPrice = String.Format("£{0}", (Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[priceIndex][2 + altNum]) * quantity).ToString("0.00")); // Get the item price and format it to be (£x.xx)
 
                 String displayString = String.Format("{0, -4}{1}{2," + (36 - itemName.Length - 4) + "}", quantity.ToString(), itemName, itemPrice); // Format the display string to be <qty><name><price> with adequete spacing
@@ -368,14 +351,10 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void tillFinish(bool isByCard) { // Till finialisation 
-            if (isListBoxLocked) { // If the list box is unlocked
-                return;
-            }
-            if (lbxTillDisplay.Items.Count == 0) { // And has items in it
+            if (isListBoxLocked) { // If the list box is locked
                 return;
             }
             // Declare all items to be put into datatable 
-            //int userID = 999; // TODO: User from table
             DateTime cashedTime = DateTime.Now; // The date/time when cashed is the same as now 
             string itemsOnCheque = ""; // String of a list of items and quantity
             decimal tenderedAmount;
@@ -386,7 +365,6 @@ namespace CS3._0Project.Code.Sales {
                 tenderedAmount = tillTotal;
             }
             chequeDeductions += tenderedAmount; // Keep count of how much the cheque is
-
 
             lbxTillDisplay.Items.Add(new String('-', 36)); // seperate display
             lbxTillDisplay.Items.Add(String.Format("Subtotal{0," + (36 - "Subtotal".Length) + "}", "£" + tillTotal.ToString("0.00"))); // Add the subtotal line
@@ -444,35 +422,33 @@ namespace CS3._0Project.Code.Sales {
                 }
             }
 
-            tblEPOSCashChequesTableAdapter.Fill(ePOSDBDataSet.tblEPOSCashCheques); // Pull info from DB
-            DataTable cashedCheques = ePOSDBDataSet.tblEPOSCashCheques; // Gets the dataTable
-            cashedCheques.Rows.Add(); // Adds a new row
-            int lastRowIndex = cashedCheques.Rows.Count - 1; // Finds the index of the last (new) row
-            int openTable = 0;
-            if (openTableID >= 0) {
-                openTable = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[openTableIndex][1]);
-            } else {
-                openTable = -1;
+            int openTable = -1;
+            if (lbxTillDisplay.Items.Count != 0) { // Dont bother saving to DB if there are no items on the bill
+                tblEPOSCashChequesTableAdapter.Fill(ePOSDBDataSet.tblEPOSCashCheques); // Pull info from DB
+                DataTable cashedCheques = ePOSDBDataSet.tblEPOSCashCheques; // Gets the dataTable
+                cashedCheques.Rows.Add(); // Adds a new row
+                int lastRowIndex = cashedCheques.Rows.Count - 1; // Finds the index of the last (new) row
+                if (openTableID >= 0) {
+                    openTable = Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[openTableIndex][1]);
+                }
+
+                // Input all data into the new row
+                cashedCheques.Rows[lastRowIndex][1] = userID;
+                cashedCheques.Rows[lastRowIndex][2] = openTable;
+                cashedCheques.Rows[lastRowIndex][3] = cashedTime;
+                cashedCheques.Rows[lastRowIndex][4] = itemsOnCheque;
+                cashedCheques.Rows[lastRowIndex][5] = chequeDeductions;
+                cashedCheques.Rows[lastRowIndex][6] = cashAmount;
+
+                tblEPOSCashChequesTableAdapter.Update(ePOSDBDataSet.tblEPOSCashCheques); // Push updates to DB
             }
 
-            // Input all data into the new row
-            cashedCheques.Rows[lastRowIndex][1] = userID;
-            cashedCheques.Rows[lastRowIndex][2] = openTable;
-            cashedCheques.Rows[lastRowIndex][3] = cashedTime;
-            cashedCheques.Rows[lastRowIndex][4] = itemsOnCheque;
-            cashedCheques.Rows[lastRowIndex][5] = chequeDeductions;
-            cashedCheques.Rows[lastRowIndex][6] = cashAmount;
-
-            tblEPOSCashChequesTableAdapter.Update(ePOSDBDataSet.tblEPOSCashCheques); // Push updates to DB
-                        
             tillSelectedItems.Clear(); // Clear the list of selected items
             tillSelectedQuantity.Clear();
             tillSelectedAlts.Clear();
             tillSelectedLists.Clear();
             tillSelectedNotes.Clear();
             tillDisplayCopy.Clear();
-
-            MessageBox.Show(userID + "\n" + cashedTime + "\n" + openTable + "\n" + itemsOnCheque + "\n" + chequeDeductions + "\n" + cashAmount);
 
             chequeDeductions = 0; // reset for next sale
             cashAmount = 0;
@@ -494,7 +470,11 @@ namespace CS3._0Project.Code.Sales {
             int itemID = tillSelectedItems[selectedItemIndex]; // get the slected item ID
 
             decimal itemPrice = Convert.ToDecimal(ePOSDBDataSet.tblEPOSItemPrice.Rows[DBTools.getPriceIndex(ePOSDBDataSet.tblEPOSItemPrice, itemID)][2 + tillSelectedAlts[selectedItemIndex]]); // Get the item price
-            
+
+            if (openTableID > -1) {
+                tableItemCountOnOpen--; // To ensure new tickets will print all new items, even after removing an item
+            }
+
             // Update lists
             tillSelectedItems.RemoveAt(selectedItemIndex); // remove item from list
             tillSelectedQuantity.RemoveAt(selectedItemIndex); // Remove quantity
@@ -540,7 +520,7 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void tillCancel() {
-            if (!isListBoxLocked) { // Only cancel if lsit box is unlocked 
+            if (isListBoxLocked) { // Only cancel if list box is unlocked 
                 return;
             }
             tbxTillDisplay.Text = "Cancel £" + tillTotal.ToString("0.00"); // Display cancel value
@@ -573,17 +553,67 @@ namespace CS3._0Project.Code.Sales {
             if (openTableID == -1) { 
                 return;
             } // If the a table is open
+            List<string> printBarItemName = new List<string>();
+            List<int> printBarItemQuantity = new List<int>();
+            List<List<string>> printBarItemListItems = new List<List<string>>();
+            List<string> printBarItemNotes = new List<string>();
+            List<bool> printBarItemPrintRed = new List<bool>();
+
+            List<string> printKitchenItemName = new List<string>();
+            List<int> printKitchenItemQuantity = new List<int>();
+            List<List<string>> printKitchenItemListItems = new List<List<string>>();
+            List<string> printKitchenItemNotes = new List<string>();
+            List<bool> printKitchenItemPrintRed = new List<bool>();
+
             tblEPOSOpenTablesTableAdapter.Fill(ePOSDBDataSet.tblEPOSOpenTables); // Fill DB
             for (int i = 0; i < ePOSDBDataSet.tblEPOSOpenTables.Rows.Count; i++) { // For every open table
                 if (Convert.ToInt32(ePOSDBDataSet.tblEPOSOpenTables.Rows[i][0]) == openTableID) { // Find open table
                     string newTableItemString = ""; // Create new string
                     for (int x = 0; x < tillSelectedItems.Count; x++) { // For every item in the list box
-                        String selectedListsFormatted = "";
+                        List<string> itemPrinters = DBTools.getItemPrinters(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x]);
 
-                        foreach (List<int> selectedItem in tillSelectedLists[x]) {
+                        if (itemPrinters.Contains("Bar")) {
+                            List<string> printItemSubList = new List<string>();
+                            String selectedListsFormatted = "";
+
+                            foreach (List<int> selectedItem in tillSelectedLists[x]) {
                                 selectedListsFormatted += String.Format("{0}.{1}:", selectedItem[0], selectedItem[1]);
+                                printItemSubList.Add(DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, selectedItem[1]));
+                            }
+
+                            newTableItemString += String.Format("{0},{1},{2},{3},{4};", tillSelectedItems[x], tillSelectedQuantity[x], tillSelectedAlts[x], selectedListsFormatted, tillSelectedNotes[x]); // Add its quantity and itemid to the string
+                            if (tillSelectedAlts[x] > 0) { // Get the name based on weather it is an alternate item or not
+                                printBarItemName.Add(ePOSDBDataSet.tblEPOSItems.Rows[DBTools.getItemIndex(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x])][10 + tillSelectedAlts[x]] + " " + DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x]));
+                            } else {
+                                printBarItemName.Add(DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x]));
+                            }
+                            printBarItemListItems.Add(printItemSubList);
+                            printBarItemPrintRed.Add(DBTools.getItemPrintRed(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x]));
+                            printBarItemQuantity.Add(tillSelectedQuantity[x]);
+                            printBarItemNotes.Add(tillSelectedNotes[x]);
                         }
-                        newTableItemString += String.Format("{0},{1},{2},{3},{4};", tillSelectedItems[x], tillSelectedQuantity[x], tillSelectedAlts[x], selectedListsFormatted, tillSelectedNotes[x]); // Add its quantity and itemid to the string
+                        if (itemPrinters.Contains("Kitchen")) {
+                            List<string> printItemSubList = new List<string>();
+                            String selectedListsFormatted = "";
+
+                            foreach (List<int> selectedItem in tillSelectedLists[x]) {
+                                selectedListsFormatted += String.Format("{0}.{1}:", selectedItem[0], selectedItem[1]);
+                                printItemSubList.Add(DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, selectedItem[1]));
+                            }
+
+                            newTableItemString += String.Format("{0},{1},{2},{3},{4};", tillSelectedItems[x], tillSelectedQuantity[x], tillSelectedAlts[x], selectedListsFormatted, tillSelectedNotes[x]); // Add its quantity and itemid to the string
+                            if (tillSelectedAlts[x] > 0) { // Get the name based on weather it is an alternate item or not
+                                printKitchenItemName.Add(ePOSDBDataSet.tblEPOSItems.Rows[DBTools.getItemIndex(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x])][10 + tillSelectedAlts[x]] + " " + DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x]));
+                            } else {
+                                printKitchenItemName.Add(DBTools.getItemName(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x]));
+                            }
+                            printKitchenItemListItems.Add(printItemSubList);
+                            printKitchenItemPrintRed.Add(DBTools.getItemPrintRed(ePOSDBDataSet.tblEPOSItems, tillSelectedItems[x]));
+                            printKitchenItemQuantity.Add(tillSelectedQuantity[x]);
+                            printKitchenItemNotes.Add(tillSelectedNotes[x]);
+                        }
+
+                        
                     }
                     ePOSDBDataSet.tblEPOSOpenTables.Rows[i][2] = newTableItemString; // add string in DB
                     tblEPOSOpenTablesTableAdapter.Update(ePOSDBDataSet.tblEPOSOpenTables.Rows[i]); // Update string
@@ -594,9 +624,34 @@ namespace CS3._0Project.Code.Sales {
             lbxTillDisplay.Items.Add(new String('-', 36)); // seperate display
             lbxTillDisplay.Items.Add(String.Format("Table Store{0," + (36 - "Table Store".Length) + "}", "£" + tillTotal.ToString("0.00"))); // Add the table store line
             tbxTillDisplay.Text = "Table Store: £" + tillTotal.ToString("0.00"); // Print registering the table store
+
+            int tableNumber = DBTools.getTableNumber(ePOSDBDataSet.tblEPOSTables, DBTools.getTableNumber(ePOSDBDataSet.tblEPOSOpenTables, openTableID));
+
+            if (printBarItemNotes.Count > 0) {
+                // Adjusting to only print newly added items
+                printBarItemName.RemoveRange(0, tableItemCountOnOpen);
+                printBarItemQuantity.RemoveRange(0, tableItemCountOnOpen);
+                printBarItemListItems.RemoveRange(0, tableItemCountOnOpen);
+                printBarItemNotes.RemoveRange(0, tableItemCountOnOpen);
+                printBarItemPrintRed.RemoveRange(0, tableItemCountOnOpen);
+
+                printCtrl.printTicket(false, username, tableNumber, printBarItemName, printBarItemQuantity, printBarItemListItems, printBarItemNotes, printBarItemPrintRed); // Print ticket to kitchen
+                
+            }
+            if (printKitchenItemName.Count > 0) {
+                // Adjusting to only print newly added items
+                printKitchenItemName.RemoveRange(0, tableItemCountOnOpen);
+                printKitchenItemQuantity.RemoveRange(0, tableItemCountOnOpen);
+                printKitchenItemListItems.RemoveRange(0, tableItemCountOnOpen);
+                printKitchenItemNotes.RemoveRange(0, tableItemCountOnOpen);
+                printKitchenItemPrintRed.RemoveRange(0, tableItemCountOnOpen);
+
+                printCtrl.printTicket(true, username, tableNumber, printKitchenItemName, printKitchenItemQuantity, printKitchenItemListItems, printKitchenItemNotes, printKitchenItemPrintRed); // Print ticket to kitchen
+                
+            }
+
             openTableID = -1; // Reset table ID to base value
-
-
+            tableItemCountOnOpen = 0;
         }
 
         private void tillChangeQuantity() { // Function to multiply quantity
@@ -612,7 +667,15 @@ namespace CS3._0Project.Code.Sales {
                 return;
             }
             string[] splitText = tbxTillDisplay.Text.Split('.'); // split if a decimal is input
-            tillSelectedQuantity[listIndex] = Convert.ToInt32(splitText[0]); // Convert the first number to a int, adjust quantity
+            int newQuantity = Convert.ToInt32(splitText[0]);
+            if (newQuantity > 999) {
+                tbxTillDisplay.Text = "";
+                return;
+            }
+            if (isRefundMode) { // If in refund mode, use negative quantity
+                newQuantity *= -1;
+            }
+            tillSelectedQuantity[listIndex] = newQuantity; // Convert the first number to a int, adjust quantity
             updateTotal(); // Recalc total
             updateTillList(); // Redraw List
             tbxTillDisplay.Text = "";
@@ -629,7 +692,7 @@ namespace CS3._0Project.Code.Sales {
         }
 
         private void tillOpenTablePlan() { // Open table plan Form
-            frmTablePlan frmTablePlan = new frmTablePlan(screenSize, userID, this); // new form instance, passing through any sub forms
+            frmTablePlan frmTablePlan = new frmTablePlan(screenSize, userID, username, this); // new form instance, passing through any sub forms
             frmTablePlan.ShowDialog();// Open table plan
         }
 
@@ -673,7 +736,6 @@ namespace CS3._0Project.Code.Sales {
             if (selectedItemIndex == -1) {
                 return;
             }
-            keyboard.ShowDialog(); // Show keyboard
             string keyboardIn = keyboard.getInput(); // get keyboard input
             if (keyboardIn == "") { // If its empty then stop
                 return;
@@ -713,7 +775,8 @@ namespace CS3._0Project.Code.Sales {
             // TODO: Put notes on a table once opened
             // MAJOR TODO: Allow moving tabs between tables
             // MAJOR TODO: Split bill feature
-            // MAJOR TODO: Reciept Layout/print
+
+            tableItemCountOnOpen = tillSelectedItems.Count;
 
             tbxTillDisplay.Text = ""; // Clear display if any text
 

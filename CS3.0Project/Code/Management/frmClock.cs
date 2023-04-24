@@ -21,9 +21,6 @@ namespace CS3._0Project.Code.Management {
 
         private DBTools DBTools = new DBTools();
 
-        // TODO: Add Shift TimeSpan
-        // TODO: Allow managers to edit shifts
-
         public frmClock(Size screenSize, int userID, bool isManager) {
             InitializeComponent();
             cbxMngrSelectedUser.SelectedValue = userID;
@@ -36,74 +33,74 @@ namespace CS3._0Project.Code.Management {
             DBInit();
             this.Size = screenSize;
             this.Location = new Point(0, 0);
-            // BIG TODO: Finish.
             updateUser(userID);
             frmUpdate(userID);
         }
 
-        private void frmMangerUpdate(int userID) {
-            frmUpdate(userID);
-            if (!isManager) {
+        private void frmMangerUpdate(int userID) { // Update all aspects of the form, then the manager side
+            frmUpdate(userID); // Regular update
+            if (!isManager) { // If is not a manger do not continue
                 return;
             }
 
-            cbxMngrSelectedUser.SelectedValue = userID;
+            cbxMngrSelectedUser.SelectedValue = userID; // Set userID
 
-            if (isClockedIn(userID, userClockIndexs)) {
+            if (isClockedIn(userID, userClockIndexs)) { // Check if clocked in form manager text
                 lblMangrClocked.Text = "Clocked In";
             } else {
                 lblMangrClocked.Text = "Clocked Out";
             }
         }
 
-        private void frmUpdate(int userID) {
-            userClockIndexs = getUserClockIndexs(ePOSDBDataSet.tblClockLog, userID);
+        private void frmUpdate(int userID) { // Form update
+            userClockIndexs = getUserClockIndexs(ePOSDBDataSet.tblClockLog, userID); // Get anew users clock indexs to display in the dgv
             fillDGV();
 
         }
 
-        private void updateUser(int userID) {
-            pnlManager.Hide();
+        private void updateUser(int userID) { // If the user is changed
+            pnlManager.Hide(); // Hide the manager form
 
-            userIndex = DBTools.getUserIndex(ePOSDBDataSet.tblEPOSUsers, userID);
+            userIndex = DBTools.getUserIndex(ePOSDBDataSet.tblEPOSUsers, userID); // Get the user index
 
+            // Get names and add to form
             string username = ePOSDBDataSet.tblEPOSUsers.Rows[userIndex][1].ToString();
             string forename = ePOSDBDataSet.tblEPOSUsers.Rows[userIndex][5].ToString();
             string surname = ePOSDBDataSet.tblEPOSUsers.Rows[userIndex][6].ToString();
             lblNameText.Text = String.Format("User: {0}\nName: {1} {2}", username, forename, surname);
 
-            if (isManager) {
+            if (isManager) { // If is manager, add the word manager underneath the name and show the panel and update the manager cbx
                 lblNameText.Text += "\nManager";
                 cbxMngrSelectedUser.SelectedValue = userID;
                 pnlManager.Show();
             }
         }
 
-        private void DBInit() {
+        private void DBInit() { // Pull DB
             this.tblEPOSUsersTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSUsers);
             this.tblEPOSUsersTableAdapter.Fill(this.ePOSDBDataSet.tblEPOSUsers);
             this.tblClockLogTableAdapter.Fill(this.ePOSDBDataSet.tblClockLog);
         }
 
-        private void btnHome_Click(object sender, EventArgs e) {
+        private void btnHome_Click(object sender, EventArgs e) { // Button Event
             this.Hide();
         }
 
-        private List<int> getUserClockIndexs(DataTable tblClock, int userID) {
-            List<int> userClockIndexs = new List<int>();
-            for (int i = 0; i < tblClock.Rows.Count; i++) {
-                if (userID != Convert.ToInt32(tblClock.Rows[i][1])) {
+        private List<int> getUserClockIndexs(DataTable tblClock, int userID) { // Get all the indexs in the DB of this users clocks
+            List<int> userClockIndexs = new List<int>(); // New list
+            for (int i = 0; i < tblClock.Rows.Count; i++) { // for evey item in the clock table, iterate through
+                if (userID != Convert.ToInt32(tblClock.Rows[i][1])) { // If the user ID is not the current user, reset loop
                     continue;
                 }
-                userClockIndexs.Add(i);
+                userClockIndexs.Add(i); // If user match, add the current index to the list
             }
             return userClockIndexs;
         }
 
-        private void fillDGV() {
-            dgvClockDisplay.Rows.Clear();
+        private void fillDGV() { // Inserts all the information in the dgv
+            dgvClockDisplay.Rows.Clear(); // Clear dgv
 
-            DataRowCollection clockTableRows = ePOSDBDataSet.tblClockLog.Rows;
+            DataRowCollection clockTableRows = ePOSDBDataSet.tblClockLog.Rows; // Get all the table rows
             foreach (int userClockIndex in userClockIndexs) { // For ever user clocked in index
                 dgvClockDisplay.Rows.Add(1); // Add a new dgv row
                 int newRowIndex = dgvClockDisplay.Rows.Count - 1; // Get the index of the row just added
@@ -192,28 +189,28 @@ namespace CS3._0Project.Code.Management {
             clockOutNow(userID);
         }
 
-        private void btnAddShift_Click(object sender, EventArgs e) {
+        private void btnAddShift_Click(object sender, EventArgs e) { // Button Event
             frmShiftAddDialog frmShiftAddDialog = new frmShiftAddDialog(this, userID);
             frmShiftAddDialog.ShowDialog();
         }
 
-        private void btnDeleteShift_Click(object sender, EventArgs e) {
-            if (dgvClockDisplay.SelectedRows.Count == 0) {
+        private void btnDeleteShift_Click(object sender, EventArgs e) { // Button Event
+            if (dgvClockDisplay.SelectedRows.Count == 0) { // if no row is selected return
                 return;
             }
-            int removeIndex = userClockIndexs[dgvClockDisplay.SelectedRows[0].Index];
+            int removeIndex = userClockIndexs[dgvClockDisplay.SelectedRows[0].Index]; // Index to remove from
 
-            ePOSDBDataSet.tblClockLog.Rows[removeIndex].Delete();
-            tblClockLogTableAdapter.Update(ePOSDBDataSet.tblClockLog);
-            ePOSDBDataSet.tblClockLog.AcceptChanges();
+            ePOSDBDataSet.tblClockLog.Rows[removeIndex].Delete(); // Delete from DB
+            tblClockLogTableAdapter.Update(ePOSDBDataSet.tblClockLog); 
+            ePOSDBDataSet.tblClockLog.AcceptChanges(); 
 
-            frmUpdate(userID);
+            frmUpdate(userID); // Update from
 
         }
 
         private void cbxMngrSelectedUser_SelectionChangeCommitted(object sender, EventArgs e) {
-            this.userID = Convert.ToInt32(cbxMngrSelectedUser.SelectedValue);
-            frmMangerUpdate(userID);
+            this.userID = Convert.ToInt32(cbxMngrSelectedUser.SelectedValue); // Get manager ID
+            frmMangerUpdate(userID); // Update form and manager side
         }
     }
 }

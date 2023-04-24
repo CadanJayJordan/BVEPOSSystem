@@ -18,7 +18,8 @@ namespace CS3._0Project.Forms.Utility {
             new ControlDragger(this, true, false); // Allow Moving form via dragging
         }
 
-        public string getInput() { // Get text from textbox
+        public string getInput(string startingText = "") { // Get text from textbox
+            txtInput.Text = startingText;
             this.ShowDialog();
             return txtInput.Text;
         }
